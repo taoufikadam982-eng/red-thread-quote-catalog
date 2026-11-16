@@ -284,7 +284,7 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .whatsapp-button { background:var(--whatsapp); color:var(--on-ink); }
 .whatsapp-button:hover { background:color-mix(in oklch,var(--whatsapp) 88%,var(--ink)); }
 .floating-whatsapp { position:fixed; bottom:18px; left:20px; z-index:30; font-size:11px; border-radius:24px; height:42px; }
-.admin-layout { --ink: oklch(0.15 0.005 285); }
+.admin-layout { --ink: oklch(0.21 0.034 264.665); }
 @media(min-width:1600px) { .corporate-hero-image { object-fit:contain; } }
 @media(max-width:1000px) { .corporate-hero h1 { font-size:36px; max-width:470px; } .corporate-hero h1 span { font-size:28px; } .corporate-hero-content>p { max-width:440px; } .express-quote { display:none; } .corporate-hero-image { opacity:.35; } }
 @media(max-width:640px) { .utility-bar { display:none; } .store-header nav { height:56px; } .corporate-hero { min-height:0; } .corporate-hero-content { padding-block:32px 230px; } .corporate-hero-image { height:250px; top:auto; bottom:0; object-fit:cover; object-position:right; opacity:1; } .corporate-hero h1 { font-size:32px; } .corporate-hero h1 span { font-size:25px; } .corporate-hero-content>p { font-size:12px; line-height:1.9; } .corporate-hero .eyebrow { font-size:9px; } .corporate-hero .hero-trust { gap:10px; } .corporate-hero-content>div> a { font-size:11px; height:42px; } .corporate-promos { background:var(--ink); } .promo-showroom { padding:26px; background:var(--showroom-red); margin-inline:-16px; } .footer-contact,.footer-store { padding:22px; } .floating-whatsapp { left:12px; bottom:12px; } }
