@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Make the Entreprise cover full-width and remove redundant promotional and contact sections from that page; verify four screen widths and quote access.
 - [x] Lighten the two footer columns and update showroom hours.
 - [x] Point all Google Maps links and the existing embedded map at the matching public SESA listing and verify site links; live Maps rendering requires user validation on the published site.
 - [x] Add a SESA benefits strip matching the reference and verify quote access and desktop/mobile display.
