@@ -10,7 +10,7 @@ import showcase from '@/assets/sesa-hardware-showcase.jpg';
 import workstationFeature from '@/assets/sesa-workstation-feature.jpg';
 import mobilityFeature from '@/assets/sesa-mobility-feature.jpg';
 
-export const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.address)}`;
+export const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`SESA Informatique, ${store.address}`)}`;
 export function SesaBenefits() {
   const { setOpen } = useQuote();
   const benefits = [
