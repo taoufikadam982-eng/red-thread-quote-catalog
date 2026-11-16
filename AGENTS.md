@@ -41,3 +41,4 @@ use the editor.
 - Keep storefront presentation and public consent intake separate from admin code; newsletter subscriptions use the existing private admin content inbox to avoid duplicating subscriber storage.
 - Keep homepage slideshow artwork separate from live HTML copy and controls so messages remain accessible, with autoplay paused for interaction and reduced-motion preferences.
 - Keep the homepage benefits strip fixed only on desktop and in normal flow on smaller screens, reserving space for the footer and floating contact button so controls remain accessible.
+- Keep showroom Maps URLs in the shared browser-safe storefront module so the footer and contact page target the same provider-confirmed listing.

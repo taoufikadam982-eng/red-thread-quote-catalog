@@ -1,5 +1,6 @@
 # SESA catalogue
-- [ ] Lighten the two footer columns, update showroom hours and point Google Maps at SESA Informatique.
+- [x] Lighten the two footer columns and update showroom hours.
+- [x] Point all Google Maps links and the existing embedded map at the matching public SESA listing and verify site links; live Maps rendering requires user validation on the published site.
 - [x] Add a SESA benefits strip matching the reference and verify quote access and desktop/mobile display.
 - [x] Create three original SESA homepage images with changing messages and verify automatic/manual slideshow, links and screen sizes.
 - [x] Add homepage contact and map section using verified SESA contact information and verify desktop/mobile display and contact links.
