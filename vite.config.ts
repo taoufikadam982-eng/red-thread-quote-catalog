@@ -14,7 +14,7 @@ export default defineConfig({
     optimizeDeps: {
       // Prebundle the shared hook consumers together with React. Late discovery of
       // Slot/Dialog otherwise replaces the dependency graph beneath an open preview.
-      include: ["@radix-ui/react-slot", "@radix-ui/react-dialog"],
+      include: ["@radix-ui/react-slot", "@radix-ui/react-dialog", "sonner", "xlsx", "papaparse", "mammoth/mammoth.browser", "pdfjs-dist", "tesseract.js"],
     },
   },
   tanstackStart: {

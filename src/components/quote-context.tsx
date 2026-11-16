@@ -1,7 +1,7 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { useContext, useState, type ReactNode } from 'react';
 import { addQuoteItem, type QuoteItem } from '@/lib/catalog';
 import { useProducts } from './catalog-context';
-const QuoteContext = createContext<{ items: QuoteItem[]; add: (id: string) => void; setItems: (items: QuoteItem[]) => void; open: boolean; setOpen: (open: boolean) => void } | null>(null);
+import { QuoteContext } from './quote-store';
 export function QuoteProvider({ children }: { children: ReactNode }) {
   const products = useProducts();
   const [items, setItems] = useState<QuoteItem[]>([]);
