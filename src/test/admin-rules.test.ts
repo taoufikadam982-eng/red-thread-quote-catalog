@@ -1,0 +1,14 @@
+import { describe,it,expect } from 'vitest';
+import { productSchema,availabilityOptions,canAdminister } from '@/lib/product-schema';
+import { mapImportRows } from '@/lib/product-import';
+import { addQuoteItem,products,recommendProducts } from '@/lib/catalog';
+const product={id:'new-product',name:'Test workstation',reference:'SESA-TEST',category:'Workstations',price:15000,old_price:null,availability:'En stock',hidden:false,indicative:true};
+describe('Administration SESA rules',()=>{
+ it('only administrator roles authorize management',()=>{expect(canAdminister('admin')).toBe(true);expect(canAdminister('user')).toBe(false);expect(canAdminister(null)).toBe(false);});
+ it('accepts exactly the three specified availability states',()=>{expect(availabilityOptions).toEqual(['En stock','Sur commande','Rupture de stock']);expect(productSchema.safeParse({...product,availability:'Autre'}).success).toBe(false);});
+ it('rejects negative product prices',()=>{expect(productSchema.safeParse({...product,price:-1}).success).toBe(false);});
+ it('requires strikethrough prices to exceed current prices',()=>{expect(productSchema.safeParse({...product,old_price:14000}).success).toBe(false);expect(productSchema.safeParse({...product,old_price:16000}).success).toBe(true);});
+ it('imports actual French price and visibility fields',()=>{const [p]=mapImportRows([{Titre:'Portable SESA',Référence:'REF-01',Catégorie:'Ordinateurs portables','Prix (DH)':'11 800,50',Masqué:'oui',Indicatif:'non'}]);expect(p?.price).toBe(11800.5);expect(p?.hidden).toBe(true);expect(p?.indicative).toBe(false);});
+ it('adds newly imported visible products to quotes',()=>{const first=products[0];if(!first)throw new Error('Missing test product');const p={...first,id:'imported'};expect(addQuoteItem([],'imported',[p])).toEqual([{id:'imported',quantity:1}]);});
+ it('excludes hidden products from quotes and recommendations',()=>{const first=products[0];if(!first)throw new Error('Missing test product');const p={...first,hidden:true};expect(addQuoteItem([],p.id,[p])).toEqual([]);expect(recommendProducts(['Travailler'],[p])).toEqual([]);});
+});

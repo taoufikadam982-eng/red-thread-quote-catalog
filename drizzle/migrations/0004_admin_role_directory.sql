@@ -1,0 +1,1 @@
+ALTER POLICY roles_read_own ON public.user_roles USING(user_id=auth.uid() OR public.has_role(auth.uid(),'admin'));

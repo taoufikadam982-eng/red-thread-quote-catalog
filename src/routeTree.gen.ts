@@ -10,15 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
 import { Route as ConfigurateurRouteImport } from './routes/configurateur'
 import { Route as ConseilsRouteImport } from './routes/conseils'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiPublicCatalogueImageRouteImport } from './routes/api/public/catalogue-image'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BoutiqueRoute = BoutiqueRouteImport.update({
@@ -41,71 +55,116 @@ const ConseilsRoute = ConseilsRouteImport.update({
   path: '/conseils',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiPublicCatalogueImageRoute = ApiPublicCatalogueImageRouteImport.update({
+  id: '/api/public/catalogue-image',
+  path: '/api/public/catalogue-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/boutique'
     | '/catalogue'
     | '/configurateur'
     | '/conseils'
+    | '/reset-password'
     | '/solutions'
+    | '/admin'
+    | '/api/public/catalogue-image'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/boutique'
     | '/catalogue'
     | '/configurateur'
     | '/conseils'
+    | '/reset-password'
     | '/solutions'
+    | '/admin'
+    | '/api/public/catalogue-image'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/boutique'
     | '/catalogue'
     | '/configurateur'
     | '/conseils'
+    | '/reset-password'
     | '/solutions'
+    | '/_authenticated/admin'
+    | '/api/public/catalogue-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CatalogueRoute: typeof CatalogueRoute
   ConfigurateurRoute: typeof ConfigurateurRoute
   ConseilsRoute: typeof ConseilsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
+  ApiPublicCatalogueImageRoute: typeof ApiPublicCatalogueImageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -115,6 +174,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/boutique': {
@@ -145,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConseilsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -152,16 +232,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/catalogue-image': {
+      id: '/api/public/catalogue-image'
+      path: '/api/public/catalogue-image'
+      fullPath: '/api/public/catalogue-image'
+      preLoaderRoute: typeof ApiPublicCatalogueImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   BoutiqueRoute: BoutiqueRoute,
   CatalogueRoute: CatalogueRoute,
   ConfigurateurRoute: ConfigurateurRoute,
   ConseilsRoute: ConseilsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
+  ApiPublicCatalogueImageRoute: ApiPublicCatalogueImageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

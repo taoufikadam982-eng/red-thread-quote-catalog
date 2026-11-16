@@ -200,3 +200,52 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 @media(max-width:1000px) { .hero h1 { font-size:40px; max-width:580px; } .quiz-options { grid-template-columns:repeat(2,minmax(0,1fr)); } .sticky-benefits .benefit-detail { display:none; } }
 @media(max-width:640px) { .site-width { width:calc(100% - 32px); } .hero { height:590px; } .hero-content { padding-top:48px; } .hero h1 { font-size:34px; max-width:100%; } .hero-image { object-position:70% center; opacity:.5; } .hero::after { background:linear-gradient(90deg,var(--ink),color-mix(in oklch,var(--ink) 40%,transparent)); } .section-title { font-size:25px; } .category-tile { height:155px; } .quiz-panel { grid-template-columns:1fr; } .quiz-aside { display:none; } .sticky-benefits { width:calc(100% - 24px); padding:10px; bottom:10px; gap:8px; } .sticky-benefits>strong { font-size:11px; } .promo-content { max-width:85%; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none!important; animation:none!important; } }
+
+.admin-layout { --admin-highlight: color-mix(in oklch,var(--primary) 3%,var(--card)); display:grid; grid-template-columns:220px minmax(0,1fr); min-height:100vh; background:var(--card); }
+.admin-sidebar { position:sticky; top:0; height:100dvh; display:flex; flex-direction:column; background:var(--ink); color:var(--on-ink); overflow-y:auto; }
+.admin-brand { padding:16px 18px 12px; }
+.admin-brand .brand-logo { width:145px; height:38px; }
+.admin-nav { padding:0 10px; flex:1; }
+.admin-group { margin:24px 9px 9px; font-size:9px; color:var(--on-ink-muted); }
+.admin-nav-item { width:100%; justify-content:flex-start; min-height:36px; height:auto; padding:9px 10px; margin-bottom:3px; gap:10px; font-size:11px; font-weight:500; white-space:normal; text-align:left; border-radius:4px; }
+.admin-nav-item svg { width:14px; height:14px; }
+.admin-nav-active { background:var(--card)!important; color:var(--foreground); box-shadow:inset 3px 0 var(--primary); font-weight:800; }
+.admin-count { margin-left:auto; background:var(--primary); color:var(--primary-foreground); border-radius:20px; font-size:9px; padding:1px 5px; }
+.admin-sidebar-bottom { border-top:1px solid var(--ink-soft); padding:10px; margin-top:22px; }
+.admin-main { min-width:0; }
+.admin-topline { display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border); padding:10px 28px; color:var(--muted-foreground); font-size:10px; }
+.admin-page { padding:32px 40px 0; max-width:1450px; margin-inline:auto; }
+.admin-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.admin-heading h1 { font-size:23px; font-weight:800; }
+.admin-action { height:38px; border-radius:4px; font-size:11px; }
+.admin-note { margin-top:26px; margin-bottom:16px; font-size:11px; line-height:1.8; color:var(--muted-foreground); }
+.admin-tabs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+.admin-tabs button { border-radius:4px; font-size:10px; }
+.admin-table-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:5px; }
+.admin-table { border-collapse:collapse; width:100%; text-align:left; font-size:11px; }
+.admin-table th { padding:12px 10px; background:var(--muted); font-size:9px; font-weight:800; white-space:nowrap; }
+.admin-table td { border-top:1px solid var(--border); padding:10px; vertical-align:middle; }
+.admin-table strong { font-weight:800; }
+.admin-table small { display:block; margin-top:5px; font-size:9px; color:var(--muted-foreground); }
+.product-price-table { min-width:880px; }
+.product-price-table th:first-child { width:34%; }
+.admin-product { display:flex; align-items:center; gap:10px; min-width:250px; }
+.admin-thumbnail { width:42px; height:42px; border:1px solid var(--border); border-radius:3px; object-fit:contain; background:var(--card); }
+.admin-input,.admin-form input:not([type=checkbox]),.admin-form select,.admin-form textarea { border:1px solid var(--input); border-radius:4px; background:var(--card); color:var(--foreground); padding:10px 11px; min-height:38px; font-size:12px; }
+.admin-input:focus,.admin-form input:focus,.admin-form textarea:focus { outline:1px solid var(--primary); }
+.admin-price { width:95px; }
+.admin-availability { width:145px; }
+.admin-indicative { background:var(--admin-highlight); }
+.admin-savebar { display:flex; align-items:center; gap:16px; position:sticky; bottom:0; padding:16px 0; background:var(--card); border-top:1px solid var(--border); margin-top:12px; }
+.admin-savebar button { border-radius:4px; font-size:12px; }
+.admin-form label { display:block; font-size:12px; font-weight:600; }
+.admin-form input:not([type=checkbox]),.admin-form select,.admin-form textarea { width:100%; display:block; margin-top:7px; font-weight:400; }
+.admin-form label.flex { display:flex; }
+.admin-collapsed { grid-template-columns:60px minmax(0,1fr); }
+.admin-collapsed .admin-brand { padding:16px 5px; }
+.admin-collapsed .admin-brand .brand-logo { width:50px; }
+.admin-collapsed .admin-nav-item { justify-content:center; padding:10px 5px; }
+.admin-collapsed .admin-nav-item span,.admin-collapsed .admin-count,.admin-collapsed .admin-group { display:none; }
+.admin-collapsed .admin-nav>div { margin-top:16px; }
+@media(max-width:1100px) { .admin-page { padding:25px 24px 0; } .admin-layout { grid-template-columns:200px minmax(0,1fr); } .admin-collapsed { grid-template-columns:60px minmax(0,1fr); } }
+@media(max-width:640px) { .admin-layout { grid-template-columns:60px minmax(0,1fr); } .admin-brand { padding:18px 5px; } .admin-brand .brand-logo { width:50px; } .admin-nav-item { justify-content:center; padding:10px 5px; } .admin-nav-item span,.admin-count,.admin-group { display:none; } .admin-nav>div { margin-top:18px; } .admin-page { padding:22px 14px 0; } .admin-topline { padding:8px 10px; } .admin-topline>span { font-size:9px; } .admin-heading h1 { font-size:21px; } .admin-action { font-size:10px; padding:8px 10px; white-space:normal; height:auto; } .admin-collapsed { grid-template-columns:200px minmax(0,1fr); } .admin-collapsed .admin-brand .brand-logo { width:145px; } .admin-collapsed .admin-nav-item { justify-content:flex-start; } .admin-collapsed .admin-nav-item span,.admin-collapsed .admin-group { display:block; } .admin-collapsed .admin-sidebar { position:fixed; z-index:40; width:200px; top:52px; height:calc(100dvh - 52px); } .admin-collapsed .admin-main { grid-column:1/-1; } }

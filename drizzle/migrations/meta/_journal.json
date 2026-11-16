@@ -8,6 +8,34 @@
       "when": 1794830569946,
       "tag": "0000_create_quote_requests",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794834313144,
+      "tag": "0001_sesa_admin_catalogue",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794834558092,
+      "tag": "0002_restrict_role_helpers",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794834706940,
+      "tag": "0003_product_batch_reference_edits",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794834881825,
+      "tag": "0004_admin_role_directory",
+      "breakpoints": true
     }
   ]
 }

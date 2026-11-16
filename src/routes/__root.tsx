@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
@@ -14,6 +15,9 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteProvider } from '@/components/quote-context';
 import { SiteShell } from '@/components/sesa-site';
+import { CatalogProvider, catalogueQuery } from '@/components/catalog-context';
+import { supabase } from '@/integrations/supabase/client';
+import { Toaster } from '@/components/ui/sonner';
 
 function NotFoundComponent() {
   return (
@@ -76,6 +80,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogueQuery),
   head: () => ({
     // Replace these placeholders with the app's name and description when first building the app.
     // Each content route, / included, must still set its own head(). Never add og:image or
@@ -118,11 +123,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+  const pathname = useRouterState({ select: state => state.location.pathname });
+  const adminSurface = pathname.startsWith('/admin') || pathname === '/auth' || pathname === '/reset-password';
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange(event => {
+      if (!['SIGNED_IN','SIGNED_OUT','USER_UPDATED'].includes(event)) return;
+      void router.invalidate();
+      if(event !== 'SIGNED_OUT') void queryClient.invalidateQueries();
+    });
+    return () => data.subscription.unsubscribe();
+  }, [router, queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <QuoteProvider><SiteShell><Outlet /></SiteShell></QuoteProvider>
+      <CatalogProvider><QuoteProvider>{adminSurface ? <Outlet/> : <SiteShell><Outlet /></SiteShell>}</QuoteProvider></CatalogProvider>
+      <Toaster richColors />
     </QueryClientProvider>
   );
 }
