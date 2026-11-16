@@ -306,7 +306,7 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .partner-row { display:flex; align-items:center; gap:28px; min-height:86px; }
 .partner-heading { flex-shrink:0; border-right:1px solid var(--border); padding-right:28px; font-size:15px; line-height:1.25; font-weight:800; }
 .partner-logo-scroll { flex:1; min-width:0; overflow-x:auto; }
-.partner-logos { display:block; width:100%; min-width:520px; height:auto; max-height:53px; object-fit:contain; mix-blend-mode:multiply; }
+.partner-logos { display:block; width:100%; min-width:520px; height:auto; max-height:53px; object-fit:contain; }
 .partner-all { flex-shrink:0; padding:0; font-size:12px; font-weight:800; }
 .quote-list-button { background:var(--ink); }
 .quote-list-button:hover { background:var(--ink); border-color:var(--on-ink-muted); }

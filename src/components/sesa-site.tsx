@@ -11,7 +11,7 @@ import { PcFinder } from './pc-finder';
 import { CorporateHero, NeedsSection, CorporatePromos, StoreFooter } from './storefront-sections';
 import { filterCatalogue } from '@/lib/storefront';
 import logoImage from '@/assets/sesa-logo-white.png';
-import partnerLogos from '@/assets/partner-logos.png.asset.json';
+import partnerLogos from '@/assets/partner-logos-transparent.png.asset.json';
 import { useProducts } from './catalog-context';
 
 export function Logo() { return <Link to="/" aria-label="SESA Informatique, accueil" className="brand-logo"><img src={logoImage} alt="SESA informatique" width={1407} height={391}/></Link>; }
