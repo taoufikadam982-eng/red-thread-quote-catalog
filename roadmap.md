@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Adapt the Entreprise page to the supplied references with full-width artwork, sectors, SESA services, four-step quote preparation and in-flow benefits; verify desktop/mobile and quote handoff.
 - [x] Make the Entreprise cover full-width and remove redundant promotional and contact sections from that page; verify four screen widths and quote access.
 - [x] Lighten the two footer columns and update showroom hours.
 - [x] Point all Google Maps links and the existing embedded map at the matching public SESA listing and verify site links; live Maps rendering requires user validation on the published site.
