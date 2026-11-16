@@ -608,3 +608,120 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
  .partner-all { margin-left:auto; font-size:10px; }
  .partner-logo-scroll { flex-basis:100%; order:3; padding-bottom:4px; }
 }
+
+/* Phone layouts preserve the desktop composition and make touch targets legible. */
+@media(max-width:767px) {
+ .store-header-main { column-gap:12px; row-gap:10px; padding-block:10px; }
+ .store-header .brand-logo { width:132px; height:38px; }
+ .store-header-main form { height:42px; }
+ .store-header-main input { padding-inline:12px; font-size:16px; }
+ .store-header-main form button { padding-inline:16px; }
+ .store-header-main .quote-list-button { height:42px; padding-inline:12px; }
+ .store-header .store-desktop-nav { display:none; }
+ .mobile-site-menu { padding-top:max(28px,env(safe-area-inset-top)); padding-bottom:max(24px,env(safe-area-inset-bottom)); }
+ .mobile-site-menu nav { height:auto; }
+ .mobile-site-menu [data-slot=button] { font-size:14px; }
+ .quote-sheet { padding-top:max(28px,env(safe-area-inset-top)); padding-bottom:max(24px,env(safe-area-inset-bottom)); }
+ .quote-sheet h2 { padding-right:36px; }
+ .contact-form input,.contact-form select,.contact-form textarea,
+ .boutique-search input,.boutique-budget input,.boutique-results-toolbar select,
+ .catalogue-search input,.catalogue-tools select { font-size:16px; }
+ .contact-form input,.contact-form select { min-height:46px; }
+ .floating-whatsapp { left:auto; right:16px; bottom:max(16px,env(safe-area-inset-bottom)); width:48px; height:48px; padding:0; border-radius:50%; font-size:0; gap:0; }
+ .floating-whatsapp a { font-size:0; gap:0; }
+ .floating-whatsapp svg { width:24px; height:24px; }
+ body:has(.sesa-benefits) .floating-whatsapp { bottom:max(16px,env(safe-area-inset-bottom)); }
+ .store-footer { padding-bottom:80px; }
+ body:has(.sesa-benefits) .store-footer { padding-bottom:80px; }
+ .footer-contact,.footer-store { min-width:0; padding:20px 16px; }
+ .footer-contact button { height:auto; min-height:44px; white-space:normal; text-align:left; justify-content:start; }
+ .footer-store [data-slot=button] { font-size:12px; padding-inline:12px; }
+ .footer-link { min-height:36px; display:flex; align-items:center; font-size:13px; }
+ .boutique-filters { scroll-margin-top:124px; }
+ .boutique-filters.is-open { max-height:60dvh; overflow-y:auto; }
+ .boutique-results-toolbar { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+ .boutique-results-toolbar>label { grid-column:1/-1; width:100%; margin:0; justify-content:space-between; min-width:0; }
+ .boutique-results-toolbar select { min-width:0; max-width:70%; }
+ .boutique-checkbox { min-height:36px; font-size:14px; align-items:center; }
+ .boutique-checkbox input { width:20px; height:20px; }
+ .boutique-filters legend { font-size:14px; }
+ .boutique-tabs button,.catalogue-tabs button { min-height:44px; font-size:12px; }
+ .boutique-product-name h3 { font-size:13px; }
+ .boutique-product-bottom button { height:44px; font-size:12px; }
+ .boutique-reference,.catalogue-reference { overflow-wrap:anywhere; }
+ .catalogue-add { width:44px; height:44px; }
+ .catalogue-product-bottom { flex-wrap:wrap; }
+ .catalogue-product-title h3 { font-size:12px; }
+ .catalogue-product-brand { flex-wrap:wrap; font-size:10px; }
+ .catalogue-product-brand span { font-size:10px; text-align:left; }
+ .catalogue-tools { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+ .catalogue-search { grid-column:1/-1; width:100%; }
+ .catalogue-search input { height:44px; }
+ .catalogue-tools select { min-width:0; height:44px; }
+ .catalogue-result { margin:0; }
+ .finder-section .quiz-panel>div { min-width:0; padding:20px 16px; }
+ .finder-section .quiz-option { height:128px; font-size:12px; line-height:1.5; }
+ .finder-section .quiz-panel>div>div:last-child { gap:8px; }
+ .finder-section .quiz-panel>div>div:last-child>button { min-height:44px; font-size:12px; padding-inline:10px; white-space:normal; }
+ .enterprise-brief { scroll-margin-top:124px; }
+ .enterprise-brief-main>h3 { scroll-margin-top:140px; }
+ .enterprise-step-actions button { min-height:44px; }
+ .enterprise-equipment-option { height:92px; font-size:12px; }
+ .enterprise-sector { min-width:0; }
+ .enterprise-sector p { font-size:12px; }
+ .enterprise-benefits li>div { min-width:0; }
+ .enterprise-benefits h3 { overflow-wrap:anywhere; }
+ .enterprise-actions { display:grid; grid-template-columns:1fr; max-width:360px; gap:10px; }
+ .enterprise-actions>* { font-size:13px; }
+ .enterprise-trust { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 12px; }
+ .enterprise-trust span { min-width:0; line-height:1.5; }
+ .enterprise-trust svg { flex-shrink:0; }
+ .enterprise-final>.site-width { display:grid; grid-template-columns:auto minmax(0,1fr); }
+ .enterprise-final button,.enterprise-final a { grid-column:1/-1; width:100%; min-height:44px; }
+ .enterprise-final h2 { font-size:18px; }
+ .sesa-benefits li>div { min-width:0; }
+}
+@media(max-width:640px) {
+ .sesa-hero { height:470px; }
+ .sesa-hero-content { padding-top:20px; }
+ .sesa-hero h1 { font-size:26px; line-height:1.25; }
+ .sesa-hero-description { font-size:12px; }
+ .sesa-hero-image { height:190px; }
+ .sesa-hero-actions { gap:8px; }
+ .sesa-hero-actions>a,.sesa-hero-actions>button { min-height:44px; font-size:11px; }
+ .sesa-hero-controls>button,.sesa-hero-dot { width:40px; height:40px; }
+ .partner-row { gap:12px; padding-block:16px; }
+ .partner-logos { min-width:460px; }
+ .equipment-feature { min-height:280px; }
+ .equipment-feature-copy { width:60%; padding-left:16px; }
+ .equipment-feature-copy>p:not(.equipment-feature-label) { font-size:12px; }
+ .equipment-feature-copy>a { font-size:11px; min-height:44px; white-space:normal; }
+ .enterprise-workstation { min-height:330px; }
+ .enterprise-workstation>div { max-width:68%; }
+ .enterprise-workstation a { min-height:44px; white-space:normal; }
+ .boutique-service-list { gap:14px; }
+ .boutique-service-list li { font-size:11px; }
+ .boutique-product-image { height:160px; }
+ .boutique-product-name { min-height:64px; }
+ .boutique-specs span { font-size:11px; }
+ .boutique-specs { min-height:88px; }
+ .category-heading { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+ .category-heading h2 { min-width:0; }
+ .category-all { min-height:44px; }
+}
+@media(max-width:360px) {
+ .store-header .brand-logo { width:112px; }
+ .store-header-main .quote-list-button { padding-inline:8px; }
+ .sesa-hero { height:510px; }
+ .sesa-hero h1 { font-size:24px; }
+ .sesa-hero-actions { display:grid; max-width:260px; }
+ .sesa-hero-actions>* { justify-content:start; }
+ .boutique-product-grid { grid-template-columns:1fr; }
+ .boutique-product-image { height:210px; }
+ .boutique-specs,.boutique-product-name { min-height:0; }
+ .enterprise-sector { height:208px; }
+ .enterprise-equipment-option { padding:8px; gap:6px; font-size:11px; }
+ .enterprise-equipment-option>svg { width:16px; }
+ .sesa-benefits ul,.enterprise-benefits ul { grid-template-columns:1fr; }
+ .finder-section .quiz-panel>div>div:last-child>button { font-size:11px; padding-inline:8px; }
+}

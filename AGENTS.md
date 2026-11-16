@@ -44,3 +44,6 @@ use the editor.
 - Keep showroom Maps URLs in the shared browser-safe storefront module so the footer and contact page target the same provider-confirmed listing.
 - Keep enterprise quote preparation in a dedicated browser-side page and hand its summary to the existing quote form; this preserves one secure submission path without duplicating intake logic.
 - Keep Boutique filters browser-side and derive technical facets only from visible product specifications; this avoids inventing catalogue attributes or copying competitor inventory.
+
+- Keep phone storefront navigation in an accessible sheet and use compact mobile-only layouts so desktop presentation remains unchanged.
+- Home-screen installation uses a manifest and branded icons only; do not add app-shell caching or service workers unless offline support is requested.

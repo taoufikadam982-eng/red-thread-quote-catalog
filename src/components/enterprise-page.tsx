@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowLeft, ArrowRight, Building2, Users, GraduationCap, HeartPulse, Factory, Landmark, Laptop, Monitor, Mouse, Cpu, HardDrive, Network, Printer, ScanLine, ShieldCheck, FileCheck2, Headphones, SlidersHorizontal, Store, Check, FileText, Phone } from 'lucide-react';
 import { Button } from './ui/button';
@@ -34,6 +34,12 @@ export function EnterprisePage() {
   const { setOpen } = useQuote();
   const briefRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
+  const stepHeadingRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (step > 0 && window.matchMedia('(max-width: 767px)').matches) {
+      stepHeadingRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+  }, [step]);
   const [brief, setBrief] = useState<EnterpriseBrief>({ equipment: [], sector: '', details: '', timing: '', requestType: 'Devis' });
   const startBrief = (sector?: string) => {
     if (sector) setBrief(previous => ({ ...previous, sector }));
@@ -66,7 +72,7 @@ export function EnterprisePage() {
     <section ref={briefRef} id="projet-entreprise" className="enterprise-brief"><div className="site-width">
       <div className="enterprise-brief-heading"><div><p className="eyebrow">VOTRE DEMANDE PROFESSIONNELLE</p><h2>Décrivez votre besoin.<br/><span>Construisons votre solution.</span></h2></div><p>Matériel, quantités, références ou cahier des charges : préparons une demande adaptée à votre organisation.</p></div>
       <div className="enterprise-brief-panel">
-        <div className="enterprise-brief-main"><div className="enterprise-step-label"><span>ÉTAPE {step + 1} SUR 4</span><strong>{(step + 1) * 25} %</strong></div><progress value={step + 1} max={4} aria-label="Progression de la demande"/><h3 tabIndex={-1}>{titles[step]}</h3>
+        <div className="enterprise-brief-main"><div className="enterprise-step-label"><span>ÉTAPE {step + 1} SUR 4</span><strong>{(step + 1) * 25} %</strong></div><progress value={step + 1} max={4} aria-label="Progression de la demande"/><h3 ref={stepHeadingRef} tabIndex={-1}>{titles[step]}</h3>
           {step === 0 && <><div className="enterprise-equipment">{equipment.map(item => { const selected = brief.equipment.includes(item.name); return <Button key={item.name} variant="outline" aria-pressed={selected} className="enterprise-equipment-option" onClick={() => setBrief(previous => ({ ...previous, equipment: selected ? previous.equipment.filter(name => name !== item.name) : [...previous.equipment, item.name] }))}><item.icon/><span>{item.name}</span><span className="enterprise-selection-mark">{selected && <Check/>}</span></Button>; })}</div><p className="enterprise-selected" role="status">{brief.equipment.length ? brief.equipment.join(' · ') : 'Aucun équipement sélectionné'}</p></>}
           {step === 1 && <div className="contact-form space-y-5"><div><label htmlFor="enterprise-sector">Votre secteur</label><select id="enterprise-sector" value={brief.sector} onChange={event => setBrief({ ...brief, sector: event.target.value })}><option value="">À préciser</option>{sectors.map(sector => <option key={sector.name}>{sector.name}</option>)}<option>Autre</option></select></div><div><label htmlFor="enterprise-details">Références, quantités et besoins *</label><textarea id="enterprise-details" rows={5} maxLength={3500} value={brief.details} onChange={event => setBrief({ ...brief, details: event.target.value })} placeholder="Ex. 10 PC portables pour notre équipe, 16 Go de RAM, 2 écrans…"/></div></div>}
           {step === 2 && <div className="contact-form space-y-5"><div><label htmlFor="enterprise-request-type">Type de demande</label><select id="enterprise-request-type" value={brief.requestType} onChange={event => { const value = event.target.value; if (value === 'Devis' || value === 'Bon de commande' || value === 'Marché') setBrief({ ...brief, requestType: value }); }}><option>Devis</option><option>Bon de commande</option><option>Marché</option></select></div><div><label htmlFor="enterprise-timing">Échéance souhaitée</label><input id="enterprise-timing" value={brief.timing} maxLength={150} onChange={event => setBrief({ ...brief, timing: event.target.value })} placeholder="Ex. fin du mois, selon disponibilité…"/></div><p className="text-sm leading-7 text-muted-foreground">Cahiers des charges et pièces complémentaires : <a href="mailto:sesa@menara.ma" className="font-bold text-primary">sesa@menara.ma</a>.</p></div>}

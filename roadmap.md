@@ -25,3 +25,5 @@
 - [x] Build screenshot-matched admin navigation and quote/message inbox.
 - [x] Verify authenticated product edits, CSV import, image uploads, public quote intake, private-data access and sign-out end-to-end.
 - [ ] First email/password login awaits the administrator choosing a password from the invitation; recovery-email delivery and Word/PDF/photo parsing remain unverified.
+- [x] Improve phone navigation, product/filter readability, banners and quote windows; verify key flows at 320, 390, 430, 768 and 1280px without changing desktop.
+- [x] Add manifest-only SESA home-screen installation with branded icons and verify metadata and assets; offline mode is not requested, device installation awaits publication.
