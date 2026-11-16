@@ -278,6 +278,21 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .express-quote small { font-size:10px; color:var(--muted-foreground); }
 .need-item { border:1px solid var(--border); background:var(--card); padding:24px; border-radius:6px; transition:border-color .2s; }
 .need-item:hover { border-color:var(--primary); }
+.equipment-highlights { display:grid; grid-template-columns:1.15fr 1fr; gap:18px; padding-block:8px 12px; }
+.equipment-feature { position:relative; isolation:isolate; overflow:hidden; border-radius:8px; min-height:250px; }
+.equipment-feature-dark { background:var(--ink); color:var(--on-ink); }
+.equipment-feature-light { background:var(--card); color:var(--card-foreground); border:1px solid var(--border); }
+.equipment-feature>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-1; }
+.equipment-feature-copy { width:55%; padding:27px 0 27px 26px; }
+.equipment-feature-label { font-size:9px; font-weight:800; margin-bottom:12px; }
+.equipment-feature-dark .equipment-feature-label { color:var(--on-ink-muted); }
+.equipment-feature-light .equipment-feature-label { color:var(--primary); }
+.equipment-feature h2 { font-size:25px; line-height:1.15; font-weight:800; }
+.equipment-feature-copy>p:not(.equipment-feature-label) { font-size:11px; line-height:1.7; margin-top:12px; max-width:210px; }
+.equipment-feature-copy>a { margin-top:18px; font-size:10px; height:36px; padding-inline:12px; gap:8px; max-width:100%; }
+.equipment-feature-copy>a svg { width:14px; height:14px; }
+@media(max-width:1100px) { .equipment-feature-copy { padding-left:20px; width:57%; } .equipment-feature h2 { font-size:22px; } }
+@media(max-width:760px) { .equipment-highlights { grid-template-columns:1fr; gap:14px; } .equipment-feature { min-height:235px; } .equipment-feature-copy { width:53%; padding:24px 0 24px 20px; } .equipment-feature h2 { font-size:21px; } .equipment-feature-copy>p:not(.equipment-feature-label) { font-size:10px; } .equipment-feature-copy>a { font-size:9px; padding-inline:9px; } }
 .product-card { padding:22px; }
 .product-image { height:195px; }
 .spec-pills { display:flex; flex-wrap:wrap; gap:5px; min-height:44px; margin-top:12px; }
