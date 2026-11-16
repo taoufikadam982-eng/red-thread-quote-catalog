@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { CorporatePage, pageContents } from '@/components/corporate-pages';
+export const Route = createFileRoute('/confidentialite')({ component: () => <CorporatePage {...pageContents.privacy}/>, head: () => ({ meta: [{ title: 'Protection des données personnelles — SESA Informatique' }, { name: 'description', content: 'Utilisation des coordonnées, demandes de devis et inscriptions aux offres SESA.' }, { property: 'og:title', content: 'Confidentialité SESA Informatique' }, { property: 'og:description', content: 'Vos données, votre consentement et vos droits auprès de SESA.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

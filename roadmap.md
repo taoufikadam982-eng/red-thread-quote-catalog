@@ -1,4 +1,8 @@
 # SESA catalogue
+- [x] Adapt the storefront to the new original corporate brief, preserving admin and quote flows.
+- [x] Add need/category/brand filtering, six requested products and express quote access.
+- [x] Add newsletter intake, store/contact footer and working corporate/legal destinations.
+- [x] Verify desktop/mobile storefront, newsletter readback, quotes and protected admin.
 - [x] Build French black/crimson catalogue and homepage matching references.
 - [x] Add quote drawer, technical sheets, search, filters and eight-step finder.
 - [x] Store and verify contact/quote requests securely.

@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { CorporatePage, pageContents } from '@/components/corporate-pages';
+export const Route = createFileRoute('/marches')({ component: () => <CorporatePage {...pageContents.tenders}/>, head: () => ({ meta: [{ title: 'Bons de commande & Marchés — SESA Informatique' }, { name: 'description', content: 'Procédure de devis et accompagnement des bons de commande et marchés IT à Rabat.' }, { property: 'og:title', content: 'Marchés et bons de commande SESA' }, { property: 'og:description', content: 'Un accompagnement dédié pour votre organisation et vos cahiers des charges.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

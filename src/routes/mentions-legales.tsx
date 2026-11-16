@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { CorporatePage, pageContents } from '@/components/corporate-pages';
+export const Route = createFileRoute('/mentions-legales')({ component: () => <CorporatePage {...pageContents.legal}/>, head: () => ({ meta: [{ title: 'Mentions légales — SESA Informatique' }, { name: 'description', content: 'Informations légales, coordonnées et conditions de présentation des prix SESA.' }, { property: 'og:title', content: 'Mentions légales SESA' }, { property: 'og:description', content: 'Informations sur SESA Informatique et la vente exclusivement en magasin.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

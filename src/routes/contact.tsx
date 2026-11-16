@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { ContactSection } from '@/components/sesa-site';
+export const Route = createFileRoute('/contact')({ component: ContactSection, head: () => ({ meta: [{ title: 'Contacter SESA Informatique — Conseil & Devis' }, { name: 'description', content: 'Contactez SESA à Rabat pour un devis, une disponibilité ou votre projet informatique.' }, { property: 'og:title', content: 'Contact et devis SESA Informatique' }, { property: 'og:description', content: 'Téléphones, e-mail et formulaire de demande de devis à Rabat.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

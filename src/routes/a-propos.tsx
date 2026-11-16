@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { CorporatePage, pageContents } from '@/components/corporate-pages';
+export const Route = createFileRoute('/a-propos')({ component: () => <CorporatePage {...pageContents.about}/>, head: () => ({ meta: [{ title: 'À propos de SESA Informatique — Rabat' }, { name: 'description', content: 'Votre partenaire en matériel informatique neuf et professionnel à Hassan, Rabat.' }, { property: 'og:title', content: 'À propos de SESA Informatique' }, { property: 'og:description', content: 'Conseil, devis et équipement IT pour entreprises et administrations.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

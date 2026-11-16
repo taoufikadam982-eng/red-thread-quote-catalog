@@ -11,11 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ConfigurateurRouteImport } from './routes/configurateur'
 import { Route as ConseilsRouteImport } from './routes/conseils'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GarantieRouteImport } from './routes/garantie'
+import { Route as MarchesRouteImport } from './routes/marches'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -28,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -45,6 +56,11 @@ const CatalogueRoute = CatalogueRouteImport.update({
   path: '/catalogue',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConfigurateurRoute = ConfigurateurRouteImport.update({
   id: '/configurateur',
   path: '/configurateur',
@@ -53,6 +69,26 @@ const ConfigurateurRoute = ConfigurateurRouteImport.update({
 const ConseilsRoute = ConseilsRouteImport.update({
   id: '/conseils',
   path: '/conseils',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GarantieRoute = GarantieRouteImport.update({
+  id: '/garantie',
+  path: '/garantie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarchesRoute = MarchesRouteImport.update({
+  id: '/marches',
+  path: '/marches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -78,11 +114,17 @@ const ApiPublicCatalogueImageRoute = ApiPublicCatalogueImageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/contact': typeof ContactRoute
+  '/garantie': typeof GarantieRoute
+  '/marches': typeof MarchesRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -90,11 +132,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/contact': typeof ContactRoute
+  '/garantie': typeof GarantieRoute
+  '/marches': typeof MarchesRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -104,11 +152,17 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/configurateur': typeof ConfigurateurRoute
   '/conseils': typeof ConseilsRoute
+  '/contact': typeof ContactRoute
+  '/garantie': typeof GarantieRoute
+  '/marches': typeof MarchesRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -118,11 +172,17 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/a-propos'
     | '/auth'
     | '/boutique'
     | '/catalogue'
+    | '/confidentialite'
     | '/configurateur'
     | '/conseils'
+    | '/contact'
+    | '/garantie'
+    | '/marches'
+    | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
     | '/admin'
@@ -130,11 +190,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/a-propos'
     | '/auth'
     | '/boutique'
     | '/catalogue'
+    | '/confidentialite'
     | '/configurateur'
     | '/conseils'
+    | '/contact'
+    | '/garantie'
+    | '/marches'
+    | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
     | '/admin'
@@ -143,11 +209,17 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/a-propos'
     | '/auth'
     | '/boutique'
     | '/catalogue'
+    | '/confidentialite'
     | '/configurateur'
     | '/conseils'
+    | '/contact'
+    | '/garantie'
+    | '/marches'
+    | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
     | '/_authenticated/admin'
@@ -157,11 +229,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AProposRoute: typeof AProposRoute
   AuthRoute: typeof AuthRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CatalogueRoute: typeof CatalogueRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   ConfigurateurRoute: typeof ConfigurateurRoute
   ConseilsRoute: typeof ConseilsRoute
+  ContactRoute: typeof ContactRoute
+  GarantieRoute: typeof GarantieRoute
+  MarchesRoute: typeof MarchesRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
   ApiPublicCatalogueImageRoute: typeof ApiPublicCatalogueImageRoute
@@ -181,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -204,6 +289,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogueRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/configurateur': {
       id: '/configurateur'
       path: '/configurateur'
@@ -216,6 +308,34 @@ declare module '@tanstack/react-router' {
       path: '/conseils'
       fullPath: '/conseils'
       preLoaderRoute: typeof ConseilsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/garantie': {
+      id: '/garantie'
+      path: '/garantie'
+      fullPath: '/garantie'
+      preLoaderRoute: typeof GarantieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marches': {
+      id: '/marches'
+      path: '/marches'
+      fullPath: '/marches'
+      preLoaderRoute: typeof MarchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -263,11 +383,17 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AProposRoute: AProposRoute,
   AuthRoute: AuthRoute,
   BoutiqueRoute: BoutiqueRoute,
   CatalogueRoute: CatalogueRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   ConfigurateurRoute: ConfigurateurRoute,
   ConseilsRoute: ConseilsRoute,
+  ContactRoute: ContactRoute,
+  GarantieRoute: GarantieRoute,
+  MarchesRoute: MarchesRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
   ApiPublicCatalogueImageRoute: ApiPublicCatalogueImageRoute,
