@@ -252,7 +252,8 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 
 :root { --whatsapp: oklch(0.55 0.16 151); --showroom-red: oklch(0.43 0.16 27); --footer-panel: oklch(0.255 0.013 264); }
 @theme inline { --color-whatsapp: var(--whatsapp); }
-.utility-bar { background:var(--ink-soft); color:var(--on-ink-muted); }
+.utility-bar { background:var(--card); color:var(--card-foreground); border-bottom:1px solid var(--border); }
+.utility-bar a:hover { color:var(--primary); }
 .store-header { position:sticky; top:0; z-index:35; }
 .store-header form { border-radius:6px; }
 .corporate-hero { position:relative; background:var(--card); overflow:hidden; min-height:565px; }
