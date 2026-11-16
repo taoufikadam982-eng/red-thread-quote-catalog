@@ -9,9 +9,9 @@ import { useQuote } from './quote-context';
 import { QuoteForm } from './quote-form';
 import { PcFinder } from './pc-finder';
 import office from '@/assets/sesa-office.jpg';
-import logoAsset from '@/assets/sesa-logo.png.asset.json';
+import logoImage from '@/assets/sesa-logo-white.png';
 
-export function Logo() { return <Link to="/" aria-label="SESA Informatique, accueil" className="brand-logo"><img src={logoAsset.url} alt="SESA informatique" width={514} height={147}/></Link>; }
+export function Logo() { return <Link to="/" aria-label="SESA Informatique, accueil" className="brand-logo"><img src={logoImage} alt="SESA informatique" width={1407} height={391}/></Link>; }
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const quote = useQuote(); const count = quote.items.reduce((sum, item) => sum + item.quantity, 0);
   const [search, setSearch] = useState(''); const [mobile, setMobile] = useState(false);
