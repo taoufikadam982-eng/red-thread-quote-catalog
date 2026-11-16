@@ -39,3 +39,4 @@ use the editor.
 - Keep quote context identity in a non-component module so Fast Refresh cannot disconnect mounted providers from consumers.
 - Treat catalogue transport failures as recoverable: preserve cached products and quote state and keep sign-in accessible instead of throwing from the root loader.
 - Keep storefront presentation and public consent intake separate from admin code; newsletter subscriptions use the existing private admin content inbox to avoid duplicating subscriber storage.
+- Keep homepage slideshow artwork separate from live HTML copy and controls so messages remain accessible, with autoplay paused for interaction and reduced-motion preferences.
