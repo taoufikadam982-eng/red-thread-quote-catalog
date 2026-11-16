@@ -725,3 +725,49 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
  .sesa-benefits ul,.enterprise-benefits ul { grid-template-columns:1fr; }
  .finder-section .quiz-panel>div>div:last-child>button { font-size:11px; padding-inline:8px; }
 }
+
+@media(max-width:767px) {
+ .admin-login input,.admin-input,.admin-form input:not([type=checkbox]),.admin-form select,.admin-form textarea { min-width:0; max-width:100%; font-size:16px; min-height:44px; }
+ .admin-form label { min-width:0; }
+ .admin-form>div:last-child { flex-wrap:wrap; }
+ .admin-form button { min-height:44px; height:auto; white-space:normal; }
+ .admin-table { min-width:560px; font-size:13px; }
+ .product-price-table { min-width:880px; }
+ .admin-table-wrap { max-width:100%; }
+ .admin-table small { font-size:11px; overflow-wrap:anywhere; }
+ .admin-table button { min-height:44px; }
+ .admin-price { max-width:none; }
+ .admin-heading { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px; }
+ .admin-heading>div { grid-column:1/-1; min-width:0; }
+ .admin-heading h1 { min-width:0; overflow-wrap:anywhere; }
+ .admin-action { min-height:44px; }
+ .admin-tabs { flex-wrap:nowrap; overflow-x:auto; padding-bottom:8px; }
+ .admin-tabs button { flex-shrink:0; min-height:44px; font-size:12px; }
+ .admin-savebar { flex-wrap:wrap; gap:8px; padding-bottom:max(16px,env(safe-area-inset-bottom)); }
+ .admin-savebar button { min-height:44px; }
+ .admin-page>form:not(.admin-form)>input { width:100%; }
+ .admin-page>form:not(.admin-form)>button { min-height:44px; white-space:normal; }
+ [role=dialog]>h2 { padding-right:32px; overflow-wrap:anywhere; }
+ [role=dialog]>p,[role=dialog]>a { overflow-wrap:anywhere; }
+ [role=dialog]>input[type=file] { min-width:0; max-width:100%; }
+ .quiz-options { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .quiz-panel { grid-template-columns:1fr; }
+ .quiz-aside { display:none; }
+ .promo-content { max-width:100%; }
+ .corporate-promos button { min-height:44px; height:auto; white-space:normal; }
+ .newsletter-band form>div:first-child { display:grid; }
+ .newsletter-input { font-size:16px; }
+ .category-heading,.catalogue-heading,.enterprise-section-heading { min-width:0; }
+}
+@media(max-width:640px) {
+ .admin-layout,.admin-collapsed { grid-template-columns:minmax(0,1fr); }
+ .admin-sidebar { display:none; }
+ .admin-collapsed .admin-sidebar { display:flex; width:260px; top:57px; height:calc(100dvh - 57px); box-shadow:var(--category-shadow); }
+ .admin-collapsed .admin-nav-item { min-height:44px; font-size:13px; }
+ .admin-collapsed .admin-nav-item svg { flex-shrink:0; }
+ .admin-collapsed .admin-count { display:block; }
+ .admin-topline { position:sticky; top:0; z-index:41; background:var(--card); display:grid; grid-template-columns:40px minmax(0,1fr) auto; }
+ .admin-topline>span { min-width:0; font-size:11px; }
+ .admin-page { padding:24px 16px 0; }
+ .admin-note { font-size:12px; }
+}

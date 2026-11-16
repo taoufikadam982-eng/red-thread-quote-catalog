@@ -27,3 +27,5 @@
 - [ ] First email/password login awaits the administrator choosing a password from the invitation; recovery-email delivery and Word/PDF/photo parsing remain unverified.
 - [x] Improve phone navigation, product/filter readability, banners and quote windows; verify key flows at 320, 390, 430, 768 and 1280px without changing desktop.
 - [x] Add manifest-only SESA home-screen installation with branded icons and verify metadata and assets; offline mode is not requested, device installation awaits publication.
+
+- [x] Sweep phone surfaces: all public pages at five widths, all 12 authenticated admin destinations, editor/import windows, mobile navigation, login/reset/404 and eight-question finder; review catalogue recovery and inactive legacy sections. Keep records/settings unchanged. Device installation, invitation/password email delivery, and Word/PDF/photo parsing remain unverified.
