@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { AdvicePage } from '@/components/sesa-site';
+export const Route = createFileRoute('/conseils')({ component: AdvicePage, head: () => ({ meta: [{ title: 'Conseils & Guides IT — SESA Informatique' }, { name: 'description', content: 'Choisissez le matériel adapté à vos usages professionnels avec les conseils SESA et notre questionnaire personnalisé.' }, { property: 'og:title', content: 'Conseils & Guides IT — SESA Informatique' }, { property: 'og:description', content: 'Portable, workstation ou équipement d’équipe : faites le bon choix.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

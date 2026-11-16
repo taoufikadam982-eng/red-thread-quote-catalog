@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Share the quote selection through a root-level React provider so navigation preserves a visitor's current request without requiring an account.
+- Keep catalogue data and recommendation logic in browser-safe modules; only validated lead intake uses a server function and privileged write-only storage.
+- Content navigation uses individual TanStack leaf routes with per-page metadata so every named destination has a working URL.

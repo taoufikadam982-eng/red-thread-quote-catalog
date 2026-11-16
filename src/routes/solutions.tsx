@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { SolutionsPage } from '@/components/sesa-site';
+export const Route = createFileRoute('/solutions')({ component: SolutionsPage, head: () => ({ meta: [{ title: 'Solutions B2B & Marchés — SESA Informatique' }, { name: 'description', content: 'Solutions IT pour les PME, grands comptes et administrations. Accompagnement des marchés publics et privés et bons de commande.' }, { property: 'og:title', content: 'Solutions B2B & Marchés — SESA Informatique' }, { property: 'og:description', content: 'Un partenaire informatique pour vos projets professionnels au Maroc.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

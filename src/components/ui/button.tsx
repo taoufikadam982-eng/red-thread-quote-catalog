@@ -9,6 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        dark: "border border-on-ink/15 bg-ink-soft text-on-ink hover:bg-on-ink/10",
+        nav: "text-on-ink hover:bg-on-ink/10",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:

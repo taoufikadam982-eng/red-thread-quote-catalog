@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { ContactSection } from '@/components/sesa-site';
+export const Route = createFileRoute('/boutique')({ component: ContactSection, head: () => ({ meta: [{ title: 'Showroom & Contact à Rabat — SESA Informatique' }, { name: 'description', content: 'Retrouvez SESA Informatique Boulevard Al Alaouiyine 30, Hassan, Rabat. Contact, itinéraire et demande de devis.' }, { property: 'og:title', content: 'Showroom de Rabat — SESA Informatique' }, { property: 'og:description', content: 'Conseil, matériel informatique et achat direct au showroom de Hassan.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });

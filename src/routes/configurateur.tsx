@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { PcFinder } from '@/components/pc-finder';
+export const Route = createFileRoute('/configurateur')({ component: PcFinder, head: () => ({ meta: [{ title: 'Trouvez votre PC professionnel — SESA Informatique' }, { name: 'description', content: 'Répondez à huit questions sur vos usages et découvrez une sélection de PC professionnels adaptée à votre projet.' }, { property: 'og:title', content: 'Votre sélection PC personnalisée — SESA Informatique' }, { property: 'og:description', content: 'Votre usage d’abord. Le bon ordinateur ensuite.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }) });
