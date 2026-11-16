@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Match the partner-brand strip to the supplied reference and match the quote-list button background to the header.
 - [x] Match the admin sidebar to the requested charcoal and verify authenticated price saving, CSV preview, editor, all navigation destinations and sign-out; public quote inbox readback verified in the previous storefront check.
 - [x] Adapt the storefront to the new original corporate brief, preserving admin and quote flows.
 - [x] Add need/category/brand filtering, six requested products and express quote access.
