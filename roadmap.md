@@ -3,7 +3,8 @@
 - [x] Add quote drawer, technical sheets, search, filters and eight-step finder.
 - [x] Store and verify contact/quote requests securely.
 - [x] Verify desktop/mobile, business rules and commit.
-- [ ] Add secure administrator access and user profiles.
-- [ ] Store editable catalogue, uploads and imports in Cloud; connect storefront.
-- [ ] Build screenshot-matched admin navigation and quote/message inbox.
-- [ ] Verify permissions, product updates and quote intake end-to-end.
+- [x] Add secure administrator access and user profiles; invitation sent to requested account.
+- [x] Store editable catalogue, uploads and imports in Cloud; connect storefront.
+- [x] Build screenshot-matched admin navigation and quote/message inbox.
+- [x] Verify authenticated product edits, CSV import, image uploads, public quote intake, private-data access and sign-out end-to-end.
+- [ ] First email/password login awaits the administrator choosing a password from the invitation; recovery-email delivery and Word/PDF/photo parsing remain unverified.
