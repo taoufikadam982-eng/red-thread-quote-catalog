@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Add homepage contact and map section using verified SESA contact information and verify desktop/mobile display and contact links.
 - [x] Add the SESA-styled PC selection questionnaire below the homepage catalogue and verify all eight questions and quote selection.
 - [x] Restyle the material catalogue with compact product cards and verify category, brand, search and quote controls.
 - [x] Add two original equipment banners directly below homepage categories and verify links and desktop/mobile presentation.
