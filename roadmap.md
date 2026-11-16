@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Add a SESA benefits strip matching the reference and verify quote access and desktop/mobile display.
 - [x] Create three original SESA homepage images with changing messages and verify automatic/manual slideshow, links and screen sizes.
 - [x] Add homepage contact and map section using verified SESA contact information and verify desktop/mobile display and contact links.
 - [x] Add the SESA-styled PC selection questionnaire below the homepage catalogue and verify all eight questions and quote selection.

@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useServerFn } from '@tanstack/react-start';
-import { ArrowRight, Building2, FileCheck2, Cpu, Printer, MapPin, Phone, Mail, MessageCircle, Check, Store } from 'lucide-react';
+import { ArrowRight, Building2, FileCheck2, Cpu, Printer, MapPin, Phone, Mail, MessageCircle, Check, Store, ShieldCheck, Headphones } from 'lucide-react';
 import { Button } from './ui/button';
 import { useQuote } from './quote-context';
 import { subscribeNewsletter } from '@/lib/newsletter.functions';
@@ -11,6 +11,20 @@ import workstationFeature from '@/assets/sesa-workstation-feature.jpg';
 import mobilityFeature from '@/assets/sesa-mobility-feature.jpg';
 
 export const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.address)}`;
+export function SesaBenefits() {
+  const { setOpen } = useQuote();
+  const benefits = [
+    { icon: Building2, title: 'Solutions sur mesure', detail: 'Entreprises & administrations' },
+    { icon: ShieldCheck, title: 'Matériel neuf & garanti', detail: 'Garantie constructeur' },
+    { icon: Store, title: 'Showroom à Rabat', detail: 'Achat direct en magasin' },
+    { icon: Headphones, title: 'Conseil & accompagnement', detail: 'Un interlocuteur dédié' },
+  ];
+  return <section className="sesa-benefits" aria-labelledby="sesa-benefits-title">
+    <h2 id="sesa-benefits-title">Pourquoi choisir <span>SESA ?</span></h2>
+    <ul>{benefits.map(benefit => <li key={benefit.title}><span className="sesa-benefit-icon"><benefit.icon aria-hidden="true"/></span><div><h3>{benefit.title}</h3><p>{benefit.detail}</p></div></li>)}</ul>
+    <Button className="sesa-benefits-quote" onClick={() => setOpen(true)}>Demander un devis<ArrowRight/></Button>
+  </section>;
+}
 export function CorporateHero() {
   const { setOpen } = useQuote();
   return <section className="corporate-hero"><img src={showcase} alt="Illustration d’un ensemble professionnel : ordinateur portable, écran et imprimante laser" width={1920} height={1024} className="corporate-hero-image"/><div className="site-width corporate-hero-content"><p className="eyebrow mb-5 flex items-center gap-2"><span className="size-1.5 bg-primary"/>PARTENAIRE IT PROFESSIONNEL À RABAT</p><h1>SESA Informatique<span>L’équipement fiable pour votre entreprise et vos équipes.</span></h1><p className="mt-5 max-w-lg text-sm leading-7 text-muted-foreground">Ordinateurs portables, postes bureautiques, workstations, écrans et solutions d’impression neufs avec garantie constructeur. Devis rapide, traitement des bons de commande et retrait direct en magasin.</p><div className="mt-6 flex flex-wrap gap-3"><Button asChild className="h-12"><Link to="/catalogue">Explorer le catalogue<ArrowRight/></Link></Button><Button asChild variant="outline" className="h-12"><Link to="/boutique"><MapPin/>Nous rendre visite à Rabat</Link></Button></div><div className="hero-trust">{['Matériel 100% neuf', 'Devis officiel sous 24h', 'Paiement direct en magasin'].map(t => <span key={t}><Check/>{t}</span>)}</div></div><div className="express-quote"><span><strong>Votre prochain équipement.</strong><small>Portable · Écran · Impression</small></span><Button variant="default" aria-label="Configurer un devis express" onClick={() => setOpen(true)}><FileCheck2/><span>Devis express</span><ArrowRight/></Button></div></section>;

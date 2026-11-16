@@ -40,3 +40,4 @@ use the editor.
 - Treat catalogue transport failures as recoverable: preserve cached products and quote state and keep sign-in accessible instead of throwing from the root loader.
 - Keep storefront presentation and public consent intake separate from admin code; newsletter subscriptions use the existing private admin content inbox to avoid duplicating subscriber storage.
 - Keep homepage slideshow artwork separate from live HTML copy and controls so messages remain accessible, with autoplay paused for interaction and reduced-motion preferences.
+- Keep the homepage benefits strip fixed only on desktop and in normal flow on smaller screens, reserving space for the footer and floating contact button so controls remain accessible.
