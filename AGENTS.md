@@ -43,3 +43,4 @@ use the editor.
 - Keep the homepage benefits strip fixed only on desktop and in normal flow on smaller screens, reserving space for the footer and floating contact button so controls remain accessible.
 - Keep showroom Maps URLs in the shared browser-safe storefront module so the footer and contact page target the same provider-confirmed listing.
 - Keep enterprise quote preparation in a dedicated browser-side page and hand its summary to the existing quote form; this preserves one secure submission path without duplicating intake logic.
+- Keep Boutique filters browser-side and derive technical facets only from visible product specifications; this avoids inventing catalogue attributes or copying competitor inventory.

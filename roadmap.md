@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Replace the Boutique contact page with a SESA product shop inspired by the supplied references; verify filters, sorting, product details, quote selection and mobile display.
 - [x] Adapt the Entreprise page to the supplied references with full-width artwork, sectors, SESA services, four-step quote preparation and in-flow benefits; verify desktop/mobile and quote handoff.
 - [x] Make the Entreprise cover full-width and remove redundant promotional and contact sections from that page; verify four screen widths and quote access.
 - [x] Lighten the two footer columns and update showroom hours.
