@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Add the SESA-styled PC selection questionnaire below the homepage catalogue and verify all eight questions and quote selection.
 - [x] Restyle the material catalogue with compact product cards and verify category, brand, search and quote controls.
 - [x] Add two original equipment banners directly below homepage categories and verify links and desktop/mobile presentation.
 - [x] Match the partner-brand strip to the supplied reference and match the quote-list button background to the header.
