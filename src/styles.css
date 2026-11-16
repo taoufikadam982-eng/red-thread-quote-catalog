@@ -297,6 +297,41 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .product-image { height:195px; }
 .spec-pills { display:flex; flex-wrap:wrap; gap:5px; min-height:44px; margin-top:12px; }
 .spec-pills span { background:var(--muted); color:var(--muted-foreground); font-size:10px; padding:4px 7px; border-radius:3px; }
+.catalogue-section { padding-block:36px 42px; background:var(--secondary); }
+.catalogue-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
+.catalogue-all { padding:0; height:30px; font-size:11px; font-weight:800; }
+.catalogue-all svg { width:14px; height:14px; }
+.catalogue-tabs { display:flex; gap:7px; overflow-x:auto; padding-bottom:10px; }
+.catalogue-tabs button { flex-shrink:0; font-size:10px; height:35px; font-weight:800; }
+.catalogue-tabs button[aria-pressed=false] { background:var(--card); color:var(--card-foreground); }
+.catalogue-tools { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-block:6px 18px; }
+.catalogue-search { display:flex; align-items:center; gap:9px; border:1px solid var(--border); border-radius:6px; background:var(--card); padding-inline:11px; width:260px; max-width:100%; }
+.catalogue-search svg { width:15px; height:15px; color:var(--muted-foreground); flex-shrink:0; }
+.catalogue-search input { width:100%; min-width:0; height:36px; font-size:11px; outline:none; }
+.catalogue-tools select { height:38px; padding-inline:11px; border:1px solid var(--border); border-radius:6px; background:var(--card); color:var(--card-foreground); font-size:11px; }
+.catalogue-result { margin-left:auto; font-size:11px; color:var(--muted-foreground); }
+.catalogue-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+.catalogue-product { padding:10px 12px 12px; display:flex; flex-direction:column; box-shadow:var(--category-shadow); }
+.catalogue-image-button { padding:0; width:100%; height:140px; background:var(--card); }
+.catalogue-image-button:hover { background:var(--card); }
+.catalogue-image-button .product-image { height:126px; width:100%; object-fit:contain; transition:transform .2s; }
+.catalogue-image-button:hover .product-image { transform:scale(1.04); }
+.catalogue-product-info { display:flex; flex-direction:column; flex:1; }
+.catalogue-product-brand { display:flex; justify-content:space-between; align-items:center; gap:5px; margin-block:6px 8px; color:var(--muted-foreground); font-size:9px; font-weight:800; }
+.catalogue-product-brand span { font-size:8px; font-weight:400; text-align:right; }
+.catalogue-product-title { white-space:normal; padding:0; height:auto; justify-content:flex-start; text-align:left; align-items:flex-start; min-height:38px; }
+.catalogue-product-title h3 { font-size:11px; font-weight:800; line-height:1.6; }
+.catalogue-product-title:hover { background:transparent; color:var(--primary); }
+.catalogue-reference { margin-top:4px; font-size:9px; color:var(--muted-foreground); }
+.catalogue-product-bottom { display:flex; justify-content:space-between; align-items:flex-end; gap:5px; margin-top:auto; padding-top:14px; }
+.catalogue-price { font-size:13px; font-weight:800; line-height:1.6; }
+.catalogue-price span { font-size:9px; white-space:nowrap; }
+.catalogue-old-price { font-size:9px; color:var(--muted-foreground); }
+.catalogue-add { position:relative; width:31px; height:31px; flex-shrink:0; border-radius:6px; }
+.catalogue-add .catalogue-add-plus { position:absolute; width:9px; height:9px; right:4px; bottom:4px; background:var(--primary); }
+@media(max-width:1100px) { .catalogue-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media(max-width:850px) { .catalogue-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:640px) { .catalogue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .catalogue-heading { align-items:flex-start; flex-direction:column; gap:10px; } .catalogue-section { padding-block:28px; } .catalogue-search { width:100%; } .catalogue-image-button { height:125px; } .catalogue-image-button .product-image { height:115px; } .catalogue-product { padding:9px 10px 12px; } .catalogue-price { font-size:12px; } }
 .corporate-promos { margin-top:34px; background:linear-gradient(90deg,var(--ink) 50%,var(--showroom-red) 50%); color:var(--on-ink); }
 .promo-showroom { padding-left:34px; }
 .newsletter-band { background:var(--primary); color:var(--primary-foreground); }

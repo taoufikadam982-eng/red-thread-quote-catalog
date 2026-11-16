@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Restyle the material catalogue with compact product cards and verify category, brand, search and quote controls.
 - [x] Add two original equipment banners directly below homepage categories and verify links and desktop/mobile presentation.
 - [x] Match the partner-brand strip to the supplied reference and match the quote-list button background to the header.
 - [x] Match the admin sidebar to the requested charcoal and verify authenticated price saving, CSV preview, editor, all navigation destinations and sign-out; public quote inbox readback verified in the previous storefront check.
