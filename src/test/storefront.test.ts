@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { filterCatalogue, store } from '@/lib/storefront';
+import { filterCatalogue, socialLinks, store } from '@/lib/storefront';
 import { newsletterSchema } from '@/lib/newsletter-schema';
 describe('new storefront business rules', () => {
   it('lists the scanner at 4690 DH', () => expect(products.find(p => p.id === 'scanjet')?.price).toBe(4690));
@@ -11,4 +11,6 @@ describe('new storefront business rules', () => {
   it('filters category and brand together', () => expect(filterCatalogue(products, 'Scanners', 'HP', '').map(p => p.id)).toEqual(['scanjet']));
   it('rejects newsletter signup without consent', () => expect(newsletterSchema.safeParse({ email: 'person@example.com', consent: false }).success).toBe(false));
   it('rejects newsletter signup with a filled honeypot', () => expect(newsletterSchema.safeParse({ email: 'person@example.com', consent: true, website: 'spam' }).success).toBe(false));
+  it('lists Instagram, Facebook and X as the SESA social channels', () => expect(socialLinks.map(l => l.name)).toEqual(['Instagram', 'Facebook', 'X']));
+  it('points every social channel at its own https profile', () => expect(socialLinks.map(l => l.href)).toEqual(['https://www.instagram.com/sesainformatique', 'https://www.facebook.com/sesainformatique', 'https://x.com/sesainformatique']));
 });
