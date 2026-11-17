@@ -1,5 +1,5 @@
 # SESA catalogue
-- [ ] Transfer administrator access to taoufik@sesa.ma, revoke the sales account role, send password setup, and verify private management and unchanged public contact.
+- [x] Transfer administrator access to taoufik@sesa.ma and revoke the sales account role; invitation accepted by the email service, profiles preserved, product-price save/readback, quote inbox, settings save, account identity and sign-out verified with no runtime errors; public contact unchanged.
 - [x] Prebundle the catalogue Popover with React to prevent mixed identities in an open preview; verified fresh visits, repeated opening/dismissal, brand navigation, quote sheet, reload and mobile drawer with no runtime errors; shared UI regression tests pass.
 - [x] Upgrade seven-link navigation and category mega-menu; complete brands, blog, showroom/contact destinations and specialized enterprise intake; verified seven pages at five widths, brand filters, reading modal, mobile drawer dismissal, 38 tests and enterprise submission readback; removed only the test request.
 - [ ] Owner request emails await a paid plan and a verified owned sender domain.
@@ -30,7 +30,7 @@
 - [x] Store editable catalogue, uploads and imports in Cloud; connect storefront.
 - [x] Build screenshot-matched admin navigation and quote/message inbox.
 - [x] Verify authenticated product edits, CSV import, image uploads, public quote intake, private-data access and sign-out end-to-end.
-- [ ] First email/password login awaits the administrator choosing a password from the invitation; recovery-email delivery and Word/PDF/photo parsing remain unverified.
+- [ ] First email/password login awaits taoufik@sesa.ma choosing a password from the invitation or login recovery link; inbox delivery remains unverified. Word/PDF/photo parsing remains unverified from prior work.
 - [x] Improve phone navigation, product/filter readability, banners and quote windows; verify key flows at 320, 390, 430, 768 and 1280px without changing desktop.
 - [x] Add manifest-only SESA home-screen installation with branded icons and verify metadata and assets; offline mode is not requested, device installation awaits publication.
 
