@@ -442,6 +442,31 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .newsletter-band { background:var(--primary); color:var(--primary-foreground); }
 .newsletter-input { width:100%; min-width:0; height:48px; padding:12px 15px; background:var(--card); color:var(--foreground); border-radius:4px; font-size:12px; }
 .store-footer { background:var(--ink); color:var(--on-ink); padding-top:42px; padding-bottom:54px; }
+.sesa-showroom { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px; padding-block:18px 48px; border-bottom:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); align-items:start; }
+.sesa-showroom-copy { min-width:0; }
+.sesa-showroom h2 { margin-top:20px; font-size:40px; line-height:1.2; font-weight:800; }
+.sesa-showroom h2 span { color:var(--primary); }
+.sesa-showroom-intro { margin-top:20px; font-size:13px; line-height:1.9; color:var(--on-ink-muted); }
+.sesa-showroom-address { display:flex; gap:12px; margin-top:24px; padding-block:18px; border-block:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); }
+.sesa-showroom-address>svg { width:22px; height:22px; flex-shrink:0; color:var(--primary); }
+.sesa-showroom-address h3 { font-size:13px; font-weight:700; }
+.sesa-showroom-address p { margin-top:6px; font-size:12px; line-height:1.8; color:var(--on-ink-muted); }
+.sesa-showroom-details>div { display:flex; justify-content:space-between; align-items:start; gap:16px; border-bottom:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); padding-block:14px; font-size:12px; }
+.sesa-showroom-details dt { display:flex; align-items:center; gap:8px; color:var(--on-ink-muted); }
+.sesa-showroom-details dt svg { width:16px; height:16px; color:var(--primary); flex-shrink:0; }
+.sesa-showroom-details dd { text-align:right; line-height:1.8; font-weight:600; }
+.sesa-showroom-details dd a { display:block; }
+.sesa-showroom-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+.sesa-showroom-actions [data-slot=button] { min-height:44px; font-size:12px; }
+.sesa-showroom-note { margin-top:16px; color:var(--on-ink-muted); font-size:10px; line-height:1.8; }
+.sesa-showroom-map { border-radius:8px; overflow:hidden; border-top:3px solid var(--primary); background:var(--card); color:var(--card-foreground); min-width:0; }
+.sesa-showroom-map iframe { display:block; width:100%; height:440px; border:0; }
+.sesa-showroom-map-caption { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px; }
+.sesa-showroom-map-caption strong { display:block; font-size:13px; }
+.sesa-showroom-map-caption span { display:block; font-size:11px; color:var(--muted-foreground); margin-top:4px; }
+.sesa-showroom-map-caption [data-slot=button] { min-height:44px; font-size:11px; }
+@media(max-width:1000px) { .sesa-showroom { gap:28px; } .sesa-showroom h2 { font-size:32px; } .sesa-showroom-map-caption { flex-wrap:wrap; } }
+@media(max-width:760px) { .sesa-showroom { grid-template-columns:1fr; padding-block:0 32px; gap:28px; } .sesa-showroom h2 { font-size:30px; } .sesa-showroom-map iframe { height:340px; } .sesa-showroom-details>div { font-size:11px; gap:10px; } .sesa-showroom-map-caption { padding:14px; } }
 .footer-contact,.footer-store { background:var(--card); color:var(--card-foreground); border-radius:6px; padding:28px; border-top:3px solid var(--primary); }
 .footer-store { background:var(--secondary); }
 .footer-contact .text-on-ink-muted,.footer-store .text-on-ink-muted { color:var(--muted-foreground); }
