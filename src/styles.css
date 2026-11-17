@@ -723,11 +723,9 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
  .sesa-benefits li>div { min-width:0; }
 }
 @media(max-width:640px) {
- .sesa-hero { height:470px; }
  .sesa-hero-content { padding-top:20px; }
  .sesa-hero h1 { font-size:26px; line-height:1.25; }
  .sesa-hero-description { font-size:12px; }
- .sesa-hero-image { height:190px; }
  .sesa-hero-actions { gap:8px; }
  .sesa-hero-actions>a,.sesa-hero-actions>button { min-height:44px; font-size:11px; }
  .sesa-hero-controls>button,.sesa-hero-dot { width:40px; height:40px; }
@@ -753,7 +751,6 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 @media(max-width:360px) {
  .store-header .brand-logo { width:112px; }
  .store-header-main .quote-list-button { padding-inline:8px; }
- .sesa-hero { height:510px; }
  .sesa-hero h1 { font-size:24px; }
  .sesa-hero-actions { display:grid; max-width:260px; }
  .sesa-hero-actions>* { justify-content:start; }
