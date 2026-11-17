@@ -34,6 +34,7 @@ use the editor.
 - Content navigation uses individual TanStack leaf routes with per-page metadata so every named destination has a working URL.
 - Prebundle React entry points and shared Radix (including Popover), Sonner and lazy document-reader dependencies at startup; register new hook-consuming dependencies before use to prevent mixed React identities in an open preview.
 - Place admin UI under the authenticated layout and enforce separate server-side administrator middleware and RLS for every private action; UI gates alone never authorize writes.
+- Keep administrator login defaults separate from sales settings and show the authenticated account email; authorization remains role-based, not an email label.
 - Serve private-bucket images only when attached to a visible product, through a narrow public image handler; workspace policy forbids public buckets.
 - Parse product files locally with dedicated format readers and preview validated rows before atomic batch import; no AI service is needed for tabular documents.
 - Keep quote context identity in a non-component module so Fast Refresh cannot disconnect mounted providers from consumers.

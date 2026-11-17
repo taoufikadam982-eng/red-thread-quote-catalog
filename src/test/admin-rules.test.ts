@@ -2,8 +2,13 @@ import { describe,it,expect } from 'vitest';
 import { productSchema,availabilityOptions,canAdminister } from '@/lib/product-schema';
 import { mapImportRows } from '@/lib/product-import';
 import { addQuoteItem,products,recommendProducts } from '@/lib/catalog';
+import { adminLoginEmail, adminInvitationEmailSchema } from '@/lib/admin-account';
+import { store } from '@/lib/storefront';
 const product={id:'new-product',name:'Test workstation',reference:'SESA-TEST',category:'Workstations',price:15000,old_price:null,availability:'En stock',hidden:false,indicative:true};
 describe('Administration SESA rules',()=>{
+ it('uses taoufik@sesa.ma as the administrator login default',()=>{expect(adminLoginEmail).toBe('taoufik@sesa.ma');expect(adminInvitationEmailSchema.safeParse('taoufik@sesa.ma').success).toBe(true);});
+ it('prevents granting administration to the public sales email',()=>{expect(adminInvitationEmailSchema.safeParse('sesa@menara.ma').success).toBe(false);expect(adminInvitationEmailSchema.safeParse(' SESA@MENARA.MA ').success).toBe(false);});
+ it('keeps sesa@menara.ma as the public contact',()=>{expect(store.email).toBe('sesa@menara.ma');});
  it('only administrator roles authorize management',()=>{expect(canAdminister('admin')).toBe(true);expect(canAdminister('user')).toBe(false);expect(canAdminister(null)).toBe(false);});
  it('accepts exactly the three specified availability states',()=>{expect(availabilityOptions).toEqual(['En stock','Sur commande','Rupture de stock']);expect(productSchema.safeParse({...product,availability:'Autre'}).success).toBe(false);});
  it('rejects negative product prices',()=>{expect(productSchema.safeParse({...product,price:-1}).success).toBe(false);});

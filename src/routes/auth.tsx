@@ -5,9 +5,10 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/sesa-site';
 import { z } from 'zod';
+import { adminLoginEmail } from '@/lib/admin-account';
 export const Route=createFileRoute('/auth')({component:AdminLogin,head:()=>({meta:[{title:'Connexion administrateur — SESA Informatique'},{name:'description',content:'Connexion sécurisée à l’administration SESA Informatique.'},{property:'og:title',content:'Connexion administrateur SESA'},{property:'og:description',content:'Accès privé à l’administration SESA Informatique.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary'},{name:'robots',content:'noindex'}]})});
 function AdminLogin(){
- const navigate=useNavigate();const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
+ const navigate=useNavigate();const [email,setEmail]=useState(adminLoginEmail);const [password,setPassword]=useState('');const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
  async function login(e:React.FormEvent){e.preventDefault();setBusy(true);setMessage('');try{
   z.object({email:z.string().email().max(254),password:z.string().min(1).max(200)}).parse({email,password});
   const {error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;

@@ -2,6 +2,7 @@ import { createServerFn, createMiddleware } from '@tanstack/react-start';
 import { z } from 'zod';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { productSchema } from './product-schema';
+import { adminInvitationEmailSchema } from './admin-account';
 
 export const requireAdmin = createMiddleware({ type: 'function' }).middleware([requireSupabaseAuth]).server(async ({ context, next }) => {
   const { data, error } = await context.supabase.rpc('has_role', { _user_id: context.userId, _role: 'admin' });
@@ -49,7 +50,7 @@ export const saveProfile = createServerFn({method:'POST'}).middleware([requireAd
   .inputValidator((input:unknown)=>z.object({display_name:z.string().trim().max(150),avatar_url:z.string().max(500)}).parse(input))
   .handler(async({data,context})=>{const {error}=await context.supabase.from('profiles').update(data).eq('id',context.userId);if(error)throw new Error(error.message);return true;});
 export const inviteAdmin = createServerFn({method:'POST'}).middleware([requireAdmin])
-  .inputValidator((input:unknown)=>z.object({email:z.string().email().max(254),redirectTo:z.string().url().max(1000)}).parse(input))
+  .inputValidator((input:unknown)=>z.object({email:adminInvitationEmailSchema,redirectTo:z.string().url().max(1000)}).parse(input))
   .handler(async({data,context})=>{
     const { getRequest } = await import('@tanstack/react-start/server');
     const origin=getRequest().headers.get('origin');

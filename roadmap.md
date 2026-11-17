@@ -1,4 +1,5 @@
 # SESA catalogue
+- [ ] Transfer administrator access to taoufik@sesa.ma, revoke the sales account role, send password setup, and verify private management and unchanged public contact.
 - [x] Prebundle the catalogue Popover with React to prevent mixed identities in an open preview; verified fresh visits, repeated opening/dismissal, brand navigation, quote sheet, reload and mobile drawer with no runtime errors; shared UI regression tests pass.
 - [x] Upgrade seven-link navigation and category mega-menu; complete brands, blog, showroom/contact destinations and specialized enterprise intake; verified seven pages at five widths, brand filters, reading modal, mobile drawer dismissal, 38 tests and enterprise submission readback; removed only the test request.
 - [ ] Owner request emails await a paid plan and a verified owned sender domain.
