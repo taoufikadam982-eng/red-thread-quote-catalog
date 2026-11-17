@@ -2,16 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowDown, ArrowRight, Building2, ChevronRight, FileText, Headphones, Search, ShieldCheck, SlidersHorizontal, Store, X } from 'lucide-react';
 import { Button } from './ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from './ui/dialog';
 import { useProducts } from './catalog-context';
 import { useQuote } from './quote-context';
-import { priceLabel, type Product } from '@/lib/catalog';
+import { priceLabel } from '@/lib/catalog';
 import { productFacets, selectBoutiqueProducts, technicalFacets } from '@/lib/boutique-filters';
 import cover from '@/assets/sesa-boutique-cover.jpg';
 
 export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQuery = '' }: { initialBrand?: string; initialCategory?: string; initialQuery?: string }) {
   const products = useProducts();
-  const { add, setOpen } = useQuote();
+  const { setOpen } = useQuote();
   const [category, setCategory] = useState(initialCategory);
   const [query, setQuery] = useState(initialQuery);
   const [min, setMin] = useState(0);
@@ -24,7 +23,6 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
   useEffect(() => {
     if (mobileFilters) filtersRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' });
   }, [mobileFilters]);
-  const [detail, setDetail] = useState<Product | null>(null);
   const [expanded, setExpanded] = useState<string[]>([]);
   const ceiling = Math.max(1, ...products.map(p => p.price));
   const categories = [...new Set(products.map(p => p.category))];
@@ -56,12 +54,12 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
           <Button variant="outline" className="w-full" onClick={reset}>Tout effacer</Button>
         </aside>
         <div className="boutique-results"><div className="boutique-results-toolbar"><p role="status"><strong>{shown.length}</strong> produit{shown.length === 1 ? '' : 's'} trouvé{shown.length === 1 ? '' : 's'}</p><Button variant="outline" className="boutique-filter-trigger" aria-expanded={mobileFilters} aria-controls="boutique-filters" onClick={() => setMobileFilters(!mobileFilters)}><SlidersHorizontal/>Filtres</Button><label>Trier par<select aria-label="Trier les produits" value={sort} onChange={e => setSort(e.target.value)}><option value="price-up">Prix croissant</option><option value="price-down">Prix décroissant</option><option value="name">Nom du produit</option></select></label></div>
-          <div className="boutique-product-grid">{shown.slice(0, limit).map(product => <article className="boutique-product" key={product.id}><span className={`boutique-availability ${product.availability === 'En stock' ? 'is-stock' : product.availability === 'Rupture de stock' ? 'is-unavailable' : ''}`}>{product.availability || 'Sur demande'}</span><Button variant="ghost" className="boutique-product-image" aria-label={`Voir le produit : ${product.name}`} onClick={() => setDetail(product)}><img src={product.image} alt={product.name} width={384} height={300} loading="lazy"/></Button><div className="boutique-product-copy"><p className="boutique-brand">{product.brand}</p><Button variant="ghost" className="boutique-product-name" onClick={() => setDetail(product)}><h3>{product.name}</h3></Button><p className="boutique-reference">Réf. {product.reference}</p><div className="boutique-specs">{product.detail.split(/[·;\n]/).filter(Boolean).slice(0, 3).map((spec, i) => <span key={i}>{spec.trim()}</span>)}</div><div className="boutique-product-bottom"><div><p>Prix indicatif TTC</p>{product.old_price ? <del>{priceLabel(product.old_price)} DH</del> : null}<strong>{priceLabel(product.price)} <small>DH</small></strong></div><Button variant="dark" onClick={() => setDetail(product)}>Voir le produit<ArrowRight/></Button></div></div></article>)}</div>
+          <div className="boutique-product-grid">{shown.slice(0, limit).map(product => <article className="boutique-product" key={product.id}><span className={`boutique-availability ${product.availability === 'En stock' ? 'is-stock' : product.availability === 'Rupture de stock' ? 'is-unavailable' : ''}`}>{product.availability || 'Sur demande'}</span><Button variant="ghost" className="boutique-product-image" aria-label={`Voir le produit : ${product.name}`} asChild><Link to="/produit/$id" params={{ id: product.id }}><img src={product.image} alt={product.name} width={384} height={300} loading="lazy"/></Link></Button><div className="boutique-product-copy"><p className="boutique-brand">{product.brand}</p><Button variant="ghost" className="boutique-product-name" asChild><Link to="/produit/$id" params={{ id: product.id }}><h3>{product.name}</h3></Link></Button><p className="boutique-reference">Réf. {product.reference}</p><div className="boutique-specs">{product.detail.split(/[·;\n]/).filter(Boolean).slice(0, 3).map((spec, i) => <span key={i}>{spec.trim()}</span>)}</div><div className="boutique-product-bottom"><div><p>Prix indicatif TTC</p>{product.old_price ? <del>{priceLabel(product.old_price)} DH</del> : null}<strong>{priceLabel(product.price)} <small>DH</small></strong></div><Button variant="dark" asChild><Link to="/produit/$id" params={{ id: product.id }}>Voir le produit<ArrowRight/></Link></Button></div></div></article>)}</div>
           {shown.length === 0 && <div className="boutique-empty"><h3>Aucun produit dans cette sélection.</h3><Button variant="outline" onClick={reset}>Tout effacer</Button><Button onClick={() => setOpen(true)}>Demander un devis<FileText/></Button></div>}
           {shown.length > limit && <div className="boutique-load-more"><Button onClick={() => setLimit(previous => previous + 12)}>Voir plus de produits<ArrowDown/></Button></div>}
         </div>
       </div>
     </section>
-    <Dialog open={detail !== null} onOpenChange={open => { if (!open) setDetail(null); }}><DialogContent>{detail && <><DialogTitle>{detail.name}</DialogTitle><DialogDescription>Réf. {detail.reference} · {detail.availability || 'Sur demande'}</DialogDescription><img className="h-48 w-full object-contain" src={detail.image} alt={detail.name} width={384} height={300}/><p className="text-sm font-semibold">{detail.detail}</p><p className="text-sm text-muted-foreground">{detail.usage}</p><p className="text-xs text-muted-foreground">Visuel d’illustration. Configuration, disponibilité et garantie à confirmer sur devis.</p><p className="text-xl font-extrabold">{priceLabel(detail.price)} DH TTC<span className="ml-2 text-xs font-normal text-muted-foreground">Prix indicatif</span></p><Button onClick={() => { add(detail.id); setDetail(null); }}>Ajouter au devis<FileText/></Button></>}</DialogContent></Dialog>
+
   </main>;
 }

@@ -28,6 +28,7 @@ import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ProduitIdRouteImport } from './routes/produit.$id'
 import { Route as ApiPublicCatalogueImageRouteImport } from './routes/api/public/catalogue-image'
 
 const IndexRoute = IndexRouteImport.update({
@@ -124,6 +125,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ProduitIdRoute = ProduitIdRouteImport.update({
+  id: '/produit/$id',
+  path: '/produit/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicCatalogueImageRoute = ApiPublicCatalogueImageRouteImport.update({
   id: '/api/public/catalogue-image',
   path: '/api/public/catalogue-image',
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/produit/$id': typeof ProduitIdRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesByTo {
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/produit/$id': typeof ProduitIdRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesById {
@@ -193,6 +201,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/produit/$id': typeof ProduitIdRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRouteTypes {
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/solutions'
     | '/admin'
+    | '/produit/$id'
     | '/api/public/catalogue-image'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -237,6 +247,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/solutions'
     | '/admin'
+    | '/produit/$id'
     | '/api/public/catalogue-image'
   id:
     | '__root__'
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/solutions'
     | '/_authenticated/admin'
+    | '/produit/$id'
     | '/api/public/catalogue-image'
   fileRoutesById: FileRoutesById
 }
@@ -281,6 +293,7 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
+  ProduitIdRoute: typeof ProduitIdRoute
   ApiPublicCatalogueImageRoute: typeof ApiPublicCatalogueImageRoute
 }
 
@@ -419,6 +432,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/produit/$id': {
+      id: '/produit/$id'
+      path: '/produit/$id'
+      fullPath: '/produit/$id'
+      preLoaderRoute: typeof ProduitIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/catalogue-image': {
       id: '/api/public/catalogue-image'
       path: '/api/public/catalogue-image'
@@ -459,6 +479,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
+  ProduitIdRoute: ProduitIdRoute,
   ApiPublicCatalogueImageRoute: ApiPublicCatalogueImageRoute,
 }
 export const routeTree = rootRouteImport

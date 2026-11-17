@@ -32,6 +32,7 @@ use the editor.
 - Share the quote selection through a root-level React provider so navigation preserves a visitor's current request without requiring an account.
 - Keep catalogue models and recommendation logic browser-safe; load live visible products through a public read-only server function so admin edits reach every storefront surface.
 - Content navigation uses individual TanStack leaf routes with per-page metadata so every named destination has a working URL.
+- Product detail pages read the shared live catalogue and derive specifications only from published fields; catalogue links use the typed product route and reuse quote intake.
 - Prebundle React entry points and shared Radix (including Popover), Sonner and lazy document-reader dependencies at startup; register new hook-consuming dependencies before use to prevent mixed React identities in an open preview.
 - Place admin UI under the authenticated layout and enforce separate server-side administrator middleware and RLS for every private action; UI gates alone never authorize writes.
 - Keep administrator login defaults separate from sales settings and show the authenticated account email; authorization remains role-based, not an email label.

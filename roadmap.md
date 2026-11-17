@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Replace product popups with dedicated SESA product pages: image, live price/specifications, quantity-to-quote, advisor link, related references and original quote-only FAQs.
 - [x] Add the dark footer legal bar, legal-information modals and a reopening privacy panel with independent analytics consent signals and a saved SESA preference receipt; avoid unsupported favourites/history or no-tracking claims.
 - [x] Use the three supplied vertical images below 768px for the matching homepage slides; preserve wide desktop images and keep mobile copy at the top with uncropped hardware below.
 - [x] Add a compact newsletter signup to the shared footer, with email, required consent and the existing private subscription intake.
