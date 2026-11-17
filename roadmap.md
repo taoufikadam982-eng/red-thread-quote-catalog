@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Add a compact newsletter signup to the shared footer, with email, required consent and the existing private subscription intake.
 - [x] Add Instagram, Facebook and X icons to the shared footer contact section; keep all three visible without links because the owner has no social pages yet.
 - [x] Align both header rows to the exact max-w-7xl centered container; use 20px link gaps and 16px phone/quote spacing with a divider. Edge alignment verified at 1180/1280/1440/1920px, no overflow at four smaller widths, catalogue/quote/mobile menus work, and three regression tests pass.
 - [x] Transfer administrator access to taoufik@sesa.ma and revoke the sales account role; invitation accepted by the email service, profiles preserved, product-price save/readback, quote inbox, settings save, account identity and sign-out verified with no runtime errors; public contact unchanged.

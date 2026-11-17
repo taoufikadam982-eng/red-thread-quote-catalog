@@ -439,8 +439,16 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 @media(max-width:640px) { .catalogue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .catalogue-heading { align-items:flex-start; flex-direction:column; gap:10px; } .catalogue-section { padding-block:28px; } .catalogue-search { width:100%; } .catalogue-image-button { height:125px; } .catalogue-image-button .product-image { height:115px; } .catalogue-product { padding:9px 10px 12px; } .catalogue-price { font-size:12px; } }
 .corporate-promos { margin-top:34px; background:linear-gradient(90deg,var(--ink) 50%,var(--showroom-red) 50%); color:var(--on-ink); }
 .promo-showroom { padding-left:34px; }
-.newsletter-band { background:var(--primary); color:var(--primary-foreground); }
-.newsletter-input { width:100%; min-width:0; height:48px; padding:12px 15px; background:var(--card); color:var(--foreground); border-radius:4px; font-size:12px; }
+.footer-newsletter { margin-top:28px; }
+.footer-newsletter>p { font-size:12px; line-height:1.8; color:var(--on-ink-muted); margin-block:12px 14px; }
+.footer-newsletter-fields { display:flex; gap:8px; align-items:center; }
+.footer-newsletter-fields [data-slot=button] { height:42px; padding-inline:12px; font-size:12px; flex-shrink:0; }
+.newsletter-input { width:100%; min-width:0; height:42px; padding:10px 12px; background:var(--ink-soft); color:var(--on-ink); border:1px solid color-mix(in oklch,var(--on-ink) 25%,transparent); border-radius:4px; font-size:12px; }
+.newsletter-input:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+.footer-newsletter-consent { display:flex; align-items:start; gap:9px; margin-top:12px; font-size:11px; line-height:1.7; }
+.footer-newsletter-consent input { margin-top:4px; flex-shrink:0; accent-color:var(--primary); }
+.footer-newsletter-consent a { text-decoration:underline; overflow-wrap:anywhere; }
+.footer-newsletter-status { margin-top:8px; font-size:12px; line-height:1.6; }
 .store-footer { background:var(--ink); color:var(--on-ink); padding-top:42px; padding-bottom:54px; }
 .sesa-showroom { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px; padding-block:18px 48px; border-bottom:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); align-items:start; }
 .sesa-showroom-copy { min-width:0; }
@@ -788,7 +796,6 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
  .quiz-aside { display:none; }
  .promo-content { max-width:100%; }
  .corporate-promos button { min-height:44px; height:auto; white-space:normal; }
- .newsletter-band form>div:first-child { display:grid; }
  .newsletter-input { font-size:16px; }
  .category-heading,.catalogue-heading,.enterprise-section-heading { min-width:0; }
 }
