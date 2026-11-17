@@ -50,4 +50,5 @@ use the editor.
 - Home-screen installation uses a manifest and branded icons only; do not add app-shell caching or service workers unless offline support is requested.
 - Keep one shared SESA contact-and-map section in the storefront footer so every page uses the same showroom details without duplicate panels.
 - Keep header menu destinations in one browser-safe list and pass category/brand selections through validated Boutique search parameters so desktop, mobile and brand pages stay consistent.
+- Use the same max-w-7xl centered responsive container for both header rows so catalogue and quote controls align with the logo and quote-list edges.
 - Specialized enterprise intake extends the shared quote schema and inbox, validating ICE/contact/procedure on both sides and preserving those details in the stored request message.

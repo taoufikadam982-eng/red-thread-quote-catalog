@@ -23,7 +23,7 @@ export function HeaderNavigation() {
   const { setOpen: openQuote } = useQuote();
   const cancelClose = () => { if (timeout.current) clearTimeout(timeout.current); };
   const delayClose = () => { cancelClose(); timeout.current = setTimeout(() => setOpen(false), 180); };
-  return <nav className="executive-nav" aria-label="Navigation principale">
+  return <nav className="executive-nav max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Navigation principale">
     <Popover open={open} onOpenChange={setOpen}><PopoverTrigger asChild><Button className="mega-trigger" onPointerEnter={event => { if (event.pointerType === 'mouse') { cancelClose(); setOpen(true); } }} onPointerLeave={delayClose}><Menu/>Catalogue<ChevronDown/></Button></PopoverTrigger>
       <PopoverContent align="start" sideOffset={12} className="catalogue-mega" aria-label="Catégories du catalogue" onPointerEnter={cancelClose} onPointerLeave={delayClose} onOpenAutoFocus={event => event.preventDefault()}>
         <div className="mega-heading"><div><p className="eyebrow">LE MATÉRIEL SESA</p><h2>Votre catalogue professionnel</h2></div><Button asChild variant="ghost"><Link to="/boutique" onClick={() => setOpen(false)}>Tout voir<ArrowRight/></Link></Button></div>
