@@ -10,7 +10,7 @@ import { PcFinder } from './pc-finder';
 import { CorporateHero, EquipmentHighlights, NeedsSection, CorporatePromos, StoreFooter, SesaBenefits } from './storefront-sections';
 import { filterCatalogue } from '@/lib/storefront';
 import logoImage from '@/assets/sesa-logo-white.png';
-import partnerLogos from '@/assets/partner-logos-transparent.png.asset.json';
+import { PartnerBrands } from './partner-brands';
 import { useProducts } from './catalog-context';
 import { HomeHero } from './home-hero';
 import { HeaderNavigation, CategoryLinks } from './header-navigation';
@@ -25,7 +25,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
 export function Hero() { return <CorporateHero/>; }
 export function Brands() {
-  return <section className="partner-band" aria-label="Nos marques partenaires"><div className="site-width partner-row"><h2 className="partner-heading">Nos marques<br/>partenaires</h2><div className="partner-logo-scroll"><img src={partnerLogos.url} alt="HP, Dell, Lenovo, Apple, Samsung, ASUS et MSI" width={800} height={53} className="partner-logos"/></div><Button asChild variant="ghost" className="partner-all"><Link to="/marques">Voir toutes les marques<ArrowRight className="size-4"/></Link></Button></div></section>;
+  return <PartnerBrands/>;
 }
 export function CategoryGrid() {
   const products = useProducts();

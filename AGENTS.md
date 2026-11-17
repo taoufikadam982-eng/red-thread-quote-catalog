@@ -56,3 +56,4 @@ use the editor.
 - Keep header menu destinations in one browser-safe list and pass category/brand selections through validated Boutique search parameters so desktop, mobile and brand pages stay consistent.
 - Use the same max-w-7xl centered responsive container for both header rows so catalogue and quote controls align with the logo and quote-list edges.
 - Specialized enterprise intake extends the shared quote schema and inbox, validating ICE/contact/procedure on both sides and preserving those details in the stored request message.
+- Render partner strips through one shared component with separate desktop artwork and mobile logo links; duplicate the mobile track for seamless motion and pause on touch/focus or reduced-motion preferences.
