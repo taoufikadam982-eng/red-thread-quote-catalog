@@ -8,6 +8,6 @@ function XGlyph({ className }: { className?: string }) {
 export function SocialLinks({ className = '' }: { className?: string }) {
   return <ul className={`social-links ${className}`} aria-label="Réseaux sociaux SESA">{socialLinks.map(link => {
     const Icon = link.name === 'Instagram' ? Instagram : link.name === 'Facebook' ? Facebook : XGlyph;
-    return <li key={link.name}><a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name === 'X' ? 'SESA sur X' : `SESA sur ${link.name}`} title={link.name}><Icon className="social-icon"/></a></li>;
+    return <li key={link.name}>{link.href ? <a className="social-profile" href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`SESA sur ${link.name}`} title={link.name}><Icon className="social-icon"/></a> : <span className="social-profile" role="img" aria-label={link.name} title={link.name}><Icon className="social-icon"/></span>}</li>;
   })}</ul>;
 }

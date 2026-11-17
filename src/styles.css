@@ -462,11 +462,11 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .sesa-showroom-social { display:flex; align-items:center; flex-wrap:wrap; gap:14px; margin-top:22px; padding-top:20px; border-top:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); }
 .sesa-showroom-social>span { font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--on-ink-muted); }
 .social-links { display:flex; align-items:center; gap:10px; list-style:none; margin:0; padding:0; }
-.social-links a { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; border:1px solid color-mix(in oklch,var(--on-ink) 22%,transparent); color:var(--on-ink); transition:border-color .18s ease, background-color .18s ease, color .18s ease, transform .18s ease; }
+.social-links .social-profile { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; border:1px solid color-mix(in oklch,var(--on-ink) 22%,transparent); color:var(--on-ink); transition:border-color .18s ease, background-color .18s ease, color .18s ease, transform .18s ease; }
 .social-links a:hover { border-color:var(--primary); background:var(--primary); color:var(--primary-foreground); transform:translateY(-2px); }
 .social-links a:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
 .social-icon { width:18px; height:18px; }
-@media(max-width:760px) { .sesa-showroom-social { gap:10px; margin-top:18px; padding-top:16px; } .social-links a { width:38px; height:38px; } }
+@media(max-width:760px) { .sesa-showroom-social { gap:10px; margin-top:18px; padding-top:16px; } .social-links .social-profile { width:38px; height:38px; } }
 .sesa-showroom-map { border-radius:8px; overflow:hidden; border-top:3px solid var(--primary); background:var(--card); color:var(--card-foreground); min-width:0; }
 .sesa-showroom-map iframe { display:block; width:100%; height:440px; border:0; }
 .sesa-showroom-map-caption { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px; }

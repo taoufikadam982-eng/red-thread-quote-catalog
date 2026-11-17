@@ -1,5 +1,5 @@
 # SESA catalogue
-- [x] Add Instagram, Facebook and X icons to the shared footer contact section; three links verified on home, contact and boutique with no overflow or runtime errors. Profile links still await the owner's real page addresses.
+- [x] Add Instagram, Facebook and X icons to the shared footer contact section; keep all three visible without links because the owner has no social pages yet.
 - [x] Align both header rows to the exact max-w-7xl centered container; use 20px link gaps and 16px phone/quote spacing with a divider. Edge alignment verified at 1180/1280/1440/1920px, no overflow at four smaller widths, catalogue/quote/mobile menus work, and three regression tests pass.
 - [x] Transfer administrator access to taoufik@sesa.ma and revoke the sales account role; invitation accepted by the email service, profiles preserved, product-price save/readback, quote inbox, settings save, account identity and sign-out verified with no runtime errors; public contact unchanged.
 - [x] Prebundle the catalogue Popover with React to prevent mixed identities in an open preview; verified fresh visits, repeated opening/dismissal, brand navigation, quote sheet, reload and mobile drawer with no runtime errors; shared UI regression tests pass.

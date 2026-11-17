@@ -12,5 +12,5 @@ describe('new storefront business rules', () => {
   it('rejects newsletter signup without consent', () => expect(newsletterSchema.safeParse({ email: 'person@example.com', consent: false }).success).toBe(false));
   it('rejects newsletter signup with a filled honeypot', () => expect(newsletterSchema.safeParse({ email: 'person@example.com', consent: true, website: 'spam' }).success).toBe(false));
   it('lists Instagram, Facebook and X as the SESA social channels', () => expect(socialLinks.map(l => l.name)).toEqual(['Instagram', 'Facebook', 'X']));
-  it('points every social channel at its own https profile', () => expect(socialLinks.map(l => l.href)).toEqual(['https://www.instagram.com/sesainformatique', 'https://www.facebook.com/sesainformatique', 'https://x.com/sesainformatique']));
+  it('keeps all three social channels without destinations until pages exist', () => expect(socialLinks.map(l => l.href)).toEqual([null, null, null]));
 });
