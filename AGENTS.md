@@ -47,3 +47,4 @@ use the editor.
 
 - Keep phone storefront navigation in an accessible sheet and admin navigation in a dismissing overlay; use mobile-only layouts and contained scrolling tables so desktop presentation remains unchanged.
 - Home-screen installation uses a manifest and branded icons only; do not add app-shell caching or service workers unless offline support is requested.
+- Reuse the shared footer contact and showroom panels on every storefront page, including Contact, so contact details never require a duplicate map section.
