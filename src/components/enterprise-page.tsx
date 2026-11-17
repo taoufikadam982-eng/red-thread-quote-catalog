@@ -54,13 +54,14 @@ export function EnterprisePage() {
       <div className="site-width enterprise-hero-copy">
         <p className="enterprise-brand">SESA Informatique</p>
         <p className="eyebrow">VOTRE PARTENAIRE IT · ENTREPRISES & ADMINISTRATIONS</p>
-        <h1 id="enterprise-title">L’équipement IT<br/>à la hauteur de<br/>votre entreprise<span>.</span></h1>
+        <h1 id="enterprise-title">Solutions IT pour Entreprises, Administrations & Marchés Publics<span>.</span></h1>
         <p className="enterprise-hero-description">Postes de travail, workstations et solutions d’impression. De la PME aux administrations, un matériel adapté à vos équipes et à vos projets.</p>
         <div className="enterprise-actions"><Button onClick={() => startBrief()}><FileText/>Demander un devis<ArrowRight/></Button><Button asChild variant="dark"><a href="tel:+212537765777"><Phone/>Parler à notre équipe</a></Button></div>
         <div className="enterprise-trust"><span><ShieldCheck/>Garantie constructeur</span><span><FileCheck2/>Devis officiel sous 24h</span><span><Headphones/>Conseil B2B</span><span><Store/>Showroom à Rabat</span></div>
       </div>
     </section>
     <Brands/>
+    <section className="site-width b2b-advantages"><h2 className="section-title">Un partenaire pour vos achats professionnels</h2><div>{[{ title: "Réponse aux Appels d’Offres & Consultations", text: "Une réponse structurée à vos références et cahiers des charges.", icon: Landmark }, { title: "Traitement rapide des Bons de Commande", text: "Un suivi de votre BC, des références aux disponibilités.", icon: FileCheck2 }, { title: "Tarifs dégressifs & Proforma sous 24h", text: "Une offre adaptée aux volumes de votre organisation.", icon: Building2 }, { title: "Dossier administratif & Garantie officielle", text: "Documents administratifs complets et garantie constructeur.", icon: ShieldCheck }].map(item => <article key={item.title}><item.icon/><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
     <section className="enterprise-solutions"><div className="site-width">
       <div className="enterprise-section-heading"><h2 className="section-title">Des solutions adaptées à votre activité</h2><Button variant="ghost" onClick={() => startBrief()}>Votre projet<ArrowRight/></Button></div>
       <div className="enterprise-sectors">{sectors.map(sector => <Button key={sector.name} variant="outline" className="enterprise-sector" onClick={() => startBrief(sector.name)}><sector.icon aria-hidden="true"/><h3>{sector.name}</h3><p>{sector.text}</p><ArrowRight className="enterprise-sector-arrow"/></Button>)}</div>
@@ -82,6 +83,7 @@ export function EnterprisePage() {
         <aside className="enterprise-brief-aside"><div className="enterprise-aside-label"><span>VOTRE PROJET SESA</span><strong>0{step + 1}</strong></div><div className="enterprise-brief-symbol"><FileText/></div><h3>{asideTitles[step]}</h3>{brief.sector && <p className="enterprise-aside-sector">{brief.sector}</p>}<ul>{brief.equipment.map(name => <li key={name}><Check/>{name}</li>)}</ul><p className="enterprise-aside-note">Devis officiel · Aucun paiement en ligne.<br/>La vente et le paiement s’effectuent au showroom de Rabat.</p></aside>
       </div>
     </div></section>
+    <section className="site-width b2b-intake"><div><p className="eyebrow">BC · CONSULTATIONS · APPELS D’OFFRES</p><h2 className="section-title">Soumettre un Bon de Commande / Appel d’Offres</h2><p>Transmettez les éléments de votre procédure à l’équipe SESA.</p></div><QuoteForm enterprise/></section>
     <section className="enterprise-benefits"><div className="site-width"><h2>Pourquoi choisir<br/><span>SESA ?</span></h2><ul>{benefits.map(benefit => <li key={benefit.title}><benefit.icon/><div><h3>{benefit.title}</h3><p>{benefit.text}</p></div></li>)}</ul></div></section>
     <section className="enterprise-final"><div className="site-width"><Building2/><div><h2>Un projet d’équipement ou un appel d’offres ?</h2><p>Échangeons sur vos besoins et préparons votre demande.</p></div><Button onClick={() => setOpen(true)}><FileText/>Demander un devis<ArrowRight/></Button><Button asChild variant="outline"><a href="mailto:sesa@menara.ma"><Headphones/>Contacter SESA</a></Button></div></section>
   </main>;

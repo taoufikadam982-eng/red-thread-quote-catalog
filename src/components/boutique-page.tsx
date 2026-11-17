@@ -9,14 +9,14 @@ import { priceLabel, type Product } from '@/lib/catalog';
 import { productFacets, selectBoutiqueProducts, technicalFacets } from '@/lib/boutique-filters';
 import cover from '@/assets/sesa-boutique-cover.jpg';
 
-export function BoutiquePage() {
+export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQuery = '' }: { initialBrand?: string; initialCategory?: string; initialQuery?: string }) {
   const products = useProducts();
   const { add, setOpen } = useQuote();
-  const [category, setCategory] = useState('');
-  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState(initialCategory);
+  const [query, setQuery] = useState(initialQuery);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState<number | null>(null);
-  const [selected, setSelected] = useState<Record<string, string[]>>({});
+  const [selected, setSelected] = useState<Record<string, string[]>>(initialBrand ? { Marque: [initialBrand] } : {});
   const [sort, setSort] = useState('price-up');
   const [limit, setLimit] = useState(12);
   const [mobileFilters, setMobileFilters] = useState(false);

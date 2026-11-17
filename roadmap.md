@@ -1,4 +1,6 @@
 # SESA catalogue
+- [x] Upgrade seven-link navigation and category mega-menu; complete brands, blog, showroom/contact destinations and specialized enterprise intake; verified seven pages at five widths, brand filters, reading modal, mobile drawer dismissal, 38 tests and enterprise submission readback; removed only the test request.
+- [ ] Owner request emails await a paid plan and a verified owned sender domain.
 - [x] Replace both contact/showroom panels site-wide with an original SESA contact-and-map section, using confirmed contact details, hours and Maps listing.
 - [x] Remove the large contact/map section site-wide and use the existing two SESA contact/showroom panels matching the supplied reference.
 - [x] Replace the Boutique contact page with a SESA product shop inspired by the supplied references; verify filters, sorting, product details, quote selection and mobile display.

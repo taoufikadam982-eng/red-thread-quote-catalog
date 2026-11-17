@@ -1,5 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { quoteSchema } from './quote-schema';
+import { enterpriseIntakeMessage, enterpriseRequestType } from './enterprise-intake';
 
 export const submitQuote = createServerFn({ method: 'POST' })
   .inputValidator((input: unknown) => quoteSchema.parse(input))
@@ -16,7 +17,7 @@ export const submitQuote = createServerFn({ method: 'POST' })
     const { count, error: countError } = await supabaseAdmin.from('quote_requests').select('id', { count: 'exact', head: true }).eq('email', data.email).gte('created_at', new Date(Date.now() - 3600000).toISOString());
     if (countError) throw new Error('La réception des demandes est momentanément indisponible.');
     if ((count ?? 0) >= 5) throw new Error('Plusieurs demandes ont déjà été envoyées. Contactez-nous par téléphone.');
-    const { data: saved, error } = await supabaseAdmin.from('quote_requests').insert({ name: data.name, email: data.email, phone: data.phone, request_type: data.request_type, message: data.message, items }).select('id').single();
+    const { data: saved, error } = await supabaseAdmin.from('quote_requests').insert({ name: data.name, email: data.email, phone: data.phone, request_type: data.enterprise ? enterpriseRequestType(data.enterprise.procedure) : data.request_type, message: enterpriseIntakeMessage(data.message, data.enterprise), items }).select('id').single();
     if (error || !saved) throw new Error('Votre demande n’a pas pu être enregistrée. Veuillez réessayer.');
     return { id: saved.id };
   });

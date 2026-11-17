@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
@@ -20,7 +21,9 @@ import { Route as ConfigurateurRouteImport } from './routes/configurateur'
 import { Route as ConseilsRouteImport } from './routes/conseils'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GarantieRouteImport } from './routes/garantie'
+import { Route as MagasinRouteImport } from './routes/magasin'
 import { Route as MarchesRouteImport } from './routes/marches'
+import { Route as MarquesRouteImport } from './routes/marques'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
@@ -44,6 +47,11 @@ const AProposRoute = AProposRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BoutiqueRoute = BoutiqueRouteImport.update({
@@ -81,9 +89,19 @@ const GarantieRoute = GarantieRouteImport.update({
   path: '/garantie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MagasinRoute = MagasinRouteImport.update({
+  id: '/magasin',
+  path: '/magasin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarchesRoute = MarchesRouteImport.update({
   id: '/marches',
   path: '/marches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarquesRoute = MarquesRouteImport.update({
+  id: '/marques',
+  path: '/marques',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
@@ -116,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -123,7 +142,9 @@ export interface FileRoutesByFullPath {
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/garantie': typeof GarantieRoute
+  '/magasin': typeof MagasinRoute
   '/marches': typeof MarchesRoute
+  '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
@@ -134,6 +155,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -141,7 +163,9 @@ export interface FileRoutesByTo {
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/garantie': typeof GarantieRoute
+  '/magasin': typeof MagasinRoute
   '/marches': typeof MarchesRoute
+  '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
@@ -154,6 +178,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -161,7 +186,9 @@ export interface FileRoutesById {
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/garantie': typeof GarantieRoute
+  '/magasin': typeof MagasinRoute
   '/marches': typeof MarchesRoute
+  '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
@@ -174,6 +201,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/auth'
+    | '/blog'
     | '/boutique'
     | '/catalogue'
     | '/confidentialite'
@@ -181,7 +209,9 @@ export interface FileRouteTypes {
     | '/conseils'
     | '/contact'
     | '/garantie'
+    | '/magasin'
     | '/marches'
+    | '/marques'
     | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
@@ -192,6 +222,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/auth'
+    | '/blog'
     | '/boutique'
     | '/catalogue'
     | '/confidentialite'
@@ -199,7 +230,9 @@ export interface FileRouteTypes {
     | '/conseils'
     | '/contact'
     | '/garantie'
+    | '/magasin'
     | '/marches'
+    | '/marques'
     | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
@@ -211,6 +244,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/a-propos'
     | '/auth'
+    | '/blog'
     | '/boutique'
     | '/catalogue'
     | '/confidentialite'
@@ -218,7 +252,9 @@ export interface FileRouteTypes {
     | '/conseils'
     | '/contact'
     | '/garantie'
+    | '/magasin'
     | '/marches'
+    | '/marques'
     | '/mentions-legales'
     | '/reset-password'
     | '/solutions'
@@ -231,6 +267,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AProposRoute: typeof AProposRoute
   AuthRoute: typeof AuthRoute
+  BlogRoute: typeof BlogRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CatalogueRoute: typeof CatalogueRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
@@ -238,7 +275,9 @@ export interface RootRouteChildren {
   ConseilsRoute: typeof ConseilsRoute
   ContactRoute: typeof ContactRoute
   GarantieRoute: typeof GarantieRoute
+  MagasinRoute: typeof MagasinRoute
   MarchesRoute: typeof MarchesRoute
+  MarquesRoute: typeof MarquesRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
@@ -273,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/boutique': {
@@ -324,11 +370,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GarantieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/magasin': {
+      id: '/magasin'
+      path: '/magasin'
+      fullPath: '/magasin'
+      preLoaderRoute: typeof MagasinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/marches': {
       id: '/marches'
       path: '/marches'
       fullPath: '/marches'
       preLoaderRoute: typeof MarchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marques': {
+      id: '/marques'
+      path: '/marques'
+      fullPath: '/marques'
+      preLoaderRoute: typeof MarquesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mentions-legales': {
@@ -385,6 +445,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AProposRoute: AProposRoute,
   AuthRoute: AuthRoute,
+  BlogRoute: BlogRoute,
   BoutiqueRoute: BoutiqueRoute,
   CatalogueRoute: CatalogueRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
@@ -392,7 +453,9 @@ const rootRouteChildren: RootRouteChildren = {
   ConseilsRoute: ConseilsRoute,
   ContactRoute: ContactRoute,
   GarantieRoute: GarantieRoute,
+  MagasinRoute: MagasinRoute,
   MarchesRoute: MarchesRoute,
+  MarquesRoute: MarquesRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,

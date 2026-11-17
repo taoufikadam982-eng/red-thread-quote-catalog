@@ -48,3 +48,5 @@ use the editor.
 - Keep phone storefront navigation in an accessible sheet and admin navigation in a dismissing overlay; use mobile-only layouts and contained scrolling tables so desktop presentation remains unchanged.
 - Home-screen installation uses a manifest and branded icons only; do not add app-shell caching or service workers unless offline support is requested.
 - Keep one shared SESA contact-and-map section in the storefront footer so every page uses the same showroom details without duplicate panels.
+- Keep header menu destinations in one browser-safe list and pass category/brand selections through validated Boutique search parameters so desktop, mobile and brand pages stay consistent.
+- Specialized enterprise intake extends the shared quote schema and inbox, validating ICE/contact/procedure on both sides and preserving those details in the stored request message.
