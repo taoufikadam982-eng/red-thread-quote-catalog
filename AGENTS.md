@@ -41,6 +41,7 @@ use the editor.
 - Treat catalogue transport failures as recoverable: preserve cached products and quote state and keep sign-in accessible instead of throwing from the root loader.
 - Keep storefront presentation and public consent intake separate from admin code; newsletter subscriptions use the existing private admin content inbox to avoid duplicating subscriber storage.
 - Keep homepage slideshow artwork separate from live HTML copy and controls so messages remain accessible, with autoplay paused for interaction and reduced-motion preferences.
+- Keep homepage mobile slide artwork below the md breakpoint and desktop artwork at md and above; preserve portrait aspect ratio so equipment is not cropped.
 - Keep the homepage benefits strip fixed only on desktop and in normal flow on smaller screens, reserving space for the footer and floating contact button so controls remain accessible.
 - Keep showroom Maps URLs in the shared browser-safe storefront module so the footer and contact page target the same provider-confirmed listing.
 - Keep enterprise quote preparation in a dedicated browser-side page and hand its summary to the existing quote form; this preserves one secure submission path without duplicating intake logic.

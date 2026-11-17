@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Use the three supplied vertical images below 768px for the matching homepage slides; preserve wide desktop images and keep mobile copy at the top with uncropped hardware below.
 - [x] Add a compact newsletter signup to the shared footer, with email, required consent and the existing private subscription intake.
 - [x] Add Instagram, Facebook and X icons to the shared footer contact section; keep all three visible without links because the owner has no social pages yet.
 - [x] Align both header rows to the exact max-w-7xl centered container; use 20px link gaps and 16px phone/quote spacing with a divider. Edge alignment verified at 1180/1280/1440/1920px, no overflow at four smaller widths, catalogue/quote/mobile menus work, and three regression tests pass.
