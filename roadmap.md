@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Enable one-click/tap answers with a 250ms locked transition, cancellable Previous navigation, automatic results with published details/prices and quote controls; verified desktop Chromium, mobile Chromium/WebKit, double-click protection, all eight answers, Previous cancellation, quote prefill/addition, restart, homepage and 20 tests.
 - [x] Connect all category cards and Voir tout to immediate local filtering and smooth catalogue scrolling on both category surfaces; verified all ten categories, reset, header clearance and four category-prefilled quote forms in Chromium desktop/mobile and WebKit touch, plus 27 regression tests.
 - [x] Make the shared PC finder diagnostic visible in a stacked phone layout, with charcoal/crimson styling and live French profile messages and selected criteria; verified six widths, full questionnaire, back navigation, restart, homepage and 16 tests.
 - [x] Add the shared mobile sticky quote capsule, footer/consent hiding and separated WhatsApp position; preserve the existing desktop bar. Verified quote opening, consent and footer hiding, four public pages, 320/767/768/883/1280px and three regression tests.

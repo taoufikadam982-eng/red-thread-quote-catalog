@@ -58,4 +58,5 @@ use the editor.
 - Specialized enterprise intake extends the shared quote schema and inbox, validating ICE/contact/procedure on both sides and preserving those details in the stored request message.
 - Render partner strips through one shared component with separate desktop artwork and mobile logo links; duplicate the mobile track for seamless motion and pause on touch/focus or reduced-motion preferences.
 - Derive the PC finder diagnostic from committed answers plus the current choice in a browser-safe helper, so revisiting questions cannot show stale future criteria.
+- Use one shared timed questionnaire hook on all devices, with a synchronous input lock and timer cancellation on Previous, restart and unmount, to prevent accidental question skips.
 - Share local category selection between cards and catalogue on each catalogue surface; scroll after filter updates with measured sticky-header clearance and pass category quote text through the root quote provider.
