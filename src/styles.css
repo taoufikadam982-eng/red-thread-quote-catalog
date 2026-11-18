@@ -445,6 +445,8 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .spec-pills { display:flex; flex-wrap:wrap; gap:5px; min-height:44px; margin-top:12px; }
 .spec-pills span { background:var(--muted); color:var(--muted-foreground); font-size:10px; padding:4px 7px; border-radius:3px; }
 .catalogue-section { padding-block:36px 42px; background:var(--secondary); scroll-margin-top:max(7rem,var(--catalogue-header-offset,0px)); }
+@media(min-width:640px) and (max-width:767px) { .sesa-hero { height:580px; } }
+:root { --hero-mobile-navy:#0B111E; }
 @media(max-width:767px) { .catalogue-section { scroll-margin-top:max(6rem,var(--catalogue-header-offset,0px)); } }
 .catalogue-empty { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:16px; padding:32px 24px; text-align:center; border:1px solid var(--border); border-top:3px solid var(--primary); border-radius:8px; background:var(--card); color:var(--card-foreground); }
 .catalogue-empty>svg { width:36px; height:36px; color:var(--primary); }
@@ -600,7 +602,7 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .sesa-hero-dot span { width:8px; height:8px; border-radius:8px; background:var(--on-ink-muted); transition:width .3s,background .3s; }
 .sesa-hero-dot[aria-pressed=true] span { width:24px; background:var(--primary); }
 @media(max-width:1100px) { .sesa-hero h1 { font-size:32px; max-width:440px; } .sesa-hero-description { max-width:390px; font-size:12px; } .sesa-hero-content { padding-top:26px; } }
-@media(max-width:767px) { .sesa-hero { height:auto; aspect-ratio:9/16; } .sesa-hero-mobile-image { inset:0; height:100%; object-fit:contain; object-position:center bottom; } .sesa-hero-content { padding-top:22px; } .sesa-hero h1 { font-size:28px; max-width:100%; } .sesa-hero-brand { font-size:13px; margin-bottom:12px; } .sesa-hero-content .eyebrow { font-size:9px; margin-bottom:10px; } .sesa-hero-description { font-size:11px; line-height:1.7; max-width:360px; margin-top:12px; } .sesa-hero-actions { margin-top:14px; gap:6px; } .sesa-hero-actions>a,.sesa-hero-actions>button { height:38px; font-size:10px; padding-inline:10px; } }
+@media(max-width:767px) { .sesa-hero { height:540px; aspect-ratio:auto; background:var(--hero-mobile-navy); } .sesa-hero-mobile-image { inset:0; height:100%; width:100%; object-fit:cover; object-position:center 78%; transform:scale(1.04); transform-origin:center 78%; } .sesa-hero::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to bottom,var(--hero-mobile-navy) 0%,color-mix(in oklch,var(--hero-mobile-navy) 75%,transparent) 22%,transparent 45%),color-mix(in oklch,var(--hero-mobile-navy) 35%,transparent); } .sesa-hero-content { z-index:2; } .sesa-hero-controls { bottom:16px; } .sesa-hero-content { padding-top:22px; } .sesa-hero h1 { font-size:28px; max-width:100%; } .sesa-hero-brand { font-size:13px; margin-bottom:12px; } .sesa-hero-content .eyebrow { font-size:9px; margin-bottom:10px; } .sesa-hero-description { font-size:11px; line-height:1.7; max-width:360px; margin-top:12px; } .sesa-hero-actions { margin-top:14px; gap:6px; } .sesa-hero-actions>a,.sesa-hero-actions>button { height:38px; font-size:10px; padding-inline:10px; } }
 .partner-band { background:var(--partner-surface); border-bottom:1px solid var(--border); }
 .enterprise-hero { position:relative; isolation:isolate; width:100%; overflow:hidden; background:var(--ink); color:var(--on-ink); }
 .enterprise-hero-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
