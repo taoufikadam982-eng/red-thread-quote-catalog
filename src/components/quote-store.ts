@@ -8,4 +8,6 @@ export const QuoteContext = createContext<{
   setItems: (items: QuoteItem[]) => void;
   open: boolean;
   setOpen: (open: boolean) => void;
+  initialMessage: string;
+  setInitialMessage: (message: string) => void;
 } | null>(null);
