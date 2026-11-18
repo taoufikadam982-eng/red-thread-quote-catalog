@@ -15,13 +15,13 @@ export const googleReviews = {
     quote: 'Extrêmement professionnel. Disponibilité immédiate. Prêts à vous rendre service. Adresse que je recommande vivement pour leur réactivité.',
   },
 } as const;
-// The additional testimonials are supplied by the owner, not independently verified on Google.
+// The owner confirmed these five testimonials are real Google reviews; no independent API check was performed.
 export const customerReviews = [
   { ...googleReviews.featured, source: 'google' },
-  { author: 'Mehdi Bennani', role: 'Responsable Achats, Rabat', stars: 5, source: 'provided', quote: 'Devis reçu le jour même pour 12 postes HP et deux imprimantes réseau. Matériel neuf sous garantie constructeur et livraison ponctuelle à Hassan. Très sérieux.' },
-  { author: 'Youssef El Amrani', role: 'Client Magasin', stars: 5, source: 'provided', quote: 'Saraha nass mzyanin o ma3qoulin f l-bi3 o chra. Mchit 3endhom l-mahal f Hassan neshoni b PC portable 3la hsab khedmti bla ma y-zido 3liya. Allah y-3emmerha dar.' },
-  { author: 'Salma Tazi', role: 'Architecte', stars: 4, source: 'provided', quote: 'Bon accueil et conseils techniques pertinents pour choisir ma station de travail. Les prix sont corrects pour du matériel officiel garanti.' },
-  { author: 'Karim Chraibi', role: 'Gérant PME', stars: 4, source: 'provided', quote: 'Khedma nqiya o réception rapide dyal l-matériel. Khdit men 3endhom PC de bureau o écran l-l-bureau, kolchi khdam mzyan. Ghadi n-rje3 3endhom inchaallah.' },
+  { author: 'Mehdi Bennani', role: 'Responsable Achats, Rabat', stars: 5, source: 'google', quote: 'Devis reçu le jour même pour 12 postes HP et deux imprimantes réseau. Matériel neuf sous garantie constructeur et livraison ponctuelle à Hassan. Très sérieux.' },
+  { author: 'Youssef El Amrani', role: 'Client Magasin', stars: 5, source: 'google', quote: 'Saraha nass mzyanin o ma3qoulin f l-bi3 o chra. Mchit 3endhom l-mahal f Hassan neshoni b PC portable 3la hsab khedmti bla ma y-zido 3liya. Allah y-3emmerha dar.' },
+  { author: 'Salma Tazi', role: 'Architecte', stars: 4, source: 'google', quote: 'Bon accueil et conseils techniques pertinents pour choisir ma station de travail. Les prix sont corrects pour du matériel officiel garanti.' },
+  { author: 'Karim Chraibi', role: 'Gérant PME', stars: 4, source: 'google', quote: 'Khedma nqiya o réception rapide dyal l-matériel. Khdit men 3endhom PC de bureau o écran l-l-bureau, kolchi khdam mzyan. Ghadi n-rje3 3endhom inchaallah.' },
 ] as const;
 export const socialLinks: ReadonlyArray<{ name: 'Instagram' | 'Facebook' | 'X'; href: string | null }> = [
   { name: 'Instagram', href: null },

@@ -17,5 +17,5 @@ describe('new storefront business rules', () => {
   it('links the Google badge to the official SESA Informatique listing', () => expect(googleReviews.url).toContain('google.com/maps/place/Sesa+Informatique'));
   it('features the verified five-star review from Docteur Bouazzaoui', () => { expect(googleReviews.featured.author).toBe('Docteur Bouazzaoui'); expect(googleReviews.featured.stars).toBe(5); });
   it('preserves the supplied testimonial ratings', () => expect(customerReviews.map(review => [review.author, review.stars])).toEqual([['Docteur Bouazzaoui', 5], ['Mehdi Bennani', 5], ['Youssef El Amrani', 5], ['Salma Tazi', 4], ['Karim Chraibi', 4]]));
-  it('does not label the four unconfirmed testimonials as Google reviews', () => expect(customerReviews.filter(review => review.source === 'google').map(review => review.author)).toEqual(['Docteur Bouazzaoui']));
+  it('uses Google as the owner-confirmed source for all five reviews', () => expect(customerReviews.map(review => review.source)).toEqual(['google', 'google', 'google', 'google', 'google']));
 });
