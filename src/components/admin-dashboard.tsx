@@ -22,7 +22,7 @@ const navigation = [
 ];
 export const adminSections=navigation.flatMap(n=>n.items.map(i=>i.id));
 type AdminData=Awaited<ReturnType<typeof getAdminData>>;
-const categoryMatch=(category:string,filter:string)=>filter==='Tous'||category===filter||(filter==='Ordinateur Bureautique'&&category==='Ordinateurs bureautiques')||(filter==='Workstation'&&category==='Workstations');
+const categoryMatch=(category:string,filter:string)=>filter==='Tous'||category===filter||(filter==='Ordinateur de bureau'&&category==='Ordinateurs de bureau')||(filter==='Workstation'&&category==='Workstations');
 const productImage=(p:AdminProduct)=>seedProducts.find(i=>i.id===p.id)?.image??categories.find(c=>c.name===p.category)?.image??categories[0]?.image ?? '';
 
 export function AdminDashboard({section}:{section:string}){

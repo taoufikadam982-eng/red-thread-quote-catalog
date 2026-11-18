@@ -11,7 +11,7 @@ import software from '@/assets/software.jpg';
 
 export const categories = [
   { name: 'Ordinateurs portables', image: laptop },
-  { name: 'Ordinateurs bureautiques', image: desktop },
+  { name: 'Ordinateurs de bureau', image: desktop },
   { name: 'Workstations', image: workstation },
   { name: 'Imprimantes', image: printer },
   { name: 'Scanners', image: scanner },
@@ -23,7 +23,7 @@ export const categories = [
 ];
 export const products = [
   { id: 'probook', name: 'HP ProBook 4 G1iR 14', reference: 'C84S1AT', price: 11800, category: 'Ordinateurs portables', image: laptop, brand: 'HP', detail: 'Ordinateur portable professionnel · Format 14 pouces', usage: 'Bureautique, gestion et mobilité professionnelle' },
-  { id: 'dell-tower', name: 'Dell Pro Tower QCT1250', reference: 'QCT1250', price: 8290, category: 'Ordinateurs bureautiques', image: desktop, brand: 'Dell', detail: 'Ordinateur de bureau professionnel · Format tour', usage: 'Postes de travail, gestion et équipement des équipes' },
+  { id: 'dell-tower', name: 'Dell Pro Tower QCT1250', reference: 'QCT1250', price: 8290, category: 'Ordinateurs de bureau', image: desktop, brand: 'Dell', detail: 'Ordinateur de bureau professionnel · Format tour', usage: 'Postes de travail, gestion et équipement des équipes' },
   { id: 'zbook', name: 'HP ZBook 8 G1i 14', reference: 'D2TE5AT', price: 24950, category: 'Workstations', image: laptop, brand: 'HP', detail: 'Station de travail mobile · Format 14 pouces', usage: 'Création, développement et applications métiers exigeantes' },
   { id: 'laserjet', name: 'HP LaserJet Enterprise M506dn', reference: 'M506dn', price: 4200, category: 'Imprimantes', image: printer, brand: 'HP', detail: 'Imprimante laser monochrome professionnelle', usage: 'Impression de documents pour les équipes et administrations' },
   { id: 'hp-monitor', name: 'Écran HP Series 7 Pro 724pf', reference: '724pf', price: 2390, category: 'Écrans', image: monitor, brand: 'HP', detail: 'Écran professionnel · Gamme HP Series 7 Pro', usage: 'Poste de travail et confort visuel au quotidien' },

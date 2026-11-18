@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const availabilityOptions = ['En stock', 'Sur commande', 'Rupture de stock'] as const;
-export const adminCategories = ['Tous', 'Ordinateurs portables', 'Ordinateur Bureautique', 'Workstation', 'Workstations fixes', 'Imprimantes', 'Scanners', 'Écrans'];
+export const adminCategories = ['Tous', 'Ordinateurs portables', 'Ordinateur de bureau', 'Workstation', 'Workstations fixes', 'Imprimantes', 'Scanners', 'Écrans'];
 export const productSchema = z.object({
   id: z.string().min(1).max(60),
   name: z.string().trim().min(1, 'Le titre est obligatoire.').max(200),
