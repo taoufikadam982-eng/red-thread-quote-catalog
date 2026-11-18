@@ -1,0 +1,3 @@
+- Keep grounding and AI Gateway calls server-only; use the published service and review module to prevent invented or stale duplicated claims.
+- Save one text-only conversation per verified customer ID with owner RLS; never accept another user's history ID.
+- Stream Responses with the shared run-ID helper; persist terminal AI access/credit pause state and require owner action before resuming.

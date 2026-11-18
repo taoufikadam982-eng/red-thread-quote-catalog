@@ -1096,6 +1096,30 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-faq { background:var(--secondary); padding-block:48px; }
 .product-faq>.site-width { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1fr); gap:60px; }
 .product-faq h2 { margin-block:14px; }
+.assistant-page { padding-block:40px 56px; }
+.assistant-page-heading { margin-bottom:24px; }
+.assistant-page-heading h1 { font-size:32px; font-weight:800; margin-top:12px; }
+.assistant-page-heading>p:last-child { margin-top:12px; color:var(--muted-foreground); font-size:14px; }
+.assistant-signin { padding-block:36px; }
+.assistant-signin h2 { font-size:24px; font-weight:800; }
+.assistant-signin p { margin-block:16px; font-size:14px; }
+.assistant-signin>div { display:flex; flex-wrap:wrap; gap:12px; }
+.assistant-workspace { max-width:840px; margin-inline:auto; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--card); }
+.assistant-topline { display:flex; justify-content:space-between; align-items:center; padding:18px 20px; background:var(--ink); color:var(--on-ink); }
+.assistant-identity { display:flex; align-items:center; gap:20px; }
+.assistant-identity img { width:95px; height:32px; object-fit:contain; }
+.assistant-identity>span { font-size:13px; font-weight:800; }
+.assistant-identity small { display:block; font-size:10px; color:var(--on-ink-muted); font-weight:500; }
+.assistant-conversation { height:480px; }
+.assistant-empty { padding-block:28px; }
+.assistant-empty h2 { font-size:20px; font-weight:800; }
+.assistant-empty>div { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+.assistant-workspace .assistant-user-message { background:var(--primary); color:var(--primary-foreground); }
+.assistant-composer { padding:16px; border-top:1px solid var(--border); }
+.assistant-composer textarea { min-height:68px; font-size:14px; }
+.assistant-disclosure { font-size:10px; color:var(--muted-foreground); margin-top:10px; overflow-wrap:anywhere; }
+.assistant-error { color:var(--destructive); font-size:13px; }
+@media(max-width:767px) { .assistant-page { padding-block:24px 36px; } .assistant-page-heading h1 { font-size:25px; } .assistant-conversation { height:420px; } .assistant-topline { padding:14px; } .assistant-identity { gap:12px; } .assistant-identity img { width:75px; } .assistant-empty>div { flex-direction:column; align-items:start; } }
 .product-faq p { font-size:13px; color:var(--muted-foreground); line-height:1.9; }
 .product-faq details { border-top:1px solid var(--border); padding-block:18px; }
 .product-faq summary { cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:13px; font-weight:800; list-style:none; }

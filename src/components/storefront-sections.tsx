@@ -55,7 +55,7 @@ function FooterEnterpriseLinks() {
   return <><Button variant="nav" className="footer-link h-auto p-0" onClick={() => setOpen(true)}>Demander un devis</Button><Link to="/marches" className="footer-link">Bons de commande & Marchés</Link><Link to="/magasin" className="footer-link">Vente & paiement en magasin</Link><Link to="/garantie" className="footer-link">Garantie constructeur & SAV</Link><Link to="/configurateur" className="footer-link">Configuration sur mesure</Link></>;
 }
 function FooterCompanyLinks() {
-  return <><Link to="/a-propos" className="footer-link">Qui sommes-nous ?</Link><Link to="/magasin" className="footer-link">Notre magasin à Rabat</Link><Link to="/contact" className="footer-link">Nous contacter</Link><Link to="/mentions-legales" className="footer-link">Mentions légales</Link><Link to="/confidentialite" className="footer-link">Politique de confidentialité</Link><Link to="/auth" className="footer-link">Administration</Link></>;
+  return <><Link to="/a-propos" className="footer-link">Qui sommes-nous ?</Link><Link to="/magasin" className="footer-link">Notre magasin à Rabat</Link><Link to="/contact" className="footer-link">Nous contacter</Link><Link to="/assistant" className="footer-link">Poser une question à SESA</Link><Link to="/mentions-legales" className="footer-link">Mentions légales</Link><Link to="/confidentialite" className="footer-link">Politique de confidentialité</Link><Link to="/auth" className="footer-link">Administration</Link></>;
 }
 const footerColumns = [
   { id: 'catalogue', title: 'CATALOGUE', Links: FooterCatalogueLinks },

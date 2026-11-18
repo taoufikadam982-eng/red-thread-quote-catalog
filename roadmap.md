@@ -1,5 +1,5 @@
 # SESA catalogue
-- [ ] Add a single-conversation SESA services/reviews assistant through AI Gateway; history storage choice awaits the owner before chat implementation.
+- [x] Add one private customer-account SESA conversation with Google/Lovable sign-in and AI Gateway grounding; verified real review/service answers, follow-up, saved reload, Stop, signed-out history denial, desktop/mobile and 19 focused tests. Full lint exceeded the sandbox time limit; preview build passes.
 - [x] Replace the white testimonial section and single footer review with one full-width dark footer marquee below social icons; verified five dark cards, Google links, left-to-right movement, touch/focus pause, reduced motion and no overflow at 320/390/883/1280px; 17 tests pass.
 - [x] Add the five supplied testimonials above the showroom with continuous left-to-right scrolling, desktop/mobile touch/focus pause and shared Google rating; verified 390/883/1280px, reduced motion, no overflow and 17 tests.
 - [x] Label all five testimonials as Google reviews following the owner's confirmation of their source; no independent Google API verification claimed.

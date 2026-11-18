@@ -143,6 +143,10 @@ function RootComponent() {
       if (!['SIGNED_IN','SIGNED_OUT','USER_UPDATED'].includes(event)) return;
       void router.invalidate();
       if(event !== 'SIGNED_OUT') void queryClient.invalidateQueries();
+      if (event === 'SIGNED_IN' && sessionStorage.getItem('sesa-assistant-return')) {
+        sessionStorage.removeItem('sesa-assistant-return');
+        void router.navigate({ to: '/assistant' });
+      }
     });
     return () => data.subscription.unsubscribe();
   }, [router, queryClient]);

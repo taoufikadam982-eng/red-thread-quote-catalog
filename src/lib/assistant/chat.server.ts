@@ -30,7 +30,7 @@ export async function handleAssistant(request: Request) {
     if (origin && origin !== new URL(request.url).origin) return jsonError('Origine de la demande refusée.', 403);
     const parsed = assistantRequestSchema.safeParse(await request.json());
     if (!parsed.success) return jsonError('Question non valide. Envoyez uniquement du texte.', 400);
-    const messages = await validateUIMessages<UIMessage>({ messages: parsed.data.messages });
+    const messages = await validateUIMessages<UIMessage>({ messages: parsed.data.messages.map(message => ({ ...message, id: message.id || crypto.randomUUID() })) });
     if (messages.at(-1)?.role !== 'user') return jsonError('Une question est nécessaire.', 400);
     const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
     const { data: paused, error: stateError } = await supabaseAdmin.from('assistant_gateway_state').select('status,message').eq('id', 'gateway').maybeSingle();
@@ -56,15 +56,19 @@ export async function handleAssistant(request: Request) {
       }
       resolveUpstream(response);
     });
-    const stream = result.toUIMessageStreamResponse({ originalMessages: messages, sendReasoning: true,
-      onError: error => error instanceof Error ? error.message : 'Assistant indisponible.',
+    const stream = result.toUIMessageStreamResponse({ originalMessages: messages, generateMessageId: () => crypto.randomUUID(), sendReasoning: true,
+      onError: error => {
+        const message = error instanceof Error ? error.message : 'Assistant indisponible.';
+        resolveUpstream(jsonError(message, 503));
+        return message;
+      },
       onFinish: async ({ messages: completed }) => {
         const textOnly = completed.map(message => ({ ...message, parts: message.parts.filter(part => part.type === 'text') })).filter(message => message.parts.length);
         const { error } = await auth.client.from('assistant_conversations').upsert({ user_id: auth.userId, messages: textOnly, updated_at: new Date().toISOString() });
         if (error) { console.error('Assistant history save failed', error.code); throw new Error('La réponse n’a pas pu être sauvegardée.'); }
       },
     });
-    const upstream = await Promise.race([upstreamReady, runIdFetch.waitForRunId().then(() => upstreamReady)]);
+    const upstream = await upstreamReady;
     if (!upstream.ok) {
       const body = await upstream.clone().text();
       let message = 'Assistant indisponible.';

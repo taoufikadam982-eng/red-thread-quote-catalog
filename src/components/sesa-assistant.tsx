@@ -11,7 +11,7 @@ import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputSubmit 
 import { Shimmer } from './ai-elements/shimmer';
 import { Reasoning, ReasoningTrigger, ReasoningContent } from './ai-elements/reasoning';
 import { LogOut, ArrowRight } from 'lucide-react';
-import logo from '@/assets/sesa-logo.png';
+import logo from '@/assets/sesa-logo-white.png';
 
 async function authenticatedFetch(input: RequestInfo | URL, init?: RequestInit) {
   const { data } = await supabase.auth.getSession();
@@ -48,7 +48,7 @@ function AssistantChat({ userId, email, initialMessages }: { userId: string; ema
   const busy = status === 'submitted' || status === 'streaming';
   useEffect(() => { if (!busy) input.current?.focus(); }, [busy]);
   return <section className="assistant-workspace">
-    <div className="assistant-topline"><div className="assistant-identity"><img src={logo} alt="SESA Informatique"/><span>Conseiller SESA <small>Assistant IA</small></span></div><Button variant="ghost" size="icon" title="Se déconnecter" aria-label="Se déconnecter" onClick={() => supabase.auth.signOut()}><LogOut/></Button></div>
+    <div className="assistant-topline"><div className="assistant-identity"><img src={logo} alt="SESA Informatique"/><span>Conseiller SESA <small>Assistant IA</small></span></div><Button variant="dark" size="icon" title="Se déconnecter" aria-label="Se déconnecter" onClick={async () => { await supabase.auth.signOut(); window.location.reload(); }}><LogOut/></Button></div>
     <Conversation className="assistant-conversation"><ConversationContent>
       {!messages.length && <div className="assistant-empty"><h2>Bonjour, comment puis-je vous aider ?</h2><div>{['Que disent vos clients ?', 'Quels sont vos horaires ?', 'Comment demander un devis ?'].map(question => <Button variant="outline" key={question} onClick={() => { void sendMessage({ text: question }); input.current?.focus(); }}>{question}</Button>)}</div></div>}
       {messages.map(message => <Message key={message.id} from={message.role}><MessageContent className={message.role === 'user' ? 'assistant-user-message' : ''}>{message.parts.map((part, i) => part.type === 'text' ? <MessageResponse key={i}>{part.text}</MessageResponse> : part.type === 'reasoning' ? <Reasoning key={i} isStreaming={busy} defaultOpen={false}><ReasoningTrigger/><ReasoningContent>{part.text}</ReasoningContent></Reasoning> : null)}</MessageContent></Message>)}
