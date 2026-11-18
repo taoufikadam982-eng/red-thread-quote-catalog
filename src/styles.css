@@ -603,7 +603,8 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .sesa-showroom-reviews .sesa-showroom-social { margin-top:0; }
 .footer-review-marquee { width:100%; min-width:0; overflow:hidden; margin-top:22px; }
 .footer-review-marquee:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
-.footer-review-track { display:flex; width:max-content; animation:marquee-ltr 65s linear infinite; }
+.footer-review-track { display:flex; width:max-content; animation:marquee-rtl 65s linear infinite; }
+@keyframes marquee-rtl { from { transform:translateX(0%); } to { transform:translateX(-50%); } }
 .footer-review-group { display:flex; align-items:flex-start; flex-shrink:0; gap:20px; padding-right:20px; }
 .footer-review-marquee:hover .footer-review-track,.footer-review-marquee:focus-within .footer-review-track,.footer-review-track.is-touching { animation-play-state:paused; }
 @media(max-width:767px) {
