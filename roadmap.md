@@ -47,3 +47,4 @@
 
 - [x] Sweep phone surfaces: all public pages at five widths, all 12 authenticated admin destinations, editor/import windows, mobile navigation, login/reset/404 and eight-question finder; review catalogue recovery and inactive legacy sections. Keep records/settings unchanged. Device installation, invitation/password email delivery, and Word/PDF/photo parsing remain unverified.
 - [x] Blog connecté à la base + gestion dans /admin
+- [x] Footer mobile en accordéons: les trois colonnes de liens se replient sous 768px, la grille ordinateur reste ouverte. Vérifié: trois lignes fermées au chargement, ouverture/fermeture au tap, liens lisibles, grille 4 colonnes inchangée à 1280px, aucun débordement, 77 tests.

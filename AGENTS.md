@@ -61,3 +61,4 @@ use the editor.
 - Use one shared timed questionnaire hook on all devices, with a synchronous input lock and timer cancellation on Previous, restart and unmount, to prevent accidental question skips.
 - Share local category selection between cards and catalogue on each catalogue surface; scroll after filter updates with measured sticky-header clearance and pass category quote text through the root quote provider.
 - Blog articles live in blog_posts; uploaded covers go to the private catalogue bucket under blog/ and are served only when attached to a published post via the public image handler.
+- Render the three footer link columns from one shared column list: expanded desktop grid at md and above, collapsed accordion rows below it, so a phone footer stays compact without duplicating destinations.

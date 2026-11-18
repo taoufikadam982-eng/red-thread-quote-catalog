@@ -564,6 +564,17 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .footer-heading { font-size:11px; font-weight:800; margin-bottom:20px; }
 .footer-link { display:block; text-align:left; font-size:11px; line-height:1.7; margin-top:10px; color:var(--on-ink-muted); }
 .footer-link:hover { color:var(--on-ink); }
+.footer-accordion { border-top:1px solid rgb(255 255 255 / .1); }
+.footer-accordion-row { border-bottom:1px solid rgb(255 255 255 / .1); }
+.footer-accordion-heading { margin:0; }
+.footer-accordion-trigger { display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; padding-block:16px; background:transparent; text-align:left; font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--on-ink); }
+.footer-accordion-trigger svg { width:18px; height:18px; flex-shrink:0; color:var(--on-ink-muted); transition:transform .28s ease; }
+.footer-accordion-trigger svg.is-open { transform:rotate(180deg); }
+.footer-accordion-panel { display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s ease; }
+.footer-accordion-panel[data-open] { grid-template-rows:1fr; }
+.footer-accordion-panel-inner { overflow:hidden; min-height:0; padding-bottom:8px; }
+.footer-accordion-panel-inner .footer-link { font-size:13px; }
+.footer-mobile-identity { padding-bottom:6px; }
 .whatsapp-button { background:var(--whatsapp); color:var(--on-ink); }
 .whatsapp-button:hover { background:color-mix(in oklch,var(--whatsapp) 88%,var(--ink)); }
 .floating-whatsapp { position:fixed; bottom:18px; left:20px; z-index:30; font-size:11px; border-radius:24px; height:42px; }
