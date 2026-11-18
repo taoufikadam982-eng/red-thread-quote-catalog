@@ -60,3 +60,4 @@ use the editor.
 - Derive the PC finder diagnostic from committed answers plus the current choice in a browser-safe helper, so revisiting questions cannot show stale future criteria.
 - Use one shared timed questionnaire hook on all devices, with a synchronous input lock and timer cancellation on Previous, restart and unmount, to prevent accidental question skips.
 - Share local category selection between cards and catalogue on each catalogue surface; scroll after filter updates with measured sticky-header clearance and pass category quote text through the root quote provider.
+- Blog articles live in blog_posts; uploaded covers go to the private catalogue bucket under blog/ and are served only when attached to a published post via the public image handler.

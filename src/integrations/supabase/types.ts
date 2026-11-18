@@ -44,6 +44,42 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_posts: {
+        Row: {
+          category: string
+          content: string
+          cover_image_url: string
+          created_at: string
+          excerpt: string
+          id: string
+          published: boolean
+          slug: string
+          title: string
+        }
+        Insert: {
+          category?: string
+          content?: string
+          cover_image_url?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published?: boolean
+          slug: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          cover_image_url?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published?: boolean
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           availability: string

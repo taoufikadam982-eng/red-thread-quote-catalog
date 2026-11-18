@@ -2,12 +2,13 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useServerFn } from '@tanstack/react-start';
-import { Users, FileText, Laptop, Images, Star, Mail, Megaphone, Shield, Settings, UserRound, Lock, ExternalLink, LogOut, Menu, Plus, Upload, Save, Trash2, CheckCheck, ArrowLeft } from 'lucide-react';
+import { Users, FileText, Laptop, Images, Star, Mail, Megaphone, Shield, Settings, Newspaper, UserRound, Lock, ExternalLink, LogOut, Menu, Plus, Upload, Save, Trash2, CheckCheck, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from './ui/dialog';
 import { Logo } from './sesa-site';
+import { BlogAdminView } from './admin-blog';
 import { supabase } from '@/integrations/supabase/client';
 import { getAdminData, saveProducts, markQuoteRead, saveContent, deleteContent, saveProfile, saveSettings, inviteAdmin } from '@/lib/admin.functions';
 import { adminCategories, availabilityOptions, blankProduct, productSchema, type AdminProduct } from '@/lib/product-schema';
@@ -16,7 +17,7 @@ import { categories, products as seedProducts } from '@/lib/catalog';
 
 const navigation = [
   {label:'VENTES',items:[{id:'clients',title:'Clients',icon:Users},{id:'quotes',title:'Demandes de devis / BC',icon:FileText}]},
-  {label:'CATALOGUE',items:[{id:'products',title:'Produits',icon:Laptop},{id:'banners',title:'Diaporama / Bannières',icon:Images},{id:'reviews',title:'Avis',icon:Star}]},
+  {label:'CATALOGUE',items:[{id:'products',title:'Produits',icon:Laptop},{id:'blog',title:'Blog',icon:Newspaper},{id:'banners',title:'Diaporama / Bannières',icon:Images},{id:'reviews',title:'Avis',icon:Star}]},
   {label:'CONTACTS',items:[{id:'messages',title:'Messages',icon:Mail},{id:'newsletter',title:'Newsletter',icon:Megaphone}]},
   {label:'COMPTE',items:[{id:'emails',title:'E-mails',icon:Mail},{id:'personal',title:'Données personnelles',icon:Shield},{id:'settings',title:'Réglages',icon:Settings},{id:'users',title:'Utilisateurs',icon:Users},{id:'account',title:'Mon compte',icon:Lock}]},
 ];
@@ -36,7 +37,7 @@ export function AdminDashboard({section}:{section:string}){
   return <div className={`admin-layout ${collapsed?'admin-collapsed':''}`}>
     <aside className="admin-sidebar"><div className="admin-brand"><Logo/></div><nav className="admin-nav">{navigation.map(group=><div key={group.label}><p className="admin-group">{group.label}</p>{group.items.map(item=><Button asChild key={item.id} variant="nav" className={`admin-nav-item ${section===item.id?'admin-nav-active':''}`} title={item.title}><Link to="/admin" search={{p:item.id}} aria-label={item.title}><item.icon/><span>{item.title}</span>{['quotes','messages'].includes(item.id)&&unread>0&&<b className="admin-count">{unread}</b>}</Link></Button>)}</div>)}</nav><div className="admin-sidebar-bottom"><Button asChild variant="nav" className="admin-nav-item" title="Voir la boutique"><Link to="/"><ExternalLink/><span>Voir la boutique</span></Link></Button><Button variant="nav" onClick={logout} disabled={signingOut} className="admin-nav-item" title="Déconnexion (admin)"><LogOut/><span>Déconnexion (admin)</span></Button></div></aside>
     <main className="admin-main"><div className="admin-topline"><Button variant="ghost" size="icon" title={collapsed?'Afficher le menu':'Réduire le menu'} aria-label="Basculer le menu" onClick={()=>setCollapsed(!collapsed)}><Menu/></Button><span>Administration <span className="text-primary">/</span> SESA Informatique</span><Link to="/admin" search={{p:'account'}} title={accountEmail} className="ml-auto flex min-w-0 items-center gap-2"><UserRound className="size-4 shrink-0"/><span className="hidden max-w-64 truncate sm:inline">{accountEmail??'Mon compte'}</span></Link></div><div className="admin-page">
-    {isPending?<p role="status" className="py-20 text-center text-muted-foreground">Chargement de l’administration…</p>:error?<div role="alert"><h1 className="text-2xl font-bold">Accès indisponible</h1><p className="my-4">{error.message}</p><Button onClick={()=>queryClient.invalidateQueries({queryKey:['admin']})}>Réessayer</Button></div>:data?section==='products'?<ProductsView products={data.products}/>:['quotes','messages'].includes(section)?<RequestsView data={data} messages={section==='messages'}/>:section==='clients'?<ClientsView data={data}/>:section==='users'?<UsersView data={data}/>:['account','personal'].includes(section)?<AccountView data={data} personal={section==='personal'}/>:section==='settings'?<SettingsView data={data}/>:<ContentView data={data} section={section}/>:null}
+    {isPending?<p role="status" className="py-20 text-center text-muted-foreground">Chargement de l’administration…</p>:error?<div role="alert"><h1 className="text-2xl font-bold">Accès indisponible</h1><p className="my-4">{error.message}</p><Button onClick={()=>queryClient.invalidateQueries({queryKey:['admin']})}>Réessayer</Button></div>:data?section==='products'?<ProductsView products={data.products}/>:section==='blog'?<BlogAdminView/>:['quotes','messages'].includes(section)?<RequestsView data={data} messages={section==='messages'}/>:section==='clients'?<ClientsView data={data}/>:section==='users'?<UsersView data={data}/>:['account','personal'].includes(section)?<AccountView data={data} personal={section==='personal'}/>:section==='settings'?<SettingsView data={data}/>:<ContentView data={data} section={section}/>:null}
     </div></main>
   </div>;
 }
