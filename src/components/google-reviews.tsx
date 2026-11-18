@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { customerReviews, googleReviews } from '@/lib/storefront';
 
 function GoogleMark() {
@@ -27,40 +27,18 @@ export function GoogleBadge() {
   </a>;
 }
 
-export function GoogleReviewCard() {
-  const review = googleReviews.featured;
-  return <figure className="google-review-card">
-    <div className="google-review-head">
-      <GoogleMark/>
-      <Stars count={review.stars} label="Avis 5 étoiles sur Google"/>
-    </div>
-    <blockquote>« {review.quote} »</blockquote>
-    <figcaption><strong>{review.author}</strong><span>{review.role}</span></figcaption>
-    <a className="google-review-link" href={googleReviews.url} target="_blank" rel="noopener noreferrer">Voir tous les avis sur Google <span aria-hidden="true">→</span></a>
-  </figure>;
-}
-
-export function CustomerReviewsSection() {
+export function GoogleReviewMarquee() {
   const [touching, setTouching] = useState(false);
-  return <section className="customer-reviews" aria-labelledby="customer-reviews-title">
-    <div className="site-width customer-reviews-heading">
-      <p className="customer-reviews-label">AVIS CLIENTS GOOGLE</p>
-      <h2 id="customer-reviews-title">La confiance de nos clients à Rabat</h2>
-      <a className="customer-reviews-summary" href={googleReviews.url} target="_blank" rel="noopener noreferrer">
-        <GoogleMark/><strong>{googleReviews.ratingLabel} / 5</strong><Stars count={5} label="Note Google 4,6 sur 5"/><span>Basé sur {googleReviews.reviewCount} avis Google</span>
-      </a>
+  return <div className="footer-review-marquee" role="region" tabIndex={0} aria-label="Avis Google de nos clients" onTouchStart={() => setTouching(true)} onTouchEnd={() => setTouching(false)} onTouchCancel={() => setTouching(false)}>
+    <div className={`footer-review-track${touching ? ' is-touching' : ''}`}>
+      {[0, 1].map(copy => <div className="footer-review-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+        {customerReviews.map(review => <figure className="google-review-card" key={review.author}>
+          <div className="google-review-head"><GoogleMark/><Stars count={review.stars} label={`${review.stars} étoiles sur 5 sur Google`}/></div>
+          <blockquote>« {review.quote} »</blockquote>
+          <figcaption><strong>{review.author}</strong><span>{review.role}</span></figcaption>
+          <a className="google-review-link" href={googleReviews.url} target="_blank" rel="noopener noreferrer" tabIndex={copy === 1 ? -1 : undefined}>Voir tous les avis sur Google <span aria-hidden="true">→</span></a>
+        </figure>)}
+      </div>)}
     </div>
-    <div className="customer-reviews-marquee" tabIndex={0} aria-label="Témoignages clients" onTouchStart={() => setTouching(true)} onTouchEnd={() => setTouching(false)} onTouchCancel={() => setTouching(false)}>
-      <div className={`customer-reviews-track${touching ? ' is-touching' : ''}`}>
-        {[0, 1].map(copy => <div className="customer-reviews-group" key={copy} aria-hidden={copy === 1 ? true : undefined} inert={copy === 1 ? true : undefined}>
-          {customerReviews.map(review => <figure className="customer-review" key={review.author}>
-            <div className="customer-review-top"><Stars count={review.stars} label={`${review.stars} étoiles sur 5`}/><Quote aria-hidden="true"/></div>
-            <blockquote>« {review.quote} »</blockquote>
-            <figcaption><span className="customer-review-avatar" aria-hidden="true">{review.author.split(' ').map(word => word[0]).slice(0, 2).join('')}</span><span><strong>{review.author}</strong><span>{review.role}</span><small>{review.source === 'google' ? 'Avis Google' : 'Témoignage fourni'}</small></span>{review.source === 'google' && <GoogleMark/>}</figcaption>
-          </figure>)}
-        </div>)}
-      </div>
-    </div>
-    <div className="site-width customer-reviews-bottom"><a href={googleReviews.url} target="_blank" rel="noopener noreferrer">Voir tous les avis sur Google <span aria-hidden="true">→</span></a></div>
-  </section>;
+  </div>;
 }

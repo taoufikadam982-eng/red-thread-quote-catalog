@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Replace the white testimonial section and single footer review with one full-width dark footer marquee below social icons; verified five dark cards, Google links, left-to-right movement, touch/focus pause, reduced motion and no overflow at 320/390/883/1280px; 17 tests pass.
 - [x] Add the five supplied testimonials above the showroom with continuous left-to-right scrolling, desktop/mobile touch/focus pause and shared Google rating; verified 390/883/1280px, reduced motion, no overflow and 17 tests.
 - [x] Label all five testimonials as Google reviews following the owner's confirmation of their source; no independent Google API verification claimed.
 - [x] Enable one-click/tap answers with a 250ms locked transition, cancellable Previous navigation, automatic results with published details/prices and quote controls; verified desktop Chromium, mobile Chromium/WebKit, double-click protection, all eight answers, Previous cancellation, quote prefill/addition, restart, homepage and 20 tests.
