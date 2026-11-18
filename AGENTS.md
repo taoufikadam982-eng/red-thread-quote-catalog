@@ -62,3 +62,4 @@ use the editor.
 - Share local category selection between cards and catalogue on each catalogue surface; scroll after filter updates with measured sticky-header clearance and pass category quote text through the root quote provider.
 - Blog articles live in blog_posts; uploaded covers go to the private catalogue bucket under blog/ and are served only when attached to a published post via the public image handler.
 - Render the three footer link columns from one shared column list: expanded desktop grid at md and above, collapsed accordion rows below it, so a phone footer stays compact without duplicating destinations.
+- Keep Google review data (rating, count, listing URL, featured review) in the shared browser-safe storefront module and render the footer badge and showroom review card from one component, so both surfaces always show the same official figures.

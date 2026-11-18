@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { filterCatalogue, socialLinks, store } from '@/lib/storefront';
+import { filterCatalogue, googleReviews, socialLinks, store } from '@/lib/storefront';
 import { newsletterSchema } from '@/lib/newsletter-schema';
 describe('new storefront business rules', () => {
   it('lists the scanner at 4690 DH', () => expect(products.find(p => p.id === 'scanjet')?.price).toBe(4690));
@@ -13,4 +13,7 @@ describe('new storefront business rules', () => {
   it('rejects newsletter signup with a filled honeypot', () => expect(newsletterSchema.safeParse({ email: 'person@example.com', consent: true, website: 'spam' }).success).toBe(false));
   it('lists Instagram, Facebook and X as the SESA social channels', () => expect(socialLinks.map(l => l.name)).toEqual(['Instagram', 'Facebook', 'X']));
   it('keeps all three social channels without destinations until pages exist', () => expect(socialLinks.map(l => l.href)).toEqual([null, null, null]));
+  it('shows the official Google rating of 4,6/5 from 15 reviews', () => { expect(googleReviews.rating).toBe(4.6); expect(googleReviews.ratingLabel).toBe('4,6'); expect(googleReviews.reviewCount).toBe(15); });
+  it('links the Google badge to the official SESA Informatique listing', () => expect(googleReviews.url).toContain('google.com/maps/place/Sesa+Informatique'));
+  it('features the verified five-star review from Docteur Bouazzaoui', () => { expect(googleReviews.featured.author).toBe('Docteur Bouazzaoui'); expect(googleReviews.featured.stars).toBe(5); });
 });
