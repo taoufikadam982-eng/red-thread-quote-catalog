@@ -1,0 +1,10 @@
+CREATE TABLE public.assistant_conversations (user_id uuid PRIMARY KEY, messages jsonb NOT NULL DEFAULT '[]'::jsonb, updated_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT, INSERT, UPDATE ON public.assistant_conversations TO authenticated;
+GRANT ALL ON public.assistant_conversations TO service_role;
+ALTER TABLE public.assistant_conversations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY assistant_read_own ON public.assistant_conversations FOR SELECT TO authenticated USING ((select auth.uid()) = user_id);
+CREATE POLICY assistant_insert_own ON public.assistant_conversations FOR INSERT TO authenticated WITH CHECK ((select auth.uid()) = user_id);
+CREATE POLICY assistant_update_own ON public.assistant_conversations FOR UPDATE TO authenticated USING ((select auth.uid()) = user_id) WITH CHECK ((select auth.uid()) = user_id);
+CREATE TABLE public.assistant_gateway_state (id text PRIMARY KEY, status integer NOT NULL, message text NOT NULL, updated_at timestamptz NOT NULL DEFAULT now());
+GRANT ALL ON public.assistant_gateway_state TO service_role;
+ALTER TABLE public.assistant_gateway_state ENABLE ROW LEVEL SECURITY;

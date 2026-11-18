@@ -14,7 +14,7 @@ export default defineConfig({
     optimizeDeps: {
       // Prebundle the shared hook consumers together with React. Late discovery of
       // Radix discovery otherwise replaces the dependency graph beneath an open preview.
-      include: ["react", "react-dom/client", "react/jsx-runtime", "@radix-ui/react-slot", "@radix-ui/react-dialog", "@radix-ui/react-popover", "sonner", "xlsx", "papaparse", "mammoth/mammoth.browser", "pdfjs-dist", "tesseract.js"],
+      include: ["react", "react-dom/client", "react/jsx-runtime", "@radix-ui/react-slot", "@radix-ui/react-dialog", "@radix-ui/react-popover", "sonner", "xlsx", "papaparse", "mammoth/mammoth.browser", "pdfjs-dist", "tesseract.js", "@ai-sdk/react", "use-stick-to-bottom", "motion", "streamdown", "@streamdown/cjk", "@streamdown/code", "@streamdown/math", "@streamdown/mermaid"],
     },
   },
   tanstackStart: {

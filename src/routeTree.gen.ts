@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
@@ -29,6 +30,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ProduitIdRouteImport } from './routes/produit.$id'
+import { Route as ApiPublicAssistantRouteImport } from './routes/api/public/assistant'
 import { Route as ApiPublicCatalogueImageRouteImport } from './routes/api/public/catalogue-image'
 
 const IndexRoute = IndexRouteImport.update({
@@ -43,6 +45,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AProposRoute = AProposRouteImport.update({
   id: '/a-propos',
   path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -130,6 +137,11 @@ const ProduitIdRoute = ProduitIdRouteImport.update({
   path: '/produit/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAssistantRoute = ApiPublicAssistantRouteImport.update({
+  id: '/api/public/assistant',
+  path: '/api/public/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicCatalogueImageRoute = ApiPublicCatalogueImageRouteImport.update({
   id: '/api/public/catalogue-image',
   path: '/api/public/catalogue-image',
@@ -139,6 +151,7 @@ const ApiPublicCatalogueImageRoute = ApiPublicCatalogueImageRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
@@ -156,11 +169,13 @@ export interface FileRoutesByFullPath {
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
+  '/api/public/assistant': typeof ApiPublicAssistantRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
@@ -178,6 +193,7 @@ export interface FileRoutesByTo {
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
+  '/api/public/assistant': typeof ApiPublicAssistantRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRoutesById {
@@ -185,6 +201,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/a-propos': typeof AProposRoute
+  '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
@@ -202,6 +219,7 @@ export interface FileRoutesById {
   '/solutions': typeof SolutionsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
+  '/api/public/assistant': typeof ApiPublicAssistantRoute
   '/api/public/catalogue-image': typeof ApiPublicCatalogueImageRoute
 }
 export interface FileRouteTypes {
@@ -209,6 +227,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/a-propos'
+    | '/assistant'
     | '/auth'
     | '/blog'
     | '/boutique'
@@ -226,11 +245,13 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/admin'
     | '/produit/$id'
+    | '/api/public/assistant'
     | '/api/public/catalogue-image'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/a-propos'
+    | '/assistant'
     | '/auth'
     | '/blog'
     | '/boutique'
@@ -248,12 +269,14 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/admin'
     | '/produit/$id'
+    | '/api/public/assistant'
     | '/api/public/catalogue-image'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/a-propos'
+    | '/assistant'
     | '/auth'
     | '/blog'
     | '/boutique'
@@ -271,6 +294,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/_authenticated/admin'
     | '/produit/$id'
+    | '/api/public/assistant'
     | '/api/public/catalogue-image'
   fileRoutesById: FileRoutesById
 }
@@ -278,6 +302,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AProposRoute: typeof AProposRoute
+  AssistantRoute: typeof AssistantRoute
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRoute
   BoutiqueRoute: typeof BoutiqueRoute
@@ -294,6 +319,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
   ProduitIdRoute: typeof ProduitIdRoute
+  ApiPublicAssistantRoute: typeof ApiPublicAssistantRoute
   ApiPublicCatalogueImageRoute: typeof ApiPublicCatalogueImageRoute
 }
 
@@ -318,6 +344,13 @@ declare module '@tanstack/react-router' {
       path: '/a-propos'
       fullPath: '/a-propos'
       preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -439,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProduitIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/assistant': {
+      id: '/api/public/assistant'
+      path: '/api/public/assistant'
+      fullPath: '/api/public/assistant'
+      preLoaderRoute: typeof ApiPublicAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/catalogue-image': {
       id: '/api/public/catalogue-image'
       path: '/api/public/catalogue-image'
@@ -464,6 +504,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AProposRoute: AProposRoute,
+  AssistantRoute: AssistantRoute,
   AuthRoute: AuthRoute,
   BlogRoute: BlogRoute,
   BoutiqueRoute: BoutiqueRoute,
@@ -480,6 +521,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
   ProduitIdRoute: ProduitIdRoute,
+  ApiPublicAssistantRoute: ApiPublicAssistantRoute,
   ApiPublicCatalogueImageRoute: ApiPublicCatalogueImageRoute,
 }
 export const routeTree = rootRouteImport
