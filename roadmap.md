@@ -1,4 +1,5 @@
 # SESA catalogue
+- [x] Make the shared PC finder diagnostic visible in a stacked phone layout, with charcoal/crimson styling and live French profile messages and selected criteria; verified six widths, full questionnaire, back navigation, restart, homepage and 16 tests.
 - [x] Add the shared mobile sticky quote capsule, footer/consent hiding and separated WhatsApp position; preserve the existing desktop bar. Verified quote opening, consent and footer hiding, four public pages, 320/767/768/883/1280px and three regression tests.
 - [x] Add a mobile-only left-to-right partner logo ticker with touch/focus pause and brand-filter links; preserve the static desktop strip. Verified nine loaded logos, 320/390/767/768px, HP filter readback, reduced motion and 16 regression tests.
 - [x] Replace product popups with dedicated SESA product pages: image, live price/specifications, quantity-to-quote, advisor link, related references and original quote-only FAQs.
