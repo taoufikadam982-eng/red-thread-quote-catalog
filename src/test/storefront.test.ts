@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { filterCatalogue, googleReviews, socialLinks, store } from '@/lib/storefront';
+import { customerReviews, filterCatalogue, googleReviews, socialLinks, store } from '@/lib/storefront';
 import { newsletterSchema } from '@/lib/newsletter-schema';
 describe('new storefront business rules', () => {
   it('lists the scanner at 4690 DH', () => expect(products.find(p => p.id === 'scanjet')?.price).toBe(4690));
@@ -16,4 +16,6 @@ describe('new storefront business rules', () => {
   it('shows the official Google rating of 4,6/5 from 15 reviews', () => { expect(googleReviews.rating).toBe(4.6); expect(googleReviews.ratingLabel).toBe('4,6'); expect(googleReviews.reviewCount).toBe(15); });
   it('links the Google badge to the official SESA Informatique listing', () => expect(googleReviews.url).toContain('google.com/maps/place/Sesa+Informatique'));
   it('features the verified five-star review from Docteur Bouazzaoui', () => { expect(googleReviews.featured.author).toBe('Docteur Bouazzaoui'); expect(googleReviews.featured.stars).toBe(5); });
+  it('preserves the supplied testimonial ratings', () => expect(customerReviews.map(review => [review.author, review.stars])).toEqual([['Docteur Bouazzaoui', 5], ['Mehdi Bennani', 5], ['Youssef El Amrani', 5], ['Salma Tazi', 4], ['Karim Chraibi', 4]]));
+  it('does not label the four unconfirmed testimonials as Google reviews', () => expect(customerReviews.filter(review => review.source === 'google').map(review => review.author)).toEqual(['Docteur Bouazzaoui']));
 });
