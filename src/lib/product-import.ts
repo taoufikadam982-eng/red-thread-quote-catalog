@@ -1,6 +1,7 @@
 import { normalizeCategory } from './product-categories';
+import { markImportedOffers } from './product-offers';
 import {productSchema,blankProduct,type AdminProduct} from './product-schema';
-const aliases:Record<string,string>={titre:'name',produit:'name',nom:'name',title:'name',reference:'reference',ref:'reference',categorie:'category',category:'category',categories:'categories',specs:'specs',description:'specs',prix:'price',prixdh:'price',price:'price',prixbarre:'old_price',oldprice:'old_price',disponibilite:'availability',availability:'availability',masque:'hidden',hidden:'hidden',indicatif:'indicative',indicative:'indicative',destockage:'is_clearance',isclearance:'is_clearance',badgeurgence:'clearance_badge',clearancebadge:'clearance_badge',marque:'brand',brand:'brand'};
+const aliases:Record<string,string>={titre:'name',produit:'name',nom:'name',title:'name',reference:'reference',ref:'reference',categorie:'category',category:'category',categories:'categories',specs:'specs',description:'specs',prix:'price',prixdh:'price',price:'price',ancienprix:'old_price',ancienprixdh:'old_price',prixbarredh:'old_price',prixbarre:'old_price',oldprice:'old_price',disponibilite:'availability',availability:'availability',masque:'hidden',hidden:'hidden',indicatif:'indicative',indicative:'indicative',destockage:'is_clearance',isclearance:'is_clearance',badgeurgence:'clearance_badge',clearancebadge:'clearance_badge',marque:'brand',brand:'brand'};
 export function mapImportRows(rows:Record<string,unknown>[]):AdminProduct[]{return rows.filter(r=>Object.values(r).some(Boolean)).map((row,index)=>{
  const mapped:Record<string,unknown>={};for(const [key,value]of Object.entries(row)){const normalized=key.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');const target=aliases[normalized];if(target)mapped[target]=value;}
  const num=(value:unknown)=>Number(String(value).replace(/\s|DH|MAD/gi,'').replace(',','.'));
@@ -9,7 +10,7 @@ export function mapImportRows(rows:Record<string,unknown>[]):AdminProduct[]{retu
  const draft={...blankProduct(),...mapped,categories:importedCategories,category:importedCategories[0]??'Ordinateurs portables',price:num(mapped['price']??0),old_price:mapped['old_price']?num(mapped['old_price']):null,hidden:bool(mapped['hidden']),indicative:mapped['indicative']===undefined?true:bool(mapped['indicative'])};
  if(mapped['is_clearance']===undefined)delete draft.is_clearance;else draft.is_clearance=bool(mapped['is_clearance']);
  if(mapped['clearance_badge']===undefined)delete draft.clearance_badge;
- const result=productSchema.safeParse(draft);if(!result.success)throw new Error(`Ligne ${index+2} : ${result.error.issues[0]?.message}`);return result.data;
+ const result=productSchema.safeParse(draft);if(!result.success)throw new Error(`Ligne ${index+2} : ${result.error.issues[0]?.message}`);return markImportedOffers([result.data])[0] ?? result.data;
 });}
 export async function parseProductFile(file:File):Promise<AdminProduct[]>{
  if(file.size>20*1024*1024)throw new Error('Fichier trop volumineux (20 Mo maximum).');

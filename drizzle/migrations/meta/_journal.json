@@ -85,6 +85,13 @@
       "when": 1795091325835,
       "tag": "0011_restore_ten_category_normalization",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1795093507452,
+      "tag": "0012_preserve_offer_category_in_legacy_saves",
+      "breakpoints": true
     }
   ]
 }

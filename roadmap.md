@@ -62,3 +62,5 @@
 - [x] Add clearance controls/storage, shared prices and badges, offers navigation/page and conditional homepage section; verified taoufik admin save/reload, Boutique offer filter, public old/current prices, homepage visibility, quote selection, mobile disabling and empty state. Temporary verification product removed; regression tests pass.
 
 - [x] Restore ten distinct ordered categories, original thumbnails, Boutique sidebar and ten-category persistence; verified 5x2 desktop/two-column mobile grids, all images, exact menu/footer order, mobile filters and administrator save/reload with all ten assignments. Temporary product removed; 123 tests and preview checks pass.
+
+- [x] Unify offer detection for flags, valid old prices and offer categories; add import-all marking and saved table toggles. Verified taoufik Excel bulk import, CSV category import, flag-off price/category-only public offers, homepage and mobile table saves with no runtime errors. Temporary products removed; Word/PDF/photo share the tested row mapping but were not file-tested.

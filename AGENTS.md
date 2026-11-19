@@ -65,4 +65,3 @@ use the editor.
 - Keep Google review data (rating, count, listing URL, featured review) in the shared browser-safe storefront module and render the footer badge and showroom review card from one component, so both surfaces always show the same official figures.
 - Render customer reviews inside the shared dark showroom footer with full-width duplicated marquee tracks, touch/focus pause and reduced-motion scrolling; exclude duplicate links from keyboard navigation but keep them clickable.
 
-- Share offer filters/badges in browser-safe helpers; legacy imports preserve saved offer fields.
