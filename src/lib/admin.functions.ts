@@ -45,6 +45,14 @@ export const saveProducts = createServerFn({ method: 'POST' }).middleware([requi
 export const markQuoteRead = createServerFn({ method:'POST' }).middleware([requireAdmin])
   .inputValidator((input:unknown)=>z.object({ id:z.string().uuid(), is_read:z.boolean() }).parse(input))
   .handler(async ({data,context})=> { const {error}=await context.supabase.from('quote_requests').update({is_read:data.is_read}).eq('id',data.id); if(error)throw new Error(error.message); return true; });
+export const deleteProduct = createServerFn({ method: 'POST' }).middleware([requireAdmin])
+  .inputValidator((input: unknown) => z.string().trim().min(1).max(60).parse(input))
+  .handler(async ({ data, context }) => {
+    const { data: removed, error } = await context.supabase.from('products').delete().eq('id', data).select('id').maybeSingle();
+    if (error) throw new Error('Suppression impossible. Réessayez.');
+    if (!removed) throw new Error('Ce produit a déjà été supprimé ou n’est plus accessible. Actualisez la liste.');
+    return { id: removed.id };
+  });
 export const saveContent = createServerFn({method:'POST'}).middleware([requireAdmin])
   .inputValidator((input:unknown)=>z.object({id:z.string().uuid().optional(),kind:z.enum(['banner','review','newsletter','email']),title:z.string().trim().min(1).max(200),body:z.string().max(10000),image_path:z.string().max(500).default(''),active:z.boolean()}).parse(input))
   .handler(async ({data,context})=>{const {error}=await context.supabase.from('admin_content').upsert({...data,id:data.id??crypto.randomUUID()});if(error)throw new Error(error.message);return true;});
