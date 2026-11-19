@@ -50,6 +50,13 @@
       "when": 1795038265877,
       "tag": "0006_customer_assistant_history",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1795085165504,
+      "tag": "0007_product_image_gallery",
+      "breakpoints": true
     }
   ]
 }

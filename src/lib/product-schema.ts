@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { imagePathSchema, MAX_PRODUCT_IMAGES } from './product-images';
 
 export const availabilityOptions = ['En stock', 'Sur commande', 'Rupture de stock'] as const;
 export const adminCategories = ['Tous', 'Ordinateurs portables', 'Ordinateur de bureau', 'Workstation', 'Workstations fixes', 'Imprimantes', 'Scanners', 'Écrans'];
@@ -11,6 +12,7 @@ export const productSchema = z.object({
   brand: z.string().max(100).default(''),
   usage: z.string().max(1000).default(''),
   image_path: z.string().max(500).default(''),
+  images: z.array(imagePathSchema).max(MAX_PRODUCT_IMAGES).optional(),
   price: z.number().finite().min(0).max(9999999999),
   old_price: z.number().finite().positive().max(9999999999).nullable(),
   availability: z.enum(availabilityOptions),

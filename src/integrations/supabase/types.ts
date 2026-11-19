@@ -128,6 +128,7 @@ export type Database = {
           hidden: boolean
           id: string
           image_path: string
+          images: string[]
           indicative: boolean
           name: string
           old_price: number | null
@@ -144,6 +145,7 @@ export type Database = {
           hidden?: boolean
           id?: string
           image_path?: string
+          images?: string[]
           indicative?: boolean
           name: string
           old_price?: number | null
@@ -160,6 +162,7 @@ export type Database = {
           hidden?: boolean
           id?: string
           image_path?: string
+          images?: string[]
           indicative?: boolean
           name?: string
           old_price?: number | null

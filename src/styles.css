@@ -1041,6 +1041,20 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-overview>div { min-width:0; }
 .product-display { position:relative; border:1px solid var(--border); border-radius:8px; background:var(--card); padding:24px; }
 .product-display img { width:100%; height:400px; object-fit:contain; }
+.product-gallery-view { position:relative; touch-action:pan-y; }
+.product-gallery-view>button { position:absolute; top:50%; transform:translateY(-50%); border-radius:50%; background:var(--card); }
+.product-gallery-prev { left:0; }
+.product-gallery-next { right:0; }
+.product-gallery-thumbs { display:flex; gap:8px; overflow-x:auto; padding:4px; margin-top:12px; }
+.product-gallery-thumbs>button { width:80px; height:80px; flex:0 0 80px; border:2px solid var(--border); padding:6px; border-radius:8px; background:var(--card); }
+.product-gallery-thumbs>button.is-active { border-color:var(--primary); box-shadow:0 0 0 2px color-mix(in oklch,var(--primary) 20%,transparent); }
+.product-display .product-gallery-thumbs img { width:100%; height:100%; object-fit:contain; }
+.admin-gallery-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:14px; }
+.admin-gallery-item { position:relative; border:1px solid var(--border); border-radius:8px; padding:8px; min-width:0; }
+.admin-gallery-item>img,.admin-gallery-item>span[role=status] { width:100%; height:100px; object-fit:contain; display:block; }
+.admin-gallery-primary { display:block; color:var(--primary); font-size:10px; font-weight:700; margin-top:6px; }
+.admin-gallery-item>div { display:flex; justify-content:space-between; gap:6px; margin-top:8px; }
+@media(max-width:767px) { .product-gallery-thumbs>button { width:64px; height:64px; flex-basis:64px; } .admin-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .product-display>p { font-size:11px; color:var(--muted-foreground); text-align:center; margin-top:12px; }
 .product-stock { display:inline-block; padding:6px 10px; background:var(--secondary); color:var(--foreground); border-radius:4px; font-size:11px; font-weight:700; }
 .product-stock.is-stock { color:var(--product-stock-ink); background:color-mix(in oklch,var(--product-stock-ink) 8%,var(--card)); }
