@@ -13,6 +13,7 @@ import logoImage from '@/assets/sesa-logo-white.png';
 import { PartnerBrands } from './partner-brands';
 import { useProducts } from './catalog-context';
 import { HomeHero } from './home-hero';
+import { hasCategory } from '@/lib/product-categories';
 import { ProductCard } from './product-card';
 import { HeaderNavigation, CategoryLinks } from './header-navigation';
 import { mainMenu, featuredBrands } from '@/lib/header-menu';
@@ -32,7 +33,7 @@ export function Brands() {
 export function CategoryGrid({ onSelect }: { onSelect: (category: string) => void }) {
   const products = useProducts();
   return <section className="category-section" aria-labelledby="categories-title"><div className="site-width"><div className="category-heading"><h2 id="categories-title" className="section-title">Nos catégories</h2><Button variant="ghost" className="category-all" onClick={() => onSelect('')}>Voir tout<ArrowRight className="size-3"/></Button></div><div className="category-grid">{categories.map(c => {
-    const count = products.filter(p => p.category === c.name).length;
+    const count = products.filter(p => hasCategory(p, c.name)).length;
     return <Button key={c.name} variant="ghost" className="category-tile" onClick={() => onSelect(c.name)}><img src={c.image} alt="" width={150} height={95} loading="lazy"/><span className="category-name">{c.name}</span><span className="category-count">{count ? `${count} produit${count > 1 ? 's' : ''} listé${count > 1 ? 's' : ''}` : 'Sur demande'}</span></Button>;
   })}</div></div></section>;
 }

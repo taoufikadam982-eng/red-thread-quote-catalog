@@ -1,4 +1,5 @@
 import type { Product } from './catalog';
+import { hasCategory } from './product-categories';
 import { productPlainText } from './product-text';
 
 export const technicalFacets = ['Processeur', 'Mémoire vive', 'Stockage SSD', 'Carte graphique', 'Taille de l’écran', 'Système d’exploitation'] as const;
@@ -18,7 +19,7 @@ export type BoutiqueFilters = { category: string; query: string; min: number; ma
 export function selectBoutiqueProducts(products: Product[], filters: BoutiqueFilters) {
   const query = filters.query.toLocaleLowerCase('fr').trim();
   return products.filter(product => {
-    if (product.hidden || (filters.category && product.category !== filters.category) || product.price < filters.min || product.price > filters.max) return false;
+    if (product.hidden || !hasCategory(product, filters.category) || product.price < filters.min || product.price > filters.max) return false;
     if (query && !`${product.name} ${product.reference} ${product.brand} ${product.detail} ${product.usage}`.toLocaleLowerCase('fr').includes(query)) return false;
     const facets: Record<string, string[]> = { ...productFacets(product), Marque: [product.brand], Disponibilité: [product.availability || 'Sur demande'] };
     return Object.entries(filters.selected).every(([key, values]) => values.length === 0 || values.some(value => (facets[key] ?? []).includes(value)));

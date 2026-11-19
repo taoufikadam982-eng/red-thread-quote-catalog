@@ -4,6 +4,7 @@ import { ArrowDown, ArrowRight, Building2, ChevronRight, FileText, Headphones, S
 import { Button } from './ui/button';
 import { useProducts } from './catalog-context';
 import { useQuote } from './quote-context';
+import { hasCategory, officialCategories, normalizeCategory } from '@/lib/product-categories';
 import { ProductCard } from './product-card';
 import { productFacets, selectBoutiqueProducts, technicalFacets } from '@/lib/boutique-filters';
 import cover from '@/assets/sesa-boutique-cover.jpg';
@@ -11,7 +12,7 @@ import cover from '@/assets/sesa-boutique-cover.jpg';
 export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQuery = '' }: { initialBrand?: string; initialCategory?: string; initialQuery?: string }) {
   const products = useProducts();
   const { setOpen } = useQuote();
-  const [category, setCategory] = useState(initialCategory);
+  const [category, setCategory] = useState(normalizeCategory(initialCategory));
   const [query, setQuery] = useState(initialQuery);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState<number | null>(null);
@@ -25,8 +26,8 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
   }, [mobileFilters]);
   const [expanded, setExpanded] = useState<string[]>([]);
   const ceiling = Math.max(1, ...products.map(p => p.price));
-  const categories = [...new Set(products.map(p => p.category))];
-  const pool = category ? products.filter(p => p.category === category) : products;
+  const categories = officialCategories;
+  const pool = category ? products.filter(p => hasCategory(p, category)) : products;
   const facets: Record<string, string[]> = {
     Marque: [...new Set(pool.map(p => p.brand).filter(Boolean))].sort(),
     ...Object.fromEntries(technicalFacets.map(key => [key, [...new Set(pool.flatMap(p => productFacets(p)[key] ?? []))].sort()])),
@@ -47,7 +48,7 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
     <div className="boutique-trust-strip"><ul className="site-width">{[{ icon: Building2, text: 'Devis & Marchés' }, { icon: ShieldCheck, text: 'Matériel neuf garanti' }, { icon: Headphones, text: 'Conseil expert' }, { icon: Store, text: 'Showroom Rabat' }].map(item => <li key={item.text}><item.icon aria-hidden="true"/><span>{item.text}</span></li>)}</ul></div>
     <section className="site-width boutique-selection" aria-label="Sélection de produits">
       <label className="boutique-search"><Search aria-hidden="true"/><input aria-label="Rechercher dans la boutique" placeholder="Un modèle, une marque ou un usage…" value={query} onChange={e => { setQuery(e.target.value); setLimit(12); }}/>{query && <Button variant="ghost" size="icon" aria-label="Effacer la recherche" onClick={() => setQuery('')}><X/></Button>}</label>
-      <div className="boutique-tabs" aria-label="Catégories de la boutique">{['', ...categories].map(value => <Button key={value} variant={category === value ? 'default' : 'outline'} aria-pressed={category === value} onClick={() => { setCategory(value); setSelected({}); setLimit(12); }}>{value || 'Tous'}<span>{value ? products.filter(p => p.category === value).length : products.length}</span></Button>)}</div>
+      <div className="boutique-tabs" aria-label="Catégories de la boutique">{['', ...categories].map(value => <Button key={value} variant={category === value ? 'default' : 'outline'} aria-pressed={category === value} onClick={() => { setCategory(value); setSelected({}); setLimit(12); }}>{value || 'Tous'}<span>{value ? products.filter(p => hasCategory(p, value)).length : products.length}</span></Button>)}</div>
       <div className="boutique-layout">
         <aside ref={filtersRef} id="boutique-filters" className={`boutique-filters ${mobileFilters ? 'is-open' : ''}`} aria-label="Affiner les produits"><div className="boutique-filter-heading"><div><p className="eyebrow">Affiner</p><h2>Votre sélection.</h2></div><Button variant="ghost" size="icon" className="boutique-filter-close" aria-label="Fermer les filtres" onClick={() => setMobileFilters(false)}><X/></Button></div>
           <fieldset><legend>Budget TTC</legend><input type="range" aria-label="Budget maximum" min={0} max={ceiling} value={Math.min(max ?? ceiling, ceiling)} onChange={e => { setMax(Number(e.target.value)); setLimit(12); }}/><div className="boutique-budget"><label><span className="sr-only">Budget minimum</span><input aria-label="Budget minimum" type="number" min={0} max={max ?? ceiling} value={min} onChange={e => { setMin(Math.max(0, Number(e.target.value))); setLimit(12); }}/></label><span>à</span><label><span className="sr-only">Budget maximum TTC</span><input aria-label="Budget maximum TTC" type="number" min={min} value={max ?? ceiling} onChange={e => { setMax(Math.max(0, Number(e.target.value))); setLimit(12); }}/></label></div><p className="boutique-budget-unit">DH TTC · Prix indicatifs</p></fieldset>

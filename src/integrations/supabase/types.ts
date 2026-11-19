@@ -123,6 +123,7 @@ export type Database = {
         Row: {
           availability: string
           brand: string
+          categories: string[]
           category: string
           created_at: string
           hidden: boolean
@@ -140,6 +141,7 @@ export type Database = {
         Insert: {
           availability?: string
           brand?: string
+          categories?: string[]
           category: string
           created_at?: string
           hidden?: boolean
@@ -157,6 +159,7 @@ export type Database = {
         Update: {
           availability?: string
           brand?: string
+          categories?: string[]
           category?: string
           created_at?: string
           hidden?: boolean
@@ -275,6 +278,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      normalize_product_category: { Args: { value: string }; Returns: string }
       save_product_batch: { Args: { rows: Json }; Returns: undefined }
     }
     Enums: {

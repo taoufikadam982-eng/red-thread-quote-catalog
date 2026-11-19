@@ -57,6 +57,13 @@
       "when": 1795085165504,
       "tag": "0007_product_image_gallery",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1795089610330,
+      "tag": "0008_product_multiple_categories",
+      "breakpoints": true
     }
   ]
 }

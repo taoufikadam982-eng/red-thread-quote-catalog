@@ -10,6 +10,7 @@ import { FooterAccordionRow } from './footer-accordion';
 import { GoogleBadge, GoogleReviewMarquee } from './google-reviews';
 import { useQuote } from './quote-context';
 import { subscribeNewsletter } from '@/lib/newsletter.functions';
+import { officialCategories } from '@/lib/product-categories';
 import { store, showroomDirectionsUrl, showroomEmbedUrl } from '@/lib/storefront';
 import showcase from '@/assets/sesa-hardware-showcase.jpg';
 import workstationFeature from '@/assets/sesa-workstation-feature.jpg';
@@ -48,7 +49,7 @@ function FooterNewsletter() {
   return <section className="footer-newsletter" aria-labelledby="footer-newsletter-title"><h3 id="footer-newsletter-title" className="footer-heading">INSCRIVEZ-VOUS À NOTRE NEWSLETTER</h3><p>Les nouveautés et offres de matériel informatique SESA, directement dans votre boîte mail.</p><form onSubmit={send}><div className="footer-newsletter-fields"><input type="email" aria-label="Votre e-mail pour la newsletter SESA" placeholder="votre@email.ma" required maxLength={200} value={email} onChange={e => setEmail(e.target.value)} className="newsletter-input"/><Button type="submit" variant="secondary" disabled={busy}>{busy ? 'Envoi…' : 'S’inscrire'}</Button></div><input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true"/><label className="footer-newsletter-consent"><input type="checkbox" required checked={consent} onChange={e => setConsent(e.target.checked)}/><span>J’accepte de recevoir la newsletter de SESA. Désinscription sur demande à <a href={`mailto:${store.email}`}>{store.email}</a>. <Link to="/confidentialite">Confidentialité</Link>.</span></label><p role="status" className="footer-newsletter-status">{status}</p></form></section>;
 }
 function FooterCatalogueLinks() {
-  return <>{['Ordinateurs portables', 'Ordinateurs de bureau', 'Workstations', 'Imprimantes', 'Scanners', 'Écrans'].map(c => <Link key={c} to="/catalogue" search={{ category: c }} className="footer-link">{c}</Link>)}<Link to="/marques" className="footer-link">Toutes nos marques</Link></>;
+  return <>{officialCategories.map(c => <Link key={c} to="/catalogue" search={{ category: c }} className="footer-link">{c}</Link>)}<Link to="/marques" className="footer-link">Toutes nos marques</Link></>;
 }
 function FooterEnterpriseLinks() {
   const { setOpen } = useQuote();

@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { useProducts } from './catalog-context';
 import { useQuote } from './quote-context';
+import { hasCategory } from '@/lib/product-categories';
 import { categories } from '@/lib/catalog';
 import { featuredBrands, mainMenu, menuIcons } from '@/lib/header-menu';
 
@@ -12,7 +13,7 @@ export function CategoryLinks({ onSelect }: { onSelect: () => void }) {
   const products = useProducts();
   return <div className="mega-categories">{categories.map((category, index) => {
     const Icon = menuIcons[index] ?? Menu;
-    const count = products.filter(product => !product.hidden && product.category === category.name).length;
+    const count = products.filter(product => !product.hidden && hasCategory(product, category.name)).length;
     return <Button asChild variant="ghost" className="mega-category" key={category.name}><Link to="/boutique" search={{ category: category.name }} onClick={onSelect}><Icon/><span><strong>{category.name}</strong><small>{count} référence{count === 1 ? '' : 's'} au catalogue</small></span><ArrowRight/></Link></Button>;
   })}</div>;
 }

@@ -1,4 +1,5 @@
 import type { Product } from './catalog';
+import { assignedCategories, hasCategory } from './product-categories';
 import { productPlainText } from './product-text';
 export function publishedSpecGroups(product: Product) {
   const groups = [
@@ -16,7 +17,7 @@ export function publishedSpecGroups(product: Product) {
   }) })).filter(group => group.rows.length);
 }
 export function sameCategoryProducts(product: Product, products: Product[]) {
-  return products.filter(item => !item.hidden && item.id !== product.id && item.category === product.category).slice(0, 4);
+  return products.filter(item => !item.hidden && item.id !== product.id && assignedCategories(product).some(category => hasCategory(item, category))).slice(0, 4);
 }
 export function productSpecPills(product: Product): string[] {
   const rows = publishedSpecGroups(product).flatMap(group => group.rows);
