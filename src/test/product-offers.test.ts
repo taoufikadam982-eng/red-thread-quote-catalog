@@ -1,11 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
 import { clearanceProducts, clearanceLabel, isClearance, markImportedOffers, clearanceCategory } from '@/lib/product-offers';
-import { officialCategories } from '@/lib/product-categories';
+import { officialCategories, hasCategory } from '@/lib/product-categories';
+import { filterCatalogue } from '@/lib/storefront';
+import { selectBoutiqueProducts } from '@/lib/boutique-filters';
 import { blankProduct, productSchema } from '@/lib/product-schema';
 import { mapImportRows } from '@/lib/product-import';
 
 describe('clearance rules', () => {
+  it('uses automatic offer detection for category searches in every catalogue filter', () => {
+    const base=products[0];
+    if (!base) throw new Error('Fixture required');
+    const offer={...base,is_clearance:false,old_price:20000};
+    expect(hasCategory(offer,'OFFRES & DÉSTOCKAGE')).toBe(true);
+    expect(filterCatalogue([offer],clearanceCategory,'','')).toEqual([offer]);
+    expect(selectBoutiqueProducts([offer],{category:clearanceCategory,query:'',min:0,max:999999,selected:{},sort:'name'})).toEqual([offer]);
+  });
   it('recognizes a higher old price even when the manual flag is off', () => {
     expect(isClearance({price:11900,old_price:14500,is_clearance:false})).toBe(true);
     expect(isClearance({price:11900,old_price:11900,is_clearance:false})).toBe(false);
