@@ -1,6 +1,7 @@
 import type { Product } from './catalog';
 import { assignedCategories, hasCategory } from './product-categories';
 import { productPlainText } from './product-text';
+import { extractProductSpecPills } from './product-specs';
 export function publishedSpecGroups(product: Product) {
   const groups = [
     { title: 'PERFORMANCES', pattern: /processeur|core|ryzen|mémoire|ram|ssd|stockage|capacité|vitesse|laser|ppm/i },
@@ -20,12 +21,5 @@ export function sameCategoryProducts(product: Product, products: Product[]) {
   return products.filter(item => !item.hidden && item.id !== product.id && assignedCategories(product).some(category => hasCategory(item, category))).slice(0, 4);
 }
 export function productSpecPills(product: Product): string[] {
-  const rows = publishedSpecGroups(product).flatMap(group => group.rows);
-  const priorities = [/processeur|\bcpu\b|\bcore\b|ryzen|apple\s+m\d/i, /mémoire|\bram\b|ddr[345]/i, /stockage|\bssd\b|disque|\bhdd\b/i, /écran|pouces|résolution|\d\s*["″]/i];
-  const chosen = priorities.flatMap(pattern => {
-    const row = rows.find(item => pattern.test(`${item.label} ${item.value}`) && item.value.length <= 72);
-    return row ? [row.value] : [];
-  });
-  const other = rows.filter(row => row.label !== 'Caractéristique' && row.value.length <= 72 && row.value.length > 0).map(row => row.value);
-  return [...new Set([...chosen, ...other])].slice(0, 4);
+  return extractProductSpecPills(product);
 }

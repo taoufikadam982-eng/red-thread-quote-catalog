@@ -21,7 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
       <p className="sesa-card-brand">{productPlainText(product.brand)}</p>
       <Link className="sesa-card-title" to="/produit/$id" params={{ id: product.id }}><h3>{name}</h3></Link>
       <p className="sesa-card-reference">Réf. {productPlainText(product.reference)}</p>
-      <div className="sesa-card-specs">{specs.length ? specs.map(spec => <span key={spec}>{spec}</span>) : <span>Fiche technique disponible</span>}</div>
+      <div className="sesa-card-specs">{specs.length ? specs.map(spec => <span key={spec} title={spec}>{spec}</span>) : <span title="Fiche technique disponible">Fiche technique disponible</span>}</div>
       <div className="sesa-card-bottom"><div className={`sesa-card-price ${isClearance(product) ? 'is-clearance' : ''}`}><p>Prix indicatif TTC</p>{isClearance(product) && product.old_price && product.old_price > product.price && <del>{priceLabel(product.old_price)} DH</del>}<strong>{product.price > 0 ? <>{priceLabel(product.price)} <small>DH</small></> : 'Sur devis'}</strong></div><Button variant="dark" className="sesa-card-action" asChild><Link to="/produit/$id" params={{ id: product.id }}>Voir le produit<ArrowRight/></Link></Button></div>
     </div>
   </article>;
