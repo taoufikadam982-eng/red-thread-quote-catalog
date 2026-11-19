@@ -8,8 +8,19 @@ import { mapImportRows, mapImportText } from '@/lib/product-import';
 const base = products[0];
 if (!base) throw new Error('Missing fixture');
 describe('multiple product categories', () => {
-  it('shares the exact seven official categories', () => {
-    expect(officialCategories).toEqual(['Ordinateurs portables','Ordinateurs de bureau','Workstations','Imprimantes','Scanners','Écrans','Accessoires & Réseau']);
+  it('shares the exact ten official categories in the requested order', () => {
+    expect(officialCategories).toEqual(['Ordinateurs portables','Ordinateurs de bureau','Workstations','Imprimantes','Scanners','Écrans','Réseau & Serveurs','Onduleurs Eaton','Périphériques','Logiciels']);
+  });
+  it.each(['Réseau & Serveurs','Onduleurs Eaton','Périphériques','Logiciels'])('keeps %s separate in all catalogue filters', category => {
+    const product = { ...base, category, categories: [category] };
+    for (const candidate of officialCategories.slice(6)) {
+      expect(filterCatalogue([product],candidate,'','').length).toBe(candidate === category ? 1 : 0);
+      expect(selectBoutiqueProducts([product],{category:candidate,query:'',min:0,max:999999,selected:{},sort:'name'}).length).toBe(candidate === category ? 1 : 0);
+    }
+  });
+  it('accepts all ten category assignments without truncating any', () => {
+    expect(productSchema.parse({...base,categories:[...officialCategories],old_price:null,availability:'En stock',hidden:false,indicative:true}).categories).toEqual(officialCategories);
+    expect(mapImportRows([{Titre:'Test',Référence:'TEN',Catégories:officialCategories.join(';'),Prix:100}])[0]?.categories).toEqual(officialCategories);
   });
   it.each(['Ordinateur portable','Ordinateurs portable','Ordinateurs portables','ORDINATEUR PORTABLE'])('matches laptop spelling %s', category => {
     expect(hasCategory({category}, 'Ordinateurs portables')).toBe(true);

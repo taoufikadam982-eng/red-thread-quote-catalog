@@ -6,8 +6,11 @@ import printer from '@/assets/printer.jpg';
 import scanner from '@/assets/scanner.jpg';
 import monitor from '@/assets/monitor.jpg';
 import accessories from '@/assets/accessories.jpg';
+import server from '@/assets/server.jpg';
+import ups from '@/assets/ups.jpg';
+import software from '@/assets/software.jpg';
 
-export const categories = officialCategories.map((name, index) => ({ name, image: [laptop, desktop, workstation, printer, scanner, monitor, accessories][index] ?? accessories }));
+export const categories = officialCategories.map((name, index) => ({ name, image: [laptop, desktop, workstation, printer, scanner, monitor, server, ups, accessories, software][index] ?? accessories }));
 export const products = [
   { id: 'probook', name: 'HP ProBook 4 G1iR 14', reference: 'C84S1AT', price: 11800, category: 'Ordinateurs portables', image: laptop, brand: 'HP', detail: 'Ordinateur portable professionnel · Format 14 pouces', usage: 'Bureautique, gestion et mobilité professionnelle' },
   { id: 'dell-tower', name: 'Dell Pro Tower QCT1250', reference: 'QCT1250', price: 8290, category: 'Ordinateurs de bureau', image: desktop, brand: 'Dell', detail: 'Ordinateur de bureau professionnel · Format tour', usage: 'Postes de travail, gestion et équipement des équipes' },

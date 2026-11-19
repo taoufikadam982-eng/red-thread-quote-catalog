@@ -14,7 +14,7 @@ export function CategoryLinks({ onSelect }: { onSelect: () => void }) {
   return <div className="mega-categories">{categories.map((category, index) => {
     const Icon = menuIcons[index] ?? Menu;
     const count = products.filter(product => !product.hidden && hasCategory(product, category.name)).length;
-    return <Button asChild variant="ghost" className="mega-category" key={category.name}><Link to="/boutique" search={{ category: category.name }} onClick={onSelect}><Icon/><span><strong>{category.name}</strong><small>{count} référence{count === 1 ? '' : 's'} au catalogue</small></span><ArrowRight/></Link></Button>;
+    return <Button asChild variant="ghost" className="mega-category" key={category.name}><Link to="/boutique" search={{ category: category.name }} onClick={onSelect}><Icon/><span><strong>{category.name}</strong><small>{count ? `${count} référence${count === 1 ? '' : 's'} au catalogue` : 'Sur demande'}</small></span><ArrowRight/></Link></Button>;
   })}</div>;
 }
 

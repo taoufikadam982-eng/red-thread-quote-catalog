@@ -60,3 +60,5 @@
 - [x] Badge Google Avis 4,6/5 (15 avis) dans le footer PC/mobile + avis vérifié 5★ du Dr Bouazzaoui dans la section magasin; lien officiel en nouvel onglet; vérifié à 1280 et 390px, 15 tests.
 
 - [x] Add clearance controls/storage, shared prices and badges, offers navigation/page and conditional homepage section; verified taoufik admin save/reload, Boutique offer filter, public old/current prices, homepage visibility, quote selection, mobile disabling and empty state. Temporary verification product removed; regression tests pass.
+
+- [x] Restore ten distinct ordered categories, original thumbnails, Boutique sidebar and ten-category persistence; verified 5x2 desktop/two-column mobile grids, all images, exact menu/footer order, mobile filters and administrator save/reload with all ten assignments. Temporary product removed; 123 tests and preview checks pass.

@@ -1,4 +1,4 @@
-export const officialCategories = ['Ordinateurs portables', 'Ordinateurs de bureau', 'Workstations', 'Imprimantes', 'Scanners', 'Écrans', 'Accessoires & Réseau'] as const;
+export const officialCategories = ['Ordinateurs portables', 'Ordinateurs de bureau', 'Workstations', 'Imprimantes', 'Scanners', 'Écrans', 'Réseau & Serveurs', 'Onduleurs Eaton', 'Périphériques', 'Logiciels'] as const;
 export function normalizeCategory(value: string) {
   const key = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   if (key === 'tous' || key === 'tous les produits') return '';
@@ -8,7 +8,10 @@ export function normalizeCategory(value: string) {
   if (/^imprimantes?$/.test(key)) return 'Imprimantes';
   if (/^scanners?$/.test(key)) return 'Scanners';
   if (/^ecrans?$/.test(key)) return 'Écrans';
-  if (/^(?:accessoires?(?: reseaux?)?|peripheriques?|reseaux?(?: serveurs?)?|onduleurs?(?: eaton)?)$/.test(key)) return 'Accessoires & Réseau';
+  if (/^(?:reseaux?(?: serveurs?)?|serveurs?)$/.test(key)) return 'Réseau & Serveurs';
+  if (/^onduleurs?(?: eaton)?$/.test(key)) return 'Onduleurs Eaton';
+  if (/^(?:peripheriques?|accessoires?)$/.test(key)) return 'Périphériques';
+  if (/^logiciels?$/.test(key)) return 'Logiciels';
   return value.trim();
 }
 export function assignedCategories(product: { category: string; categories?: string[] | null | undefined }) {

@@ -9,7 +9,7 @@ export const productSchema = z.object({
   name: z.string().trim().min(1, 'Le titre est obligatoire.').max(200),
   reference: z.string().trim().min(1, 'La référence est obligatoire.').max(120),
   category: z.string().trim().max(100).default(''),
-  categories: z.array(z.string().trim().min(1).max(100)).min(1, 'Choisissez au moins une catégorie.').max(7).optional(),
+  categories: z.array(z.string().trim().min(1).max(100)).min(1, 'Choisissez au moins une catégorie.').max(officialCategories.length).optional(),
   specs: z.string().max(10000).default(''),
   brand: z.string().max(100).default(''),
   usage: z.string().max(1000).default(''),
