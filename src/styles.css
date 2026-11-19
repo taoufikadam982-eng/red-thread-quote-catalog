@@ -83,6 +83,9 @@
 
 :root {
   --review-gold: oklch(0.769 0.188 70.08);
+  --product-stock-ink: oklch(0.45 0.12 155);
+  --product-order-ink: oklch(0.55 0.13 70);
+  --product-action-shadow: 0 4px 18px color-mix(in oklch,var(--ink) 5%,transparent);
   --review-surface: color-mix(in oklch,var(--on-ink) 4%,transparent);
   --review-border: color-mix(in oklch,var(--on-ink) 10%,transparent);
   --footer-bottom-surface: var(--primary);
@@ -1040,14 +1043,17 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-display img { width:100%; height:400px; object-fit:contain; }
 .product-display>p { font-size:11px; color:var(--muted-foreground); text-align:center; margin-top:12px; }
 .product-stock { display:inline-block; padding:6px 10px; background:var(--secondary); color:var(--foreground); border-radius:4px; font-size:11px; font-weight:700; }
+.product-stock.is-stock { color:var(--product-stock-ink); background:color-mix(in oklch,var(--product-stock-ink) 8%,var(--card)); }
+.product-stock.is-order { color:var(--product-order-ink); background:color-mix(in oklch,var(--product-order-ink) 8%,var(--card)); }
+.product-display>p strong { display:inline-block; color:var(--foreground); font-size:13px; margin-bottom:4px; }
 .product-assurances { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid var(--border); border-radius:8px; margin-top:14px; }
-.product-assurances li { display:flex; align-items:center; gap:8px; padding:15px 10px; font-size:11px; font-weight:700; }
+.product-assurances li { display:flex; flex-direction:column; text-align:center; align-items:center; gap:8px; padding:16px 8px; font-size:11px; font-weight:700; background:var(--card); }
 .product-assurances li+li { border-left:1px solid var(--border); }
 .product-assurances svg { width:22px; flex-shrink:0; color:var(--primary); }
-.product-assurances small { color:var(--muted-foreground); font-size:10px; font-weight:400; }
+.product-assurances small { display:block; margin-top:4px; color:var(--muted-foreground); font-size:10px; font-weight:400; }
 .product-labels { display:flex; flex-wrap:wrap; gap:8px; }
 .product-labels span { padding:5px 10px; background:var(--secondary); border-radius:4px; font-size:10px; font-weight:800; }
-.product-labels span:first-child { background:var(--primary); color:var(--primary-foreground); }
+.product-labels span:first-child { background:color-mix(in oklch,var(--primary) 8%,var(--card)); color:var(--primary); text-transform:uppercase; }
 .product-summary h1 { font-size:34px; line-height:1.2; font-weight:800; margin-top:16px; overflow-wrap:anywhere; }
 .product-reference { margin-top:14px; font-size:12px; color:var(--muted-foreground); }
 .product-small-heading { font-size:12px; font-weight:700; margin-block:20px 10px; color:var(--muted-foreground); }
@@ -1055,7 +1061,12 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-quick-specs>div { border:1px solid var(--border); border-radius:6px; padding:12px; }
 .product-quick-specs small { display:block; font-size:10px; text-transform:uppercase; color:var(--muted-foreground); margin-bottom:6px; }
 .product-quick-specs strong { font-size:12px; line-height:1.5; display:block; }
-.product-quote-tool { margin-top:20px; padding:20px; border:1px solid var(--border); border-radius:8px; background:var(--card); }
+.product-quote-tool { margin-top:20px; padding:24px; border:1px solid var(--border); border-radius:8px; background:var(--card); box-shadow:var(--product-action-shadow); }
+.product-price-header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.product-store-pill { display:grid; grid-template-columns:16px 1fr; align-items:center; gap:4px 6px; font-size:10px; background:var(--secondary); padding:9px; border-radius:6px; color:var(--muted-foreground); }
+.product-store-pill svg { width:14px; height:14px; color:var(--primary); }
+.product-store-pill small { grid-column:2; font-size:9px; }
+.product-immediate { width:100%; margin-top:12px; min-height:46px; }
 .product-detail-price strong { font-size:32px; font-weight:800; display:block; }
 .product-detail-price span { font-size:18px; }
 .product-detail-price del { font-size:12px; color:var(--muted-foreground); }
@@ -1065,25 +1076,35 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-quantity { display:flex; align-items:center; justify-content:center; border:1px solid var(--border); border-radius:6px; }
 .product-quantity input { width:40px; min-width:0; text-align:center; background:transparent; font-size:13px; appearance:textfield; }
 .product-quantity input::-webkit-inner-spin-button { appearance:none; }
-.product-advisor { display:flex; width:100%; height:auto; min-height:58px; text-align:left; justify-content:start; gap:12px; }
+.product-advisor { display:flex; margin-top:14px; padding:14px 16px; width:100%; height:auto; min-height:66px; text-align:left; justify-content:start; gap:12px; background:var(--card); }
+.product-advisor:hover { border-color:var(--product-stock-ink); }
+.product-advisor>svg:first-child { color:var(--product-stock-ink); }
 .product-advisor span { min-width:0; white-space:normal; font-size:10px; color:var(--muted-foreground); }
 .product-advisor strong { display:block; color:var(--foreground); font-size:12px; }
 .product-advisor>svg:last-child { margin-left:auto; }
-.product-specifications { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:28px; padding-block:48px; border-top:1px solid var(--border); }
+.product-specifications { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); align-items:start; gap:28px; padding-block:48px; border-top:1px solid var(--border); }
+.product-specifications>div { min-width:0; }
+.product-spec-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-block:12px 24px; }
+.product-spec-heading .section-title { margin:0; }
+.product-spec-heading>span { font-size:10px; color:var(--muted-foreground); background:var(--secondary); padding:6px 10px; border-radius:4px; }
 .product-specifications .section-title { margin-block:12px 24px; }
 .product-spec-table { border:1px solid var(--border); border-radius:8px; overflow:hidden; font-size:13px; }
 .product-spec-table h3 { padding:13px 18px; background:var(--ink); color:var(--on-ink); font-size:11px; font-weight:800; }
 .product-spec-table dl>div { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:20px; padding:15px 18px; border-bottom:1px solid var(--border); }
 .product-spec-table dt { color:var(--muted-foreground); }
 .product-spec-table dd { font-weight:600; overflow-wrap:anywhere; }
+.product-spec-table dl>div:nth-child(even) { background:var(--secondary); }
 .product-spec-table li { padding:15px 18px; border-bottom:1px solid var(--border); }
 .product-spec-note { color:var(--muted-foreground); font-size:11px; line-height:1.8; margin-top:14px; }
-.product-help { display:grid; align-content:start; gap:14px; }
+.product-help { display:grid; align-content:start; gap:14px; position:sticky; top:180px; }
 .product-help article { border:1px solid var(--border); border-radius:8px; padding:22px; }
 .product-help .product-help-dark { background:var(--ink); color:var(--on-ink); }
 .product-help article>svg { color:var(--primary); margin-bottom:12px; }
 .product-help h3 { font-size:18px; line-height:1.3; font-weight:800; }
 .product-help p,.product-help li { font-size:12px; line-height:1.9; margin-top:10px; }
+.product-help .eyebrow { color:var(--primary); margin:0 0 12px; font-size:10px; }
+.product-help li { display:flex; align-items:start; gap:8px; }
+.product-help li svg { width:16px; height:22px; flex-shrink:0; color:var(--primary); }
 .product-help button,.product-help a { padding:0; margin-top:12px; font-size:12px; white-space:normal; height:auto; }
 .product-related { padding-block:24px 48px; border-top:1px solid var(--border); }
 .product-related h2 { margin-block:12px 24px; }
@@ -1094,6 +1115,11 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-related h3 { font-size:13px; font-weight:800; margin-top:8px; min-height:40px; }
 .product-related p { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:20px; font-size:14px; font-weight:800; }
 .product-related svg { width:18px; color:var(--primary); }
+.product-related-badge { display:inline-block; padding:5px 8px; border-radius:4px; font-size:9px; font-weight:700; color:var(--primary); background:color-mix(in oklch,var(--primary) 8%,var(--card)); }
+.product-related-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:10px; }
+.product-related-tags span { background:var(--secondary); font-size:9px; padding:4px 6px; border-radius:4px; }
+.product-related-arrow { display:flex; align-items:center; justify-content:center; width:32px; height:32px; flex-shrink:0; border-radius:50%; background:var(--ink); }
+.product-related-arrow svg { color:var(--on-ink); }
 .product-faq { background:var(--secondary); padding-block:48px; }
 .product-faq>.site-width { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1fr); gap:60px; }
 .product-faq h2 { margin-block:14px; }
@@ -1127,5 +1153,5 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-faq summary svg { width:16px; flex-shrink:0; }
 .product-faq details[open] svg { transform:rotate(45deg); }
 .product-faq details p { margin-top:16px; }
-@media(max-width:900px) { .product-overview { gap:24px; } .product-summary h1 { font-size:28px; } .product-display img { height:320px; } .product-specifications { grid-template-columns:1fr; } .product-help { grid-template-columns:repeat(3,minmax(0,1fr)); } .product-assurances { grid-template-columns:1fr; } .product-assurances li+li { border-left:0; border-top:1px solid var(--border); } }
-@media(max-width:767px) { .product-overview { grid-template-columns:1fr; } .product-display img { height:280px; } .product-assurances { grid-template-columns:repeat(3,minmax(0,1fr)); } .product-assurances li { flex-direction:column; text-align:center; } .product-assurances li+li { border-top:0; border-left:1px solid var(--border); } .product-summary h1 { font-size:28px; } .product-help { grid-template-columns:1fr; } .product-related>div { grid-template-columns:repeat(2,minmax(0,1fr)); } .product-related img { height:120px; } .product-related article { padding:12px; } .product-faq>.site-width { grid-template-columns:1fr; gap:24px; } .product-quote-row { grid-template-columns:1fr; } .product-quantity { width:140px; min-height:44px; } .product-spec-table dl>div { grid-template-columns:1fr; gap:6px; } }
+@media(max-width:1023px) { .product-overview { gap:24px; } .product-summary h1 { font-size:28px; } .product-display img { height:320px; } .product-quote-tool { padding:16px; } .product-quote-row { grid-template-columns:110px minmax(0,1fr); } .product-quote-row>button { font-size:11px; white-space:normal; height:auto; min-height:46px; } .product-help article { padding:16px; } }
+@media(max-width:767px) { .product-overview { grid-template-columns:1fr; } .product-display img { height:280px; } .product-assurances { grid-template-columns:repeat(3,minmax(0,1fr)); } .product-assurances li { padding:14px 5px; font-size:10px; } .product-assurances small { font-size:9px; } .product-summary h1 { font-size:28px; } .product-specifications { grid-template-columns:1fr; } .product-help { grid-template-columns:1fr; position:static; } .product-related>div { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; } .product-related article { width:265px; flex:0 0 265px; scroll-snap-align:start; padding:16px; } .product-related img { height:160px; } .product-faq>.site-width { grid-template-columns:1fr; gap:24px; } .product-quote-row { grid-template-columns:100px minmax(0,1fr); } .product-quantity { min-height:46px; } .product-quantity button { width:30px; flex-shrink:0; } .product-quantity input { width:32px; } .product-spec-table dl>div { grid-template-columns:1fr; gap:6px; } }
