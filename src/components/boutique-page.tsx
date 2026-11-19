@@ -4,7 +4,7 @@ import { ArrowDown, ArrowRight, Building2, ChevronRight, FileText, Headphones, S
 import { Button } from './ui/button';
 import { useProducts } from './catalog-context';
 import { useQuote } from './quote-context';
-import { priceLabel } from '@/lib/catalog';
+import { ProductCard } from './product-card';
 import { productFacets, selectBoutiqueProducts, technicalFacets } from '@/lib/boutique-filters';
 import cover from '@/assets/sesa-boutique-cover.jpg';
 
@@ -55,7 +55,7 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
           <Button variant="outline" className="w-full" onClick={reset}>Tout effacer</Button>
         </aside>
         <div className="boutique-results"><div className="boutique-results-toolbar"><p role="status"><strong>{shown.length}</strong> produit{shown.length === 1 ? '' : 's'} trouvé{shown.length === 1 ? '' : 's'}</p><Button variant="outline" className="boutique-filter-trigger" aria-expanded={mobileFilters} aria-controls="boutique-filters" onClick={() => setMobileFilters(!mobileFilters)}><SlidersHorizontal/>Filtres</Button><label>Trier par<select aria-label="Trier les produits" value={sort} onChange={e => setSort(e.target.value)}><option value="price-up">Prix croissant</option><option value="price-down">Prix décroissant</option><option value="name">Nom du produit</option></select></label></div>
-          <div className="boutique-product-grid">{shown.slice(0, limit).map(product => <article className="boutique-product" key={product.id}><span className={`boutique-availability ${product.availability === 'En stock' ? 'is-stock' : product.availability === 'Rupture de stock' ? 'is-unavailable' : ''}`}>{product.availability || 'Sur demande'}</span><Button variant="ghost" className="boutique-product-image" aria-label={`Voir le produit : ${product.name}`} asChild><Link to="/produit/$id" params={{ id: product.id }}><img src={product.image} alt={product.name} width={384} height={300} loading="lazy"/></Link></Button><div className="boutique-product-copy"><p className="boutique-brand">{product.brand}</p><Button variant="ghost" className="boutique-product-name" asChild><Link to="/produit/$id" params={{ id: product.id }}><h3>{product.name}</h3></Link></Button><p className="boutique-reference">Réf. {product.reference}</p><div className="boutique-specs">{product.detail.split(/[·;\n]/).filter(Boolean).slice(0, 3).map((spec, i) => <span key={i}>{spec.trim()}</span>)}</div><div className="boutique-product-bottom"><div><p>Prix indicatif TTC</p>{product.old_price ? <del>{priceLabel(product.old_price)} DH</del> : null}<strong>{priceLabel(product.price)} <small>DH</small></strong></div><Button variant="dark" asChild><Link to="/produit/$id" params={{ id: product.id }}>Voir le produit<ArrowRight/></Link></Button></div></div></article>)}</div>
+          <div className="boutique-product-grid">{shown.slice(0, limit).map(product => <ProductCard key={product.id} product={product}/>)}</div>
           {shown.length === 0 && <div className="boutique-empty"><h3>Aucun produit dans cette sélection.</h3><Button variant="outline" onClick={reset}>Tout effacer</Button><Button onClick={() => setOpen(true)}>Demander un devis<FileText/></Button></div>}
           {shown.length > limit && <div className="boutique-load-more"><Button onClick={() => setLimit(previous => previous + 12)}>Voir plus de produits<ArrowDown/></Button></div>}
         </div>

@@ -1,8 +1,9 @@
 import type { Product } from './catalog';
+import { productPlainText } from './product-text';
 
 export const technicalFacets = ['Processeur', 'Mémoire vive', 'Stockage SSD', 'Carte graphique', 'Taille de l’écran', 'Système d’exploitation'] as const;
 export function productFacets(product: Product): Record<string, string[]> {
-  const text = `${product.name} ${product.detail}`;
+  const text = productPlainText(`${product.name} ${product.detail}`);
   const matches = (pattern: RegExp) => [...new Set((text.match(pattern) ?? []).map(value => value.replace(/\s+/g, ' ').trim()))];
   return {
     Processeur: matches(/(?:Intel\s+)?Core\s+(?:Ultra\s+)?[3579]|(?:AMD\s+)?Ryzen\s+[3579]|Apple\s+M[1-9]/gi),
