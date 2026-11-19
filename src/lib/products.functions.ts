@@ -15,7 +15,7 @@ export const getPublicProducts = createServerFn({ method: 'GET' }).handler(async
       return fetch(input, { ...init, headers });
     } },
   });
-  const { data, error } = await client.from('products').select('id,name,reference,category,categories,specs,brand,usage,image_path,images,price,old_price,availability,hidden,indicative').eq('hidden', false).order('created_at');
+  const { data, error } = await client.from('products').select('id,name,reference,category,categories,specs,brand,usage,image_path,images,price,old_price,availability,hidden,indicative,is_clearance,clearance_badge').eq('hidden', false).order('created_at');
   if (error) throw new Error('Impossible de charger le catalogue.');
   return data ?? [];
 });

@@ -125,12 +125,14 @@ export type Database = {
           brand: string
           categories: string[]
           category: string
+          clearance_badge: string | null
           created_at: string
           hidden: boolean
           id: string
           image_path: string
           images: string[]
           indicative: boolean
+          is_clearance: boolean
           name: string
           old_price: number | null
           price: number
@@ -143,12 +145,14 @@ export type Database = {
           brand?: string
           categories?: string[]
           category: string
+          clearance_badge?: string | null
           created_at?: string
           hidden?: boolean
           id?: string
           image_path?: string
           images?: string[]
           indicative?: boolean
+          is_clearance?: boolean
           name: string
           old_price?: number | null
           price: number
@@ -161,12 +165,14 @@ export type Database = {
           brand?: string
           categories?: string[]
           category?: string
+          clearance_badge?: string | null
           created_at?: string
           hidden?: boolean
           id?: string
           image_path?: string
           images?: string[]
           indicative?: boolean
+          is_clearance?: boolean
           name?: string
           old_price?: number | null
           price?: number

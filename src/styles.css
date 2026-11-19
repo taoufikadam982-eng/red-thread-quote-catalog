@@ -1186,3 +1186,22 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .product-faq details p { margin-top:16px; }
 @media(max-width:1023px) { .product-overview { gap:24px; } .product-summary h1 { font-size:28px; } .product-display img { height:320px; } .product-quote-tool { padding:16px; } .product-quote-row { grid-template-columns:110px minmax(0,1fr); } .product-quote-row>button { font-size:11px; white-space:normal; height:auto; min-height:46px; } .product-help article { padding:16px; } }
 @media(max-width:767px) { .product-overview { grid-template-columns:1fr; } .product-display img { height:280px; } .product-assurances { grid-template-columns:repeat(3,minmax(0,1fr)); } .product-assurances li { padding:14px 5px; font-size:10px; } .product-assurances small { font-size:9px; } .product-summary h1 { font-size:28px; } .product-specifications { grid-template-columns:1fr; } .product-help { grid-template-columns:1fr; position:static; } .product-related>div { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; } .product-related article { width:265px; flex:0 0 265px; scroll-snap-align:start; } .product-faq>.site-width { grid-template-columns:1fr; gap:24px; } .product-quote-row { grid-template-columns:100px minmax(0,1fr); } .product-quantity { min-height:46px; } .product-quantity button { width:30px; flex-shrink:0; } .product-quantity input { width:32px; } .product-spec-table dl>div { grid-template-columns:1fr; gap:6px; } }
+
+/* Clearance offers share the catalogue's product layout. */
+.offer-nav-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--primary); margin-right:5px; vertical-align:middle; }
+.offer-nav-promo { display:inline-block; background:var(--primary); color:var(--primary-foreground); font-size:10px; padding:2px 6px; border-radius:4px; margin-left:8px; }
+.sesa-clearance-badge { position:absolute; z-index:1; top:12px; right:12px; max-width:calc(100% - 24px); background:var(--primary); color:var(--primary-foreground); border-radius:20px; padding:5px 10px; font-size:11px; font-weight:800; }
+.sesa-card-media:has(.sesa-clearance-badge) .sesa-card-stock { top:46px; }
+.sesa-card-price del { display:block; color:var(--muted-foreground); font-size:12px; margin:3px 0; }
+.sesa-card-price.is-clearance strong,.product-detail-price.is-clearance strong { color:var(--primary); }
+.product-clearance-label { display:inline-block; background:var(--primary); color:var(--primary-foreground); border-radius:4px; padding:6px 12px; font-size:12px; font-weight:800; margin-bottom:16px; }
+.clearance-section { padding-block:40px; background:var(--secondary); border-block:1px solid var(--border); }
+.clearance-heading { display:flex; align-items:end; gap:24px; margin-bottom:28px; }
+.clearance-heading>div { flex:1; min-width:0; }
+.clearance-heading h2 { margin-top:12px; }
+.clearance-intro { margin-top:12px; color:var(--muted-foreground); font-size:13px; line-height:1.8; max-width:660px; }
+.clearance-heading>a { flex-shrink:0; }
+.admin-offer-box { border:1px solid var(--border); border-left:3px solid var(--primary); border-radius:6px; padding:16px; background:var(--accent); }
+.admin-offer-box legend { padding-inline:6px; font-weight:700; font-size:13px; }
+@media(min-width:1180px) and (max-width:1450px) { .executive-nav { gap:10px; } .executive-links { gap:20px; } .executive-links a { font-size:9px; } .executive-actions { gap:10px; padding-left:10px; } .executive-actions>a { font-size:9px; } .executive-actions>button { padding-inline:8px; font-size:9px; } .mega-trigger { padding-inline:8px; } }
+@media(max-width:767px) { .clearance-section { padding-block:28px; } .clearance-heading { align-items:start; flex-direction:column; gap:10px; } .clearance-heading h2 { font-size:24px; line-height:1.4; } }

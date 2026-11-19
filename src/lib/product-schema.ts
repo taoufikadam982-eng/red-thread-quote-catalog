@@ -16,7 +16,9 @@ export const productSchema = z.object({
   image_path: z.string().max(500).default(''),
   images: z.array(imagePathSchema).max(MAX_PRODUCT_IMAGES).optional(),
   price: z.number().finite().min(0).max(9999999999),
-  old_price: z.number().finite().positive().max(9999999999).nullable(),
+  old_price: z.number().finite().positive().max(9999999999).nullable().default(null),
+  is_clearance: z.boolean().optional(),
+  clearance_badge: z.string().trim().max(40).nullable().optional(),
   availability: z.enum(availabilityOptions),
   hidden: z.boolean(),
   indicative: z.boolean(),
@@ -24,5 +26,5 @@ export const productSchema = z.object({
 export type AdminProduct = z.infer<typeof productSchema>;
 export function canAdminister(role: unknown) { return role === 'admin'; }
 export function blankProduct(): AdminProduct {
-  return { id: crypto.randomUUID(), name: '', reference: '', category: 'Ordinateurs portables', categories: ['Ordinateurs portables'], specs: '', brand: '', usage: '', image_path: '', price: 0, old_price: null, availability: 'En stock', hidden: false, indicative: true };
+  return { id: crypto.randomUUID(), name: '', reference: '', category: 'Ordinateurs portables', categories: ['Ordinateurs portables'], specs: '', brand: '', usage: '', image_path: '', price: 0, old_price: null, is_clearance: false, clearance_badge: null, availability: 'En stock', hidden: false, indicative: true };
 }

@@ -58,3 +58,5 @@
 - [x] Blog connecté à la base + gestion dans /admin
 - [x] Footer mobile en accordéons: les trois colonnes de liens se replient sous 768px, la grille ordinateur reste ouverte. Vérifié: trois lignes fermées au chargement, ouverture/fermeture au tap, liens lisibles, grille 4 colonnes inchangée à 1280px, aucun débordement, 77 tests.
 - [x] Badge Google Avis 4,6/5 (15 avis) dans le footer PC/mobile + avis vérifié 5★ du Dr Bouazzaoui dans la section magasin; lien officiel en nouvel onglet; vérifié à 1280 et 390px, 15 tests.
+
+- [x] Add clearance controls/storage, shared prices and badges, offers navigation/page and conditional homepage section; verified taoufik admin save/reload, Boutique offer filter, public old/current prices, homepage visibility, quote selection, mobile disabling and empty state. Temporary verification product removed; regression tests pass.

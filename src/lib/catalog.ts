@@ -16,7 +16,7 @@ export const products = [
   { id: 'hp-monitor', name: 'Écran HP Series 7 Pro 724pf', reference: '724pf', price: 2390, category: 'Écrans', image: monitor, brand: 'HP', detail: 'Écran professionnel · Gamme HP Series 7 Pro', usage: 'Poste de travail et confort visuel au quotidien' },
   { id: 'scanjet', name: 'HP ScanJet Pro 3000 s4', reference: '3000 s4', price: 4690, category: 'Scanners', image: scanner, brand: 'HP', detail: 'Scanner de documents professionnel · Gamme HP ScanJet Pro', usage: 'Numérisation de documents pour les équipes et administrations' },
 ];
-export type Product = typeof products[number] & { categories?: string[]; old_price?: number | null; availability?: string; hidden?: boolean; indicative?: boolean; image_path?: string; images?: string[] };
+export type Product = typeof products[number] & { is_clearance?: boolean; clearance_badge?: string | null; categories?: string[]; old_price?: number | null; availability?: string; hidden?: boolean; indicative?: boolean; image_path?: string; images?: string[] };
 export type QuoteItem = { id: string; quantity: number };
 export const priceLabel = (price: number) => new Intl.NumberFormat('fr-MA').format(price);
 export function addQuoteItem(items: QuoteItem[], id: string, catalogue: Product[] = products): QuoteItem[] {

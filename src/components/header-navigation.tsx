@@ -31,7 +31,7 @@ export function HeaderNavigation() {
         <CategoryLinks onSelect={() => setOpen(false)}/><div className="mega-brands"><strong>Accès par marque</strong>{featuredBrands.slice(0, 6).map(brand => <Button asChild variant="outline" size="sm" key={brand}><Link to="/boutique" search={{ brand }} onClick={() => setOpen(false)}>{brand}</Link></Button>)}</div>
       </PopoverContent>
     </Popover>
-    <div className="executive-links">{mainMenu.map(item => <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>{item.label}</Link>)}</div>
+    <div className="executive-links">{mainMenu.map(item => <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>{item.to === '/offres' && <span className="offer-nav-dot" aria-hidden="true"/>}{item.label}</Link>)}</div>
     <div className="executive-actions"><a href="tel:+212537765777"><Phone/><span>05 37 76 57 77 / 78</span></a><Button onClick={() => openQuote(true)}>Demander un devis<ArrowRight/></Button></div>
   </nav>;
 }

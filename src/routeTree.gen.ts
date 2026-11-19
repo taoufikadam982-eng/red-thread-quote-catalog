@@ -26,6 +26,7 @@ import { Route as MagasinRouteImport } from './routes/magasin'
 import { Route as MarchesRouteImport } from './routes/marches'
 import { Route as MarquesRouteImport } from './routes/marques'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as OffresRouteImport } from './routes/offres'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -117,6 +118,11 @@ const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OffresRoute = OffresRouteImport.update({
+  id: '/offres',
+  path: '/offres',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/marches': typeof MarchesRoute
   '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/marches': typeof MarchesRoute
   '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/marches': typeof MarchesRoute
   '/marques': typeof MarquesRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -241,6 +250,7 @@ export interface FileRouteTypes {
     | '/marches'
     | '/marques'
     | '/mentions-legales'
+    | '/offres'
     | '/reset-password'
     | '/solutions'
     | '/admin'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/marches'
     | '/marques'
     | '/mentions-legales'
+    | '/offres'
     | '/reset-password'
     | '/solutions'
     | '/admin'
@@ -290,6 +301,7 @@ export interface FileRouteTypes {
     | '/marches'
     | '/marques'
     | '/mentions-legales'
+    | '/offres'
     | '/reset-password'
     | '/solutions'
     | '/_authenticated/admin'
@@ -316,6 +328,7 @@ export interface RootRouteChildren {
   MarchesRoute: typeof MarchesRoute
   MarquesRoute: typeof MarquesRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  OffresRoute: typeof OffresRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
   ProduitIdRoute: typeof ProduitIdRoute
@@ -444,6 +457,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/offres': {
+      id: '/offres'
+      path: '/offres'
+      fullPath: '/offres'
+      preLoaderRoute: typeof OffresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -518,6 +538,7 @@ const rootRouteChildren: RootRouteChildren = {
   MarchesRoute: MarchesRoute,
   MarquesRoute: MarquesRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  OffresRoute: OffresRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
   ProduitIdRoute: ProduitIdRoute,
