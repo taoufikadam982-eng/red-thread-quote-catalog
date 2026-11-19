@@ -4,7 +4,7 @@ import { products } from '@/lib/catalog';
 import { productSchema } from '@/lib/product-schema';
 import { filterCatalogue } from '@/lib/storefront';
 import { selectBoutiqueProducts } from '@/lib/boutique-filters';
-import { mapImportRows } from '@/lib/product-import';
+import { mapImportRows, mapImportText } from '@/lib/product-import';
 const base = products[0];
 if (!base) throw new Error('Missing fixture');
 describe('multiple product categories', () => {
@@ -35,8 +35,24 @@ describe('multiple product categories', () => {
   it('requires at least one selected category', () => {
     expect(productSchema.safeParse({...base,categories:[],old_price:null,availability:'En stock',hidden:false,indicative:true}).success).toBe(false);
   });
+  it('derives the legacy primary field from an array-only assignment',()=>{
+    const parsed=productSchema.parse({...base,category:undefined,categories:['Workstations','Ordinateurs portables'],old_price:null,availability:'En stock',hidden:false,indicative:true});
+    expect(parsed.category).toBe('Workstations');
+    expect(productSchema.safeParse({...base,category:'',categories:undefined,old_price:null,availability:'En stock',hidden:false,indicative:true}).success).toBe(false);
+  });
   it('imports a legacy single category and multiple category cells', () => {
     expect(mapImportRows([{Titre:'Laptop',Référence:'SINGLE',Catégorie:'Ordinateurs portable',Prix:100}])[0]?.categories).toEqual(['Ordinateurs portables']);
     expect(mapImportRows([{Titre:'Laptop',Référence:'MULTI',Catégories:'Ordinateur portable;Workstation',Prix:100}])[0]?.categories).toEqual(['Ordinateurs portables','Workstations']);
+  });
+  it('retains multiple categories and empty cells in extracted document tables',()=>{
+    const row=mapImportText('Titre\tRéférence\tCatégories\tMarque\tPrix\nLaptop\tTEXT-01\tOrdinateurs portables;Workstations\t\t100')[0];
+    expect(row?.categories).toEqual(['Ordinateurs portables','Workstations']);expect(row?.price).toBe(100);expect(row?.brand).toBe('');
+  });
+  it('rejects ambiguous extracted columns instead of assigning a category to a price',()=>{
+    expect(()=>mapImportText('Titre;Référence;Catégories;Prix\nLaptop;TEXT-01;Ordinateurs portables;Workstations;100')).toThrow('Colonnes ambiguës');
+  });
+  it('normalizes legacy all-products selection',()=>{
+    expect(hasCategory(base,'Tous')).toBe(true);
+    expect(assignedCategories({category:'Tous'})).toEqual([]);
   });
 });

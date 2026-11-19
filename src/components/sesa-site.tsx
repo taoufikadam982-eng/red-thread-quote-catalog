@@ -13,7 +13,7 @@ import logoImage from '@/assets/sesa-logo-white.png';
 import { PartnerBrands } from './partner-brands';
 import { useProducts } from './catalog-context';
 import { HomeHero } from './home-hero';
-import { hasCategory } from '@/lib/product-categories';
+import { hasCategory, normalizeCategory } from '@/lib/product-categories';
 import { ProductCard } from './product-card';
 import { HeaderNavigation, CategoryLinks } from './header-navigation';
 import { mainMenu, featuredBrands } from '@/lib/header-menu';
@@ -40,7 +40,7 @@ export function CategoryGrid({ onSelect }: { onSelect: (category: string) => voi
 export function Promos() { return <CorporatePromos/>; }
 export function ProductCatalog({ initialCategory = '', initialSearch = '', categorySelection }: { initialCategory?: string; initialSearch?: string; categorySelection?: CategorySelection | null }) {
   const products = useProducts();
-  const [brand, setBrand] = useState(''); const [filter, setFilter] = useState(initialCategory); const [query, setQuery] = useState(initialSearch); const { setOpen, setInitialMessage } = useQuote();
+  const [brand, setBrand] = useState(''); const [filter, setFilter] = useState(normalizeCategory(initialCategory)); const [query, setQuery] = useState(initialSearch); const { setOpen, setInitialMessage } = useQuote();
   const catalogueRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!categorySelection) return;

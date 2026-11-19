@@ -2,6 +2,7 @@ import { createServerFn, createMiddleware } from '@tanstack/react-start';
 import { z } from 'zod';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { productSchema } from './product-schema';
+import { assignedCategories } from './product-categories';
 import { adminInvitationEmailSchema } from './admin-account';
 
 export const requireAdmin = createMiddleware({ type: 'function' }).middleware([requireSupabaseAuth]).server(async ({ context, next }) => {
@@ -25,12 +26,18 @@ export const getAdminData = createServerFn({ method: 'GET' }).middleware([requir
   return { products: products.data ?? [], quotes: quotes.data ?? [], content: content.data ?? [], profiles: profiles.data ?? [], roles: roles.data ?? [], settings: settings.data?.data ?? {}, users: users.data.users.map(u => ({ id:u.id, email:u.email ?? '', confirmed:!!u.email_confirmed_at })), userId:context.userId };
 });
 export const saveProducts = createServerFn({ method: 'POST' }).middleware([requireAdmin])
-  .inputValidator((input: unknown) => z.array(productSchema).min(1).max(500).parse(input))
+  .inputValidator((input: unknown) => z.array(z.unknown()).min(1).max(500).parse(input).map(value => {
+    const supplied = z.object({ categories: z.array(z.string()).optional() }).passthrough().parse(value);
+    return { ...productSchema.parse(value), categoriesProvided: supplied.categories !== undefined };
+  }))
   .handler(async ({ data, context }) => {
     if (new Set(data.map(p => p.reference)).size !== data.length) throw new Error('Chaque produit doit avoir une référence unique.');
-    const { data:existing,error:lookupError } = await context.supabase.from('products').select('id,reference').in('reference',data.map(p=>p.reference));
+    const { data:existing,error:lookupError } = await context.supabase.from('products').select('id,reference,category,categories').in('reference',data.map(p=>p.reference));
     if(lookupError)throw new Error(lookupError.message);
-    const rows=data.map(p=>({...p,id:existing?.find(e=>e.reference===p.reference)?.id??p.id}));
+    const rows=data.map(({categoriesProvided,...p})=>{
+      const previous=existing?.find(e=>e.reference===p.reference);
+      return {...p,id:previous?.id??p.id,categories:!categoriesProvided&&previous?assignedCategories({category:p.category,categories:[p.category,...previous.categories.slice(1)]}):p.categories};
+    });
     const { error } = await context.supabase.rpc('save_product_batch', { rows });
     if (error) throw new Error(error.message);
     return { count:data.length };

@@ -35,8 +35,15 @@ export async function parseProductFile(file:File):Promise<AdminProduct[]>{
  }
  else if(file.type.startsWith('image/')){const {createWorker}=await import('tesseract.js');const worker=await createWorker('fra+eng');text=(await worker.recognize(file)).data.text;await worker.terminate();}
  else throw new Error('Formats acceptés : CSV, Excel, Word (.docx), PDF et photos.');
- const lines=text.split('\n').filter(l=>l.trim());const records=lines.map(line=>line.split(/\t|;|\||\s{2,}/).map(v=>v.trim()).filter(Boolean));
+ return mapImportText(text);
+}
+export function mapImportText(text:string):AdminProduct[]{
+ const lines=text.split('\n').filter(l=>l.trim());
+ const first=lines[0];if(!first)throw new Error('Aucun texte détecté.');
+ const delimiter=first.includes('\t')?/\t/:first.includes('|')?/\|/:first.includes(';')?/;/:/\s{2,}/;
+ const records=lines.map(line=>line.split(delimiter).map(v=>v.trim()));
  const header=records.shift();if(!header)throw new Error('Aucun texte détecté.');
+ if(records.some(values=>values.length!==header.length))throw new Error('Colonnes ambiguës. Utilisez un CSV ou Excel pour conserver toutes les catégories.');
  const rows=records.map(values=>Object.fromEntries(header.map((h,i)=>[h,values[i]??''])));
  if(!rows.length)throw new Error('Aucun tableau détecté. Utilisez un CSV ou Excel avec Titre, Référence, Catégorie et Prix.');
  return mapImportRows(rows);

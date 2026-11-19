@@ -1,6 +1,7 @@
 export const officialCategories = ['Ordinateurs portables', 'Ordinateurs de bureau', 'Workstations', 'Imprimantes', 'Scanners', 'Écrans', 'Accessoires & Réseau'] as const;
 export function normalizeCategory(value: string) {
   const key = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  if (key === 'tous' || key === 'tous les produits') return '';
   if (/^ordinateurs? portables?$/.test(key)) return 'Ordinateurs portables';
   if (/^ordinateurs? (?:de bureau|bureautiques?)$/.test(key)) return 'Ordinateurs de bureau';
   if (/^workstations?(?: fixes?| mobiles?)?$/.test(key)) return 'Workstations';

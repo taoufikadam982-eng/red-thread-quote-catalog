@@ -8,7 +8,7 @@ export const productSchema = z.object({
   id: z.string().min(1).max(60),
   name: z.string().trim().min(1, 'Le titre est obligatoire.').max(200),
   reference: z.string().trim().min(1, 'La référence est obligatoire.').max(120),
-  category: z.string().trim().min(1).max(100),
+  category: z.string().trim().max(100).default(''),
   categories: z.array(z.string().trim().min(1).max(100)).min(1, 'Choisissez au moins une catégorie.').max(7).optional(),
   specs: z.string().max(10000).default(''),
   brand: z.string().max(100).default(''),
@@ -20,7 +20,7 @@ export const productSchema = z.object({
   availability: z.enum(availabilityOptions),
   hidden: z.boolean(),
   indicative: z.boolean(),
-}).transform(p => { const categories = assignedCategories(p); return { ...p, categories, category: categories[0] ?? normalizeCategory(p.category) }; }).refine(p => p.old_price === null || p.old_price > p.price, { path: ['old_price'], message: 'Le prix barré doit être supérieur au prix actuel.' });
+}).transform(p => { const categories = assignedCategories(p); return { ...p, categories, category: categories[0] ?? normalizeCategory(p.category) }; }).refine(p=>p.categories.length>0,{path:['categories'],message:'Choisissez au moins une catégorie.'}).refine(p => p.old_price === null || p.old_price > p.price, { path: ['old_price'], message: 'Le prix barré doit être supérieur au prix actuel.' });
 export type AdminProduct = z.infer<typeof productSchema>;
 export function canAdminister(role: unknown) { return role === 'admin'; }
 export function blankProduct(): AdminProduct {
