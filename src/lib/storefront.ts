@@ -9,7 +9,8 @@ export const phoneHref = (display: string) => {
   const digits = display.replace(/\D/g, '');
   if (!digits) return '';
   if (digits.startsWith('00')) return `tel:+${digits.slice(2)}`;
-  if (digits.startsWith('0')) return `tel:+212${digits.slice(1)}`;
+  // A national number is 10 digits; anything after it is a second line, not part of the call.
+  if (digits.startsWith('0')) return `tel:+212${digits.slice(1, 10)}`;
   return `tel:+${digits}`;
 };
 export const primaryPhoneHref = phoneHref(store.phones[0]);

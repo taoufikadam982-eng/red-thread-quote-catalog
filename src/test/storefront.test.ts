@@ -24,5 +24,6 @@ describe('new storefront business rules', () => {
   it('dials a customer number written with spaces or dashes', () => expect(phoneHref('0612 34-56-78')).toBe('tel:+212612345678'));
   it('dials a number already written in international form', () => expect(phoneHref('+212 612 34 56 78')).toBe('tel:+212612345678'));
   it('dials a foreign number written with the 00 prefix', () => expect(phoneHref('0033 6 12 34 56 78')).toBe('tel:+33612345678'));
+  it('dials the first line when a label lists two numbers', () => expect(phoneHref('05 37 76 57 77 / 78')).toBe('tel:+212537765777'));
   it('offers no dial target when no digits were given', () => expect(phoneHref('aucun')).toBe(''));
 });
