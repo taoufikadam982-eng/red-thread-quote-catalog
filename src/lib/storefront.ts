@@ -3,9 +3,15 @@ import { hasCategory } from './product-categories';
 export const showroomPlaceId = 'ChIJmeCKg4Vrpw0RLUhPWhyhU3c';
 export const showroomDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('SESA Informatique, Boulevard Al Alaouiyine 30, Rabat')}&destination_place_id=${showroomPlaceId}`;
 export const showroomEmbedUrl = 'https://maps.google.com/maps?cid=8598393256726710317&z=16&output=embed';
-export const store = { address: 'Boulevard Al Alaouiyine 30, 10020 Hassan, Rabat, Maroc', email: 'sesa@menara.ma', phones: ['05 37 76 57 77', '05 37 76 57 78'], hours: { weekday: '8h30–16h30' }, quoteHours: 24 };
-// Dial-ready target for a displayed SESA line: digits only, never the spaced label.
-export const phoneHref = (display: string) => `tel:+212${display.replace(/\D/g, '').replace(/^0/, '')}`;
+export const store = { address: 'Boulevard Al Alaouiyine 30, 10020 Hassan, Rabat, Maroc', email: 'sesa@menara.ma', phones: ['05 37 76 57 77', '05 37 76 57 78'] as const, hours: { weekday: '8h30–16h30' }, quoteHours: 24 };
+// Digits-only dial target: the visible label may keep spaces, slashes or a second line.
+export const phoneHref = (display: string) => {
+  const digits = display.replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.startsWith('00')) return `tel:+${digits.slice(2)}`;
+  if (digits.startsWith('0')) return `tel:+212${digits.slice(1)}`;
+  return `tel:+${digits}`;
+};
 export const primaryPhoneHref = phoneHref(store.phones[0]);
 export const googleReviews = {
   url: 'https://www.google.com/maps/place/Sesa+Informatique/@34.0191587,-6.8298335,17z/data=!4m8!3m7!1s0xda76b85838ae099:0x7753a11c5a4f482d!8m2!3d34.0191543!4d-6.8272586!9m1!1b1!16s%2Fg%2F11b6j0h0bt?entry=ttu',
