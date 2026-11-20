@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { customerReviews, filterCatalogue, googleReviews, phoneHref, primaryPhoneHref, socialLinks, store } from '@/lib/storefront';
+import { customerReviews, defaultWhatsappNumber, filterCatalogue, googleReviews, phoneHref, primaryPhoneHref, socialLinks, store, whatsappHref } from '@/lib/storefront';
 import { newsletterSchema } from '@/lib/newsletter-schema';
 describe('new storefront business rules', () => {
   it('lists the scanner at 4690 DH', () => expect(products.find(p => p.id === 'scanjet')?.price).toBe(4690));
@@ -26,4 +26,9 @@ describe('new storefront business rules', () => {
   it('dials a foreign number written with the 00 prefix', () => expect(phoneHref('0033 6 12 34 56 78')).toBe('tel:+33612345678'));
   it('dials the first line when a label lists two numbers', () => expect(phoneHref('05 37 76 57 77 / 78')).toBe('tel:+212537765777'));
   it('offers no dial target when no digits were given', () => expect(phoneHref('aucun')).toBe(''));
+  it('builds a digits-only WhatsApp chat target from a displayed number', () => expect(whatsappHref('05 37 76 57 77')).toBe('https://wa.me/212537765777'));
+  it('accepts an international WhatsApp number with spaces', () => expect(whatsappHref('+212 537 765 777')).toBe('https://wa.me/212537765777'));
+  it('encodes the advisor message in the WhatsApp link', () => expect(whatsappHref('0537765777', 'Bonjour SESA')).toBe('https://wa.me/212537765777?text=Bonjour%20SESA'));
+  it('offers no WhatsApp target when the admin cleared the number', () => expect(whatsappHref('')).toBe(''));
+  it('keeps the default WhatsApp line on the showroom number', () => expect(defaultWhatsappNumber).toBe('212537765777'));
 });

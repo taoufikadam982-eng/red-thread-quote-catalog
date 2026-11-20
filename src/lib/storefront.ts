@@ -14,6 +14,21 @@ export const phoneHref = (display: string) => {
   return `tel:+${digits}`;
 };
 export const primaryPhoneHref = phoneHref(store.phones[0]);
+// WhatsApp line: the admin can change or clear it in /admin → Réglages; this is the fallback.
+export const defaultWhatsappNumber = '212537765777';
+// Digits-only chat target: accepts "05 37 76 57 77", "+212 537 765 777" or "212537765777".
+export const normalizeWhatsapp = (display: string) => {
+  const digits = display.replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.startsWith('00')) return digits.slice(2);
+  if (digits.startsWith('0')) return `212${digits.slice(1, 10)}`;
+  return digits;
+};
+export const whatsappHref = (number: string, message?: string) => {
+  const target = normalizeWhatsapp(number);
+  if (!target) return '';
+  return `https://wa.me/${target}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+};
 export const googleReviews = {
   url: 'https://www.google.com/maps/place/Sesa+Informatique/@34.0191587,-6.8298335,17z/data=!4m8!3m7!1s0xda76b85838ae099:0x7753a11c5a4f482d!8m2!3d34.0191543!4d-6.8272586!9m1!1b1!16s%2Fg%2F11b6j0h0bt?entry=ttu',
   rating: 4.6,

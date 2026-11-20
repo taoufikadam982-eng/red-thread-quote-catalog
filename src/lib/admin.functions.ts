@@ -59,7 +59,7 @@ export const saveContent = createServerFn({method:'POST'}).middleware([requireAd
 export const deleteContent = createServerFn({method:'POST'}).middleware([requireAdmin]).inputValidator((input:unknown)=>z.string().uuid().parse(input))
   .handler(async ({data,context})=>{const {error}=await context.supabase.from('admin_content').delete().eq('id',data);if(error)throw new Error(error.message);return true;});
 export const saveSettings = createServerFn({method:'POST'}).middleware([requireAdmin])
-  .inputValidator((input:unknown)=>z.object({company:z.string().max(200),email:z.string().email().max(254),phone:z.string().max(30),address:z.string().max(500)}).parse(input))
+  .inputValidator((input:unknown)=>z.object({company:z.string().max(200),email:z.string().email().max(254),phone:z.string().max(30),address:z.string().max(500),whatsapp:z.string().max(30).optional()}).parse(input))
   .handler(async({data,context})=>{const {error}=await context.supabase.from('store_settings').upsert({id:'store',data});if(error)throw new Error(error.message);return true;});
 export const saveProfile = createServerFn({method:'POST'}).middleware([requireAdmin])
   .inputValidator((input:unknown)=>z.object({display_name:z.string().trim().max(150),avatar_url:z.string().max(500)}).parse(input))

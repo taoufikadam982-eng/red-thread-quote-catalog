@@ -17,6 +17,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteProvider } from '@/components/quote-context';
 import { SiteShell } from '@/components/sesa-site';
 import { CatalogProvider, catalogueQuery } from '@/components/catalog-context';
+import { StorefrontSettingsProvider, storefrontSettingsQuery } from '@/components/settings-context';
 import { supabase } from '@/integrations/supabase/client';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -83,8 +84,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   // A temporary catalogue outage must not block login or tear down quote state.
   loader: async ({ context }) => {
-    try { return await context.queryClient.ensureQueryData(catalogueQuery); }
-    catch { return []; /* CatalogProvider retries without hiding the app. */ }
+    // Settings are best-effort too: a failure falls back to the default WhatsApp line.
+    const settings = context.queryClient.ensureQueryData(storefrontSettingsQuery).catch(() => undefined);
+    try { return { catalogue: await context.queryClient.ensureQueryData(catalogueQuery), settings: await settings }; }
+    catch { return { catalogue: [], settings: await settings }; /* CatalogProvider retries without hiding the app. */ }
   },
   head: () => ({
     // Replace these placeholders with the app's name and description when first building the app.
@@ -134,7 +137,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const initialCatalogue = Route.useLoaderData();
+  const { catalogue: initialCatalogue, settings: initialSettings } = Route.useLoaderData();
   const router = useRouter();
   const pathname = useRouterState({ select: state => state.location.pathname });
   const adminSurface = pathname.startsWith('/admin') || pathname === '/auth' || pathname === '/reset-password';
@@ -154,7 +157,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <CatalogProvider initialData={initialCatalogue}><QuoteProvider>{adminSurface ? <Outlet/> : <SiteShell><Outlet /></SiteShell>}</QuoteProvider></CatalogProvider>
+      <StorefrontSettingsProvider initialData={initialSettings}><CatalogProvider initialData={initialCatalogue}><QuoteProvider>{adminSurface ? <Outlet/> : <SiteShell><Outlet /></SiteShell>}</QuoteProvider></CatalogProvider></StorefrontSettingsProvider>
       <Toaster richColors />
     </QueryClientProvider>
   );
