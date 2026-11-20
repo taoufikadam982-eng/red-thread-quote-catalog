@@ -8,6 +8,7 @@ import { hasCategory, officialCategories, normalizeCategory } from '@/lib/produc
 import { ProductCard } from './product-card';
 import { productFacets, selectBoutiqueProducts, technicalFacets } from '@/lib/boutique-filters';
 import { clearanceProducts } from '@/lib/product-offers';
+import { brandOptions, sameBrand } from '@/lib/product-brands';
 import cover from '@/assets/sesa-boutique-cover.jpg';
 
 export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQuery = '', offersOnly = false }: { offersOnly?: boolean; initialBrand?: string; initialCategory?: string; initialQuery?: string }) {
@@ -32,14 +33,15 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
   const categories = officialCategories;
   const pool = category ? products.filter(p => hasCategory(p, category)) : products;
   const facets: Record<string, string[]> = {
-    Marque: [...new Set(pool.map(p => p.brand).filter(Boolean))].sort(),
+    Marque: brandOptions(pool.map(p => p.brand)),
     ...Object.fromEntries(technicalFacets.map(key => [key, [...new Set(pool.flatMap(p => productFacets(p)[key] ?? []))].sort()])),
     Disponibilité: [...new Set(pool.map(p => p.availability || 'Sur demande'))],
   };
   const shown = selectBoutiqueProducts(products, { category, query, min, max: max ?? ceiling, selected, sort });
   const reset = () => { setMin(0); setMax(null); setSelected({}); setQuery(''); setCategory(''); setOfferFilter(false); setLimit(12); };
+  const matchesFacet = (key: string, a: string, b: string) => key === 'Marque' ? sameBrand(a, b) : a === b;
   const toggle = (key: string, value: string) => {
-    setSelected(previous => ({ ...previous, [key]: (previous[key] ?? []).includes(value) ? (previous[key] ?? []).filter(v => v !== value) : [...(previous[key] ?? []), value] }));
+    setSelected(previous => ({ ...previous, [key]: (previous[key] ?? []).some(v => matchesFacet(key, v, value)) ? (previous[key] ?? []).filter(v => !matchesFacet(key, v, value)) : [...(previous[key] ?? []), value] }));
     setLimit(12);
   };
   return <main className="boutique-page">
@@ -56,7 +58,7 @@ export function BoutiquePage({ initialBrand = '', initialCategory = '', initialQ
         <aside ref={filtersRef} id="boutique-filters" className={`boutique-filters ${mobileFilters ? 'is-open' : ''}`} aria-label="Affiner les produits"><div className="boutique-filter-heading"><div><p className="eyebrow">Affiner</p><h2>Votre sélection.</h2></div><Button variant="ghost" size="icon" className="boutique-filter-close" aria-label="Fermer les filtres" onClick={() => setMobileFilters(false)}><X/></Button></div>
           <fieldset><legend>Catégories</legend>{categories.map(value => <label className="boutique-checkbox" key={value}><input type="radio" name="boutique-category" aria-label={`Catégorie ${value}`} checked={category === value} onChange={() => { setCategory(value); setSelected({}); setLimit(12); }}/><span>{value}</span><small>{products.filter(p => hasCategory(p, value)).length || 'Sur demande'}</small></label>)}</fieldset>
           <fieldset><legend>Budget TTC</legend><input type="range" aria-label="Budget maximum" min={0} max={ceiling} value={Math.min(max ?? ceiling, ceiling)} onChange={e => { setMax(Number(e.target.value)); setLimit(12); }}/><div className="boutique-budget"><label><span className="sr-only">Budget minimum</span><input aria-label="Budget minimum" type="number" min={0} max={max ?? ceiling} value={min} onChange={e => { setMin(Math.max(0, Number(e.target.value))); setLimit(12); }}/></label><span>à</span><label><span className="sr-only">Budget maximum TTC</span><input aria-label="Budget maximum TTC" type="number" min={min} value={max ?? ceiling} onChange={e => { setMax(Math.max(0, Number(e.target.value))); setLimit(12); }}/></label></div><p className="boutique-budget-unit">DH TTC · Prix indicatifs</p></fieldset>
-          {Object.entries(facets).filter(([, values]) => values.length > 0).map(([key, values]) => <fieldset key={key}><legend>{key}</legend>{(expanded.includes(key) ? values : values.slice(0, 5)).map(value => <label className="boutique-checkbox" key={value}><input type="checkbox" checked={(selected[key] ?? []).includes(value)} onChange={() => toggle(key, value)}/><span>{value}</span><small>{pool.filter(p => key === 'Marque' ? p.brand === value : key === 'Disponibilité' ? (p.availability || 'Sur demande') === value : (productFacets(p)[key] ?? []).includes(value)).length}</small></label>)}{values.length > 5 && <Button variant="ghost" className="boutique-more-options" onClick={() => setExpanded(previous => previous.includes(key) ? previous.filter(v => v !== key) : [...previous, key])}>{expanded.includes(key) ? 'Afficher moins' : 'Afficher plus d’options'}</Button>}</fieldset>)}
+          {Object.entries(facets).filter(([, values]) => values.length > 0).map(([key, values]) => <fieldset key={key}><legend>{key}</legend>{(expanded.includes(key) ? values : values.slice(0, 5)).map(value => <label className="boutique-checkbox" key={value}><input type="checkbox" checked={(selected[key] ?? []).some(v => matchesFacet(key, v, value))} onChange={() => toggle(key, value)}/><span>{value}</span><small>{pool.filter(p => key === 'Marque' ? sameBrand(p.brand, value) : key === 'Disponibilité' ? (p.availability || 'Sur demande') === value : (productFacets(p)[key] ?? []).includes(value)).length}</small></label>)}{values.length > 5 && <Button variant="ghost" className="boutique-more-options" onClick={() => setExpanded(previous => previous.includes(key) ? previous.filter(v => v !== key) : [...previous, key])}>{expanded.includes(key) ? 'Afficher moins' : 'Afficher plus d’options'}</Button>}</fieldset>)}
           <Button variant="outline" className="w-full" onClick={reset}>Tout effacer</Button>
         </aside>
         <div className="boutique-results"><div className="boutique-results-toolbar"><p role="status"><strong>{shown.length}</strong> produit{shown.length === 1 ? '' : 's'} trouvé{shown.length === 1 ? '' : 's'}</p><Button variant="outline" className="boutique-filter-trigger" aria-expanded={mobileFilters} aria-controls="boutique-filters" onClick={() => setMobileFilters(!mobileFilters)}><SlidersHorizontal/>Filtres</Button><label>Trier par<select aria-label="Trier les produits" value={sort} onChange={e => setSort(e.target.value)}><option value="price-up">Prix croissant</option><option value="price-down">Prix décroissant</option><option value="name">Nom du produit</option></select></label></div>

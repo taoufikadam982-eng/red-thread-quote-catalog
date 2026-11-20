@@ -2,6 +2,7 @@ import type { Product } from './catalog';
 import { hasCategory } from './product-categories';
 import { productPlainText } from './product-text';
 import { matchesProductSearch } from './product-search';
+import { sameBrand } from './product-brands';
 
 export const technicalFacets = ['Processeur', 'Mémoire vive', 'Stockage SSD', 'Carte graphique', 'Taille de l’écran', 'Système d’exploitation'] as const;
 export function productFacets(product: Product): Record<string, string[]> {
@@ -23,6 +24,6 @@ export function selectBoutiqueProducts(products: Product[], filters: BoutiqueFil
     if (product.hidden || !hasCategory(product, filters.category) || product.price < filters.min || product.price > filters.max) return false;
     if (!matchesProductSearch(product, query)) return false;
     const facets: Record<string, string[]> = { ...productFacets(product), Marque: [product.brand], Disponibilité: [product.availability || 'Sur demande'] };
-    return Object.entries(filters.selected).every(([key, values]) => values.length === 0 || values.some(value => (facets[key] ?? []).includes(value)));
+    return Object.entries(filters.selected).every(([key, values]) => values.length === 0 || values.some(value => key === 'Marque' ? sameBrand(product.brand, value) : (facets[key] ?? []).includes(value)));
   }).sort((a, b) => filters.sort === 'price-up' ? a.price - b.price : filters.sort === 'price-down' ? b.price - a.price : filters.sort === 'name' ? a.name.localeCompare(b.name, 'fr') : 0);
 }
