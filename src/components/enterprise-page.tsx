@@ -6,6 +6,7 @@ import { QuoteForm } from './quote-form';
 import { useQuote } from './quote-context';
 import { Brands } from './sesa-site';
 import { formatEnterpriseBrief, type EnterpriseBrief } from '@/lib/enterprise-brief';
+import { primaryPhoneHref } from '@/lib/storefront';
 import enterpriseScene from '@/assets/sesa-enterprise-scene.jpg';
 import workstationScene from '@/assets/sesa-workstation-feature.jpg';
 
@@ -56,7 +57,7 @@ export function EnterprisePage() {
         <p className="eyebrow">VOTRE PARTENAIRE IT · ENTREPRISES & ADMINISTRATIONS</p>
         <h1 id="enterprise-title">Solutions IT pour Entreprises, Administrations & Marchés Publics<span>.</span></h1>
         <p className="enterprise-hero-description">Postes de travail, workstations et solutions d’impression. De la PME aux administrations, un matériel adapté à vos équipes et à vos projets.</p>
-        <div className="enterprise-actions"><Button onClick={() => startBrief()}><FileText/>Demander un devis<ArrowRight/></Button><Button asChild variant="dark"><a href="tel:+212537765777"><Phone/>Parler à notre équipe</a></Button></div>
+        <div className="enterprise-actions"><Button onClick={() => startBrief()}><FileText/>Demander un devis<ArrowRight/></Button><Button asChild variant="dark"><a href={primaryPhoneHref}><Phone/>Parler à notre équipe</a></Button></div>
         <div className="enterprise-trust"><span><ShieldCheck/>Garantie constructeur</span><span><FileCheck2/>Devis officiel sous 24h</span><span><Headphones/>Conseil B2B</span><span><Store/>Showroom à Rabat</span></div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { customerReviews, filterCatalogue, googleReviews, socialLinks, store } from '@/lib/storefront';
+import { customerReviews, filterCatalogue, googleReviews, phoneHref, primaryPhoneHref, socialLinks, store } from '@/lib/storefront';
 import { newsletterSchema } from '@/lib/newsletter-schema';
 describe('new storefront business rules', () => {
   it('lists the scanner at 4690 DH', () => expect(products.find(p => p.id === 'scanjet')?.price).toBe(4690));
@@ -18,4 +18,7 @@ describe('new storefront business rules', () => {
   it('features the verified five-star review from Docteur Bouazzaoui', () => { expect(googleReviews.featured.author).toBe('Docteur Bouazzaoui'); expect(googleReviews.featured.stars).toBe(5); });
   it('preserves the supplied testimonial ratings', () => expect(customerReviews.map(review => [review.author, review.stars])).toEqual([['Docteur Bouazzaoui', 5], ['Mehdi Bennani', 5], ['Youssef El Amrani', 5], ['Salma Tazi', 4], ['Karim Chraibi', 4]]));
   it('uses Google as the owner-confirmed source for all five reviews', () => expect(customerReviews.map(review => review.source)).toEqual(['google', 'google', 'google', 'google', 'google']));
+  it('dials the first showroom line on +212537765777', () => expect(primaryPhoneHref).toBe('tel:+212537765777'));
+  it('dials each displayed number as digits only', () => expect(store.phones.map(phoneHref)).toEqual(['tel:+212537765777', 'tel:+212537765778']));
+  it('keeps spaces and the second-line slash out of every dial target', () => expect(store.phones.map(phoneHref).every(href => !/\s|\//.test(href))).toBe(true));
 });

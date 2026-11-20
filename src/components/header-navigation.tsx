@@ -8,6 +8,7 @@ import { useQuote } from './quote-context';
 import { hasCategory } from '@/lib/product-categories';
 import { categories } from '@/lib/catalog';
 import { featuredBrands, mainMenu, menuIcons } from '@/lib/header-menu';
+import { primaryPhoneHref } from '@/lib/storefront';
 
 export function CategoryLinks({ onSelect }: { onSelect: () => void }) {
   const products = useProducts();
@@ -32,6 +33,6 @@ export function HeaderNavigation() {
       </PopoverContent>
     </Popover>
     <div className="executive-links">{mainMenu.map(item => <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>{item.to === '/offres' && <span className="offer-nav-dot" aria-hidden="true"/>}{item.label}</Link>)}</div>
-    <div className="executive-actions"><a href="tel:+212537765777"><Phone/><span>05 37 76 57 77 / 78</span></a><Button onClick={() => openQuote(true)}>Demander un devis<ArrowRight/></Button></div>
+    <div className="executive-actions"><a href={primaryPhoneHref}><Phone/><span>05 37 76 57 77 / 78</span></a><Button onClick={() => openQuote(true)}>Demander un devis<ArrowRight/></Button></div>
   </nav>;
 }
