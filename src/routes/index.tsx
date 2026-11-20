@@ -1,9 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from '@/components/sesa-site';
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = 'SESA Informatique Rabat — Matériel informatique professionnel au Maroc';
+const description = 'PC portables, ordinateurs de bureau, workstations, imprimantes et écrans pour entreprises et administrations. Devis B2B, bons de commande et marchés publics — showroom à Hassan, Rabat.';
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'ComputerStore',
+  name: 'SESA Informatique',
+  url: 'https://sesa.ma',
+  telephone: '+212537765777',
+  email: 'sesa@menara.ma',
+  image: 'https://sesa.ma/icons/sesa-512.png',
+  priceRange: 'DH',
+  address: { '@type': 'PostalAddress', streetAddress: 'Boulevard Al Alaouiyine 30', addressLocality: 'Rabat', addressRegion: 'Hassan', postalCode: '10020', addressCountry: 'MA' },
+  areaServed: 'Maroc',
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.6', reviewCount: '15' },
+};
+
+// The home route ships no og:image, so serve-time hosting can inject the project's social preview.
 export const Route = createFileRoute("/")({
   component: HomePage,
-  head: () => ({ meta: [{ title: 'SESA Informatique — Matériel IT professionnel à Rabat' }, { name: 'description', content: 'PC portables, workstations, imprimantes et solutions IT pour les entreprises et administrations au Maroc. Demandez votre devis SESA.' }, { property: 'og:title', content: 'SESA Informatique — Votre partenaire IT au Maroc' }, { property: 'og:description', content: 'Matériel informatique professionnel, marchés et bons de commande. Showroom à Hassan, Rabat.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }], links: [{ rel: 'canonical', href: '/' }] }),
+  head: () => ({
+    meta: [{ title }, { name: 'description', content: description }, { name: 'keywords', content: 'matériel informatique Rabat, PC portable Maroc, workstation, imprimante, devis B2B, marchés publics, SESA Informatique' }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { property: 'og:url', content: 'https://sesa.ma/' }, { property: 'og:locale', content: 'fr_MA' }, { name: 'twitter:card', content: 'summary_large_image' }, { name: 'twitter:title', content: title }, { name: 'twitter:description', content: description }],
+    links: [{ rel: 'canonical', href: 'https://sesa.ma/' }],
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify(localBusiness) }],
+  }),
 });
