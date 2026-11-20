@@ -1205,3 +1205,24 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 .admin-offer-box legend { padding-inline:6px; font-weight:700; font-size:13px; }
 @media(min-width:1180px) and (max-width:1450px) { .executive-nav { gap:10px; } .executive-links { gap:20px; } .executive-links a { font-size:9px; } .executive-actions { gap:10px; padding-left:10px; } .executive-actions>a { font-size:9px; } .executive-actions>button { padding-inline:8px; font-size:9px; } .mega-trigger { padding-inline:8px; } }
 @media(max-width:767px) { .clearance-section { padding-block:28px; } .clearance-heading { align-items:start; flex-direction:column; gap:10px; } .clearance-heading h2 { font-size:24px; line-height:1.4; } }
+.header-search { position:relative; }
+.header-search-panel { position:absolute; inset-inline:0; top:calc(100% + 8px); z-index:50; max-height:min(75dvh,calc(100dvh - 190px)); overflow-y:auto; overscroll-behavior:contain; border:1px solid var(--border); border-radius:16px; background:var(--card); color:var(--card-foreground); box-shadow:var(--privacy-shadow); }
+.header-search-group+.header-search-group { border-top:1px solid var(--border); }
+.header-search-group-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px 8px; }
+.header-search-group-heading h2 { font-size:12px; font-weight:800; text-transform:uppercase; }
+.header-search-group-heading a { display:flex; align-items:center; gap:4px; flex-shrink:0; font-size:12px; font-weight:600; color:var(--primary); }
+.header-search-panel a:focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
+.header-search-panel a:hover { background:var(--secondary); }
+.header-search-panel svg { width:14px; height:14px; flex-shrink:0; }
+.header-search-result { display:flex; align-items:center; gap:12px; padding:10px 16px; transition:background .15s; }
+.header-search-result img { width:44px; height:44px; padding:4px; object-fit:contain; flex-shrink:0; border:1px solid var(--border); border-radius:8px; background:var(--card); }
+.header-search-product-copy { min-width:0; flex:1; }
+.header-search-product-copy strong { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:14px; font-weight:600; }
+.header-search-product-copy>span { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; color:var(--muted-foreground); }
+.header-search-product-copy small { display:block; font-size:11px; font-weight:600; text-transform:uppercase; color:var(--muted-foreground); }
+.header-search-price { white-space:nowrap; font-size:14px; font-weight:700; flex-shrink:0; }
+.header-search-footer { display:flex; align-items:center; justify-content:center; gap:6px; padding:12px 16px; background:var(--secondary); border-top:1px solid var(--border); color:var(--primary); font-size:12px; font-weight:600; overflow-wrap:anywhere; }
+.header-search-empty { padding:24px 16px; text-align:center; font-size:14px; overflow-wrap:anywhere; }
+.header-search-empty button { height:auto; white-space:normal; margin-top:8px; }
+.store-header-main .header-search-clear { width:36px; height:100%; padding:0; }
+@media(max-width:767px) { .header-search-result { gap:8px; padding-inline:12px; } .header-search-product-copy strong,.header-search-price { font-size:12px; } .header-search-group-heading { padding-inline:12px; gap:8px; } .header-search-group-heading h2 { font-size:11px; } .header-search-group-heading a { font-size:11px; } }
