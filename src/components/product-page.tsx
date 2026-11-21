@@ -9,7 +9,7 @@ import { useProducts } from './catalog-context';
 import { useQuote } from './quote-context';
 import { addQuoteItem, priceLabel } from '@/lib/catalog';
 import { clearanceLabel, isClearance } from '@/lib/product-offers';
-import { publishedSpecGroups, sameCategoryProducts } from '@/lib/product-detail';
+import { isPrintProduct, printerQuickSpecs, publishedSpecGroups, sameCategoryProducts } from '@/lib/product-detail';
 import { whatsappHref } from '@/lib/storefront';
 import { useWhatsapp } from './settings-context';
 import { ProductRecommendations } from './product-recommendations';
@@ -33,7 +33,8 @@ export function ProductPage({ id }: { id: string }) {
   const specifications = groups.flatMap(group => group.rows);
   const labeled = specifications.filter(item => item.label !== 'Caractéristique');
   const sheetQuick = sheetQuickSpecs(sheet, hasCategory(product, 'Ordinateurs de bureau') && !hasCategory(product, 'Ordinateurs portables'));
-  const quickSpecs = sheetQuick.length >= 2 ? sheetQuick : (labeled.length ? labeled : specifications).slice(0, 4);
+  const fallbackQuick = labeled.length ? labeled : specifications;
+  const quickSpecs = sheetQuick.length >= 2 ? sheetQuick : (isPrintProduct(product) ? printerQuickSpecs(fallbackQuick) : fallbackQuick.slice(0, 4));
   const highlights = (product.highlights ?? []).filter(Boolean);
   const hasStory = Boolean(product.intro || highlights.length || product.use_cases);
   const similar = sameCategoryProducts(product, products);
