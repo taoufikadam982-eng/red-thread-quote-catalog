@@ -38,7 +38,8 @@ export function ProductPage({ id }: { id: string }) {
   const sheetQuick = sheetQuickSpecs(sheet, hasCategory(product, 'Ordinateurs de bureau') && !hasCategory(product, 'Ordinateurs portables'));
   const fallbackQuick = labeled.length ? labeled : specifications;
   const quickSpecs = scanner ? scannerQuickSpecs(specifications) : monitor ? monitorQuickSpecs(specifications) : sheetQuick.length >= 2 ? sheetQuick : (isPrintProduct(product) ? printerQuickSpecs(fallbackQuick) : fallbackQuick.slice(0, 4));
-  const highlights = (product.highlights ?? []).filter(Boolean);
+  const computer = hasCategory(product, 'Ordinateurs portables') || hasCategory(product, 'Ordinateurs de bureau') || hasCategory(product, 'Workstations');
+  const highlights = computer ? [] : (product.highlights ?? []).filter(Boolean);
   const hasStory = Boolean(product.intro || highlights.length || product.use_cases);
   const similar = sameCategoryProducts(product, products);
   const advisorUrl = whatsapp ? whatsappHref(whatsapp, `Bonjour SESA, je souhaite un conseil sur ${product.name} (réf. ${product.reference}).`) : '';
