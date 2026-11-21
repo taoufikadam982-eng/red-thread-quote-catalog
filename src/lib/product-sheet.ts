@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { repairDeep } from './text-repair';
 
 export const specRowSchema = z.object({ label: z.string().trim().max(120), value: z.string().trim().max(500) });
 export const specGroupSchema = z.object({ title: z.string().trim().max(120), rows: z.array(specRowSchema).max(60) });
@@ -14,7 +15,7 @@ export type ProductSheet = z.infer<typeof productSheetSchema>;
 
 /** Drops empty rows, empty groups and blank highlights so only filled data is published. */
 export function cleanSheet(input: Partial<ProductSheet>): ProductSheet {
-  const parsed = productSheetSchema.parse(input);
+  const parsed = productSheetSchema.parse(repairDeep(input));
   return {
     ...parsed,
     highlights: parsed.highlights.filter(Boolean),

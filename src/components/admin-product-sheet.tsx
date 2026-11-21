@@ -1,3 +1,4 @@
+import { repairText } from '@/lib/text-repair';
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useServerFn } from '@tanstack/react-start';
@@ -18,7 +19,7 @@ export function AdminProductSheet({ product }: { product: Source }) {
   const [sheet, setSheet] = useState<ProductSheet | null>(null);
   const save = useServerFn(saveProductSheet);
   const qc = useQueryClient();
-  const start = () => { setSheet({ intro: product.intro ?? '', highlights: product.highlights ?? [], use_cases: product.use_cases ?? '', extra_info: product.extra_info ?? '', spec_groups: readSpecGroups(product.spec_groups) }); setOpen(true); };
+  const start = () => { setSheet({ intro: repairText(product.intro ?? ''), highlights: (product.highlights ?? []).map(repairText), use_cases: repairText(product.use_cases ?? ''), extra_info: repairText(product.extra_info ?? ''), spec_groups: readSpecGroups(product.spec_groups) }); setOpen(true); };
   const groups = (fn: (g: SpecGroup[]) => SpecGroup[]) => setSheet(s => s && { ...s, spec_groups: fn(s.spec_groups) });
   const group = (i: number, fn: (g: SpecGroup) => SpecGroup) => groups(list => list.map((g, j) => j === i ? fn(g) : g));
   const submit = async () => { if (!sheet) return; setBusy(true); try { await save({ data: { id: product.id, sheet } }); await Promise.all([qc.invalidateQueries({ queryKey: ['admin'] }), qc.invalidateQueries({ queryKey: ['catalogue'] })]); toast.success('Fiche détaillée enregistrée.'); } catch (e) { toast.error(e instanceof Error ? e.message : 'Erreur'); } finally { setBusy(false); } };

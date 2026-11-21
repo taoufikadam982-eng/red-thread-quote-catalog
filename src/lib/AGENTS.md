@@ -7,3 +7,4 @@
 - Compare brands through product-brands with trimmed, case-insensitive values for filters, options and checkbox state; imported casing must not hide products linked from menus.
 - Product-page AI recommendations validate model ids against the visible catalogue and fall back to same-category items, so the section never shows invented or hidden products.
 - Detailed product sheets (intro, highlights, use cases, extra info, spec groups) are optional product columns saved by a separate admin function; an empty sheet keeps the legacy text-derived display.
+- Repair mojibake (UTF-8 read as Latin-1) via text-repair on public product reads and sheet saves, so pasted or imported descriptions display correct accents.
