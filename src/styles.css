@@ -1241,18 +1241,18 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
 @media (max-width:640px) { .product-spec-table dl>div { grid-template-columns:1fr; gap:4px; padding:12px 14px; } }
 
 /* Scanner datasheets: compact manufacturer-style rows, with the shared SESA quote flow. */
-.product-scanner-page .product-specifications { grid-template-columns:minmax(0,2.5fr) minmax(0,1fr); }
-.product-scanner-page .product-spec-table { border-radius:4px; font-size:12px; }
-.product-scanner-page .product-spec-table h3 { padding:11px 16px; }
-.product-scanner-page .product-spec-table dl>div { padding:11px 16px; gap:16px; line-height:1.7; }
-.product-scanner-page .product-spec-table dt { overflow-wrap:anywhere; }
-.product-scanner-page .product-quick-specs>div { padding:10px; min-width:0; }
-.product-scanner-page .product-quick-specs strong { overflow-wrap:anywhere; }
+:is(.product-scanner-page,.product-monitor-page) .product-specifications { grid-template-columns:minmax(0,2.5fr) minmax(0,1fr); }
+:is(.product-scanner-page,.product-monitor-page) .product-spec-table { border-radius:4px; font-size:12px; }
+:is(.product-scanner-page,.product-monitor-page) .product-spec-table h3 { padding:11px 16px; }
+:is(.product-scanner-page,.product-monitor-page) .product-spec-table dl>div { padding:11px 16px; gap:16px; line-height:1.7; }
+:is(.product-scanner-page,.product-monitor-page) .product-spec-table dt { overflow-wrap:anywhere; }
+:is(.product-scanner-page,.product-monitor-page) .product-quick-specs>div { padding:10px; min-width:0; }
+:is(.product-scanner-page,.product-monitor-page) .product-quick-specs strong { overflow-wrap:anywhere; }
 @media (min-width:1024px) {
-  .product-scanner-page .product-quick-specs { grid-template-columns:repeat(4,minmax(0,1fr)); }
-  .product-scanner-page .product-help article { padding:18px; }
+  :is(.product-scanner-page,.product-monitor-page) .product-quick-specs { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  :is(.product-scanner-page,.product-monitor-page) .product-help article { padding:18px; }
 }
 @media (max-width:767px) {
-  .product-scanner-page .product-specifications { grid-template-columns:1fr; }
-  .product-scanner-page .product-spec-table dl>div { gap:4px; padding:11px 14px; }
+  :is(.product-scanner-page,.product-monitor-page) .product-specifications { grid-template-columns:1fr; }
+  :is(.product-scanner-page,.product-monitor-page) .product-spec-table dl>div { gap:4px; padding:11px 14px; }
 }

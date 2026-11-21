@@ -14,6 +14,7 @@ import { whatsappHref } from '@/lib/storefront';
 import { useWhatsapp } from './settings-context';
 import { ProductRecommendations } from './product-recommendations';
 import { readSpecGroups, sheetQuickSpecs } from '@/lib/product-sheet';
+import { monitorQuickSpecs } from '@/lib/product-monitor';
 
 const questions = [
   ['Les prix affichés incluent-ils la TVA ?', 'Oui. Les prix du catalogue SESA sont exprimés en dirhams marocains (MAD) TTC. Votre devis confirme le tarif et la disponibilité.'],
@@ -30,19 +31,20 @@ export function ProductPage({ id }: { id: string }) {
   if (!product) return <main className="site-width py-14"><p className="eyebrow">CATALOGUE SESA</p><h1 className="section-title mt-4">Référence indisponible</h1><p className="my-6 text-muted-foreground">Cette référence n’est pas actuellement visible au catalogue.</p><Button asChild><Link to="/boutique">Retour à la boutique<ArrowRight/></Link></Button></main>;
   const sheet = readSpecGroups(product.spec_groups);
   const scanner = hasCategory(product, 'Scanners');
+  const monitor = hasCategory(product, 'Écrans');
   const groups = sheet.length ? sheet.map(group => ({ title: group.title.toUpperCase(), rows: group.rows })) : publishedSpecGroups(product);
   const specifications = groups.flatMap(group => group.rows);
   const labeled = specifications.filter(item => item.label !== 'Caractéristique');
   const sheetQuick = sheetQuickSpecs(sheet, hasCategory(product, 'Ordinateurs de bureau') && !hasCategory(product, 'Ordinateurs portables'));
   const fallbackQuick = labeled.length ? labeled : specifications;
-  const quickSpecs = scanner ? scannerQuickSpecs(specifications) : sheetQuick.length >= 2 ? sheetQuick : (isPrintProduct(product) ? printerQuickSpecs(fallbackQuick) : fallbackQuick.slice(0, 4));
+  const quickSpecs = scanner ? scannerQuickSpecs(specifications) : monitor ? monitorQuickSpecs(specifications) : sheetQuick.length >= 2 ? sheetQuick : (isPrintProduct(product) ? printerQuickSpecs(fallbackQuick) : fallbackQuick.slice(0, 4));
   const highlights = (product.highlights ?? []).filter(Boolean);
   const hasStory = Boolean(product.intro || highlights.length || product.use_cases);
   const similar = sameCategoryProducts(product, products);
   const advisorUrl = whatsapp ? whatsappHref(whatsapp, `Bonjour SESA, je souhaite un conseil sur ${product.name} (réf. ${product.reference}).`) : '';
   const add = () => { let next = quote.items; for (let i = 0; i < quantity; i++) next = addQuoteItem(next, product.id, products); quote.setItems(next); quote.setOpen(true); };
   const immediate = () => { quote.setInitialMessage(`Bonjour SESA, je souhaite un devis pour ${quantity} × ${product.name} (réf. ${product.reference}).`); add(); };
-  return <main className={`product-detail-page${scanner ? ' product-scanner-page' : ''}`}>
+  return <main className={`product-detail-page${scanner ? ' product-scanner-page' : ''}${monitor ? ' product-monitor-page' : ''}`}>
     <nav aria-label="Fil d’Ariane" className="site-width product-breadcrumb"><Link to="/">Accueil</Link><ChevronRight/><Link to="/boutique">Boutique</Link><ChevronRight/><Link to="/boutique" search={{ category: product.category }}>{product.category}</Link><ChevronRight/><span>{product.name}</span></nav>
     <section className="site-width product-overview">
       <div><ProductGallery product={product}/><ul className="product-assurances"><li><ShieldCheck/><span>Produit neuf<small>Garantie constructeur</small></span></li><li><MapPin/><span>Retrait & Livraison<small>Rabat & Maroc · Sur devis</small></span></li><li><Headphones/><span>Accompagnement B2B<small>Conseil & SAV dédié</small></span></li></ul></div>

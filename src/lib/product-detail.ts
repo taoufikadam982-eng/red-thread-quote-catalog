@@ -2,6 +2,7 @@ import type { Product } from './catalog';
 import { assignedCategories, hasCategory } from './product-categories';
 import { productPlainText } from './product-text';
 import { extractProductSpecPills } from './product-specs';
+import { monitorGroups, monitorSpecRows } from './product-monitor';
 
 type SpecRow = { label: string; value: string };
 type SpecGroupDef = { title: string; pattern: RegExp };
@@ -86,14 +87,15 @@ export function isPrintProduct(product: Product) {
 
 export function publishedSpecGroups(product: Product) {
   const scanner = hasCategory(product, 'Scanners');
-  const groups = scanner ? scannerGroups : isPrintProduct(product) ? printerGroups : computerGroups;
+  const monitor = hasCategory(product, 'Écrans');
+  const groups = scanner ? scannerGroups : monitor ? monitorGroups : isPrintProduct(product) ? printerGroups : computerGroups;
   const plain = productPlainText(product.detail);
-  const rows = plain.split(/[·;\n]/).map(value => value.trim()).filter(Boolean);
-  const entries = rows.map(text => ({ text, row: scanner ? splitScannerSpecRow(text) : splitSpecRow(text) }));
+  const rows = plain.split(monitor ? /[·\n]/ : /[·;\n]/).map(value => value.trim()).filter(Boolean);
+  const entries = monitor ? monitorSpecRows(plain).map(row => ({ text: row.value, row })) : rows.map(text => ({ text, row: scanner ? splitScannerSpecRow(text) : splitSpecRow(text) }));
   return groups.map((group, index) => ({
     title: group.title,
     rows: entries
-      .filter(({ text, row }) => groups.findIndex(candidate => candidate.pattern.test(scanner && row.label !== 'Information complémentaire' ? row.label : text)) === index)
+      .filter(({ text, row }) => groups.findIndex(candidate => candidate.pattern.test(scanner || monitor ? row.label : text)) === index)
       .map(({ row }) => row),
   })).filter(group => group.rows.length);
 }
