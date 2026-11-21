@@ -1,7 +1,39 @@
 import { describe, expect, it } from 'vitest';
 import { products } from '@/lib/catalog';
-import { printerQuickSpecs, publishedSpecGroups, sameCategoryProducts, splitSpecRow } from '@/lib/product-detail';
+import { printerQuickSpecs, scannerQuickSpecs, publishedSpecGroups, sameCategoryProducts, splitScannerSpecRow, splitSpecRow } from '@/lib/product-detail';
 describe('published product details', () => {
+  it('keeps scanner numbers, units and comma-separated values intact', () => {
+    expect(splitScannerSpecRow('Résolution optique maximale 4 800 x 4 800 ppp (optique)')).toEqual({ label: 'Résolution optique maximale', value: '4 800 x 4 800 ppp (optique)' });
+    expect(splitScannerSpecRow('Vitesse de numérisation à plat 12 s par page en monochrome et 29 s en couleur (A4, 600 ppp)')).toEqual({ label: 'Vitesse de numérisation à plat', value: '12 s par page en monochrome et 29 s en couleur (A4, 600 ppp)' });
+    expect(splitScannerSpecRow('Type de scanner Scanner à plat')).toEqual({ label: 'Type de scanner', value: 'Scanner à plat' });
+    expect(splitScannerSpecRow('Vitesse de numérisation Jusqu’à 20 ppm, Photo couleur : environ 6,8 s')).toEqual({ label: 'Vitesse de numérisation', value: 'Jusqu’à 20 ppm, Photo couleur : environ 6,8 s' });
+  });
+  it('groups scanner facts by their labels rather than incidental accessory keywords', () => {
+    const base = products[0];
+    if (!base) throw new Error('Missing fixture');
+    const groups = publishedSpecGroups({ ...base, category: 'Scanners', categories: ['Scanners'], detail: 'Type de scanner Scanner à plat · Résolution optique 4800 ppp · Logiciels inclus Epson Scan · Consommation d\'énergie Numérisation 2,5 W · Poids net 1,5 kg · Contenu de la boîte Pilote, Câble USB' });
+    expect(groups.map(group => group.title)).toEqual(['NUMÉRISATION ET COPIE', 'CONNECTIVITÉ ET SYSTÈME', 'ÉNERGIE ET BRUIT', 'FORMAT ET USAGE', 'AUTRES INFORMATIONS']);
+    expect(groups.find(group => group.title === 'ÉNERGIE ET BRUIT')?.rows).toEqual([{ label: "Consommation d'énergie Numérisation", value: '2,5 W' }]);
+    expect(groups.flatMap(group => group.rows)).toHaveLength(6);
+  });
+  it('selects scanner type, sensor, format and speed without misleading prose matches', () => {
+    const rows = [
+      { label: 'Niveau sonore', value: '5,4 B(A) en fonctionnement' },
+      { label: 'Contenu de la boîte', value: 'Pilote et câble USB' },
+      { label: 'Recto verso', value: 'Non' },
+      { label: 'Type de scanner', value: 'Scanner à plat' },
+      { label: 'Type de capteur', value: "CIS (capteur d'image par contact)" },
+      { label: 'Format papier maxi', value: "Jusqu'au A4" },
+      { label: 'Vitesse de numérisation à plat', value: '12 s par page' },
+    ];
+    expect(scannerQuickSpecs(rows)).toEqual([
+      { label: 'Type', value: 'Scanner à plat' },
+      { label: 'Technologie', value: "CIS (capteur d'image par contact)" },
+      { label: 'Format', value: "Jusqu'au A4" },
+      { label: 'Vitesse', value: '12 s par page' },
+    ]);
+    expect(scannerQuickSpecs(rows.slice(0, 3))).toEqual([]);
+  });
   it('extracts clean published HTML specifications without rendering markup', () => {
     const base = products[0];
     if (!base) throw new Error('Missing fixture');

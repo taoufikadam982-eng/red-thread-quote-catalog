@@ -26,6 +26,45 @@ const printerGroups: SpecGroupDef[] = [
   { title: 'AUTRES CARACTÉRISTIQUES', pattern: /./ },
 ];
 
+const scannerGroups: SpecGroupDef[] = [
+  { title: 'IMPRESSION', pattern: /impression|imprimante|toner|cartouche/i },
+  { title: 'NUMÉRISATION ET COPIE', pattern: /^(?!consommation|énergie|alimentation).*(?:scanner|numéris|résolution|capteur|profondeur|source lumineuse|recto.?verso|copie|chargeur|bouton)/i },
+  { title: 'CONNECTIVITÉ ET SYSTÈME', pattern: /connect|usb|ethernet|wi.?fi|bluetooth|logiciel|pilote|système|windows|macos/i },
+  { title: 'ÉNERGIE ET BRUIT', pattern: /consommation|énergie|alimentation|prêt|arrêt|veille|sonore/i },
+  { title: 'FORMAT ET USAGE', pattern: /dimensions|poids|format|papier|taille|garantie/i },
+  { title: 'AUTRES INFORMATIONS', pattern: /./ },
+];
+
+// Longest published labels first: numbers and commas remain in the complete value.
+const scannerLabels = [
+  'Taille maximale de numérisation scanner à plat', 'Taille maximale de numérisation chargeur auto',
+  'Formats de fichiers pour la numérisation Du texte et des images', 'Formats de fichiers pour la numérisation',
+  'Grammage de support (chargeur auto)', 'Vitesse de numérisation chargeur auto',
+  'Consommation électrique', 'Puissance consommée', 'Supports pris en charge',
+  'Niveaux de gris', 'Taux d’utilisation', 'Version Twain', 'Câble fourni', 'Options de numérisation (ADF)',
+  'Caractéristiques complémentaires', 'Consommation d’énergie Numérisation', "Consommation d'énergie Numérisation",
+  'Vitesse de numérisation à plat', 'Vitesse de numérisation', 'Boutons de numérisation',
+  'Numérisation recto-verso', 'Résolution optique maximale', 'Résolution optique', 'Résolutions de sortie',
+  "Systèmes d'exploitation compatibles", 'Systèmes d’exploitation compatibles',
+  'Dimensions (l x p x h)', 'Type de scanner', 'Technologie de numérisation', 'Type scanner',
+  'Type de capteur', 'Profondeur en bits', 'Profondeur', 'Source lumineuse',
+  'Chargeur automatique', 'Format papier maxi', 'Formats de papier', 'Niveau sonore',
+  'Contenu de la boîte', 'Logiciels inclus', 'Connectivité', 'Interface', 'Format',
+  'Poids net', 'Poids', 'Garantie', 'Ethernet', 'Wi-Fi', 'Recto verso', 'Prêt', 'Arrêt',
+].sort((a, b) => b.length - a.length);
+
+export function splitScannerSpecRow(text: string): SpecRow {
+  const label = scannerLabels.find(candidate => {
+    const lower = text.toLocaleLowerCase('fr');
+    const prefix = candidate.toLocaleLowerCase('fr');
+    return lower.startsWith(`${prefix} `) || lower.startsWith(`${prefix}:`);
+  });
+  if (label) return { label: text.slice(0, label.length), value: text.slice(label.length).trim().replace(/^:\s*/, '') };
+  if (text.includes(':')) return splitSpecRow(text);
+  // Unknown prose is preserved verbatim, not guessed or split around arbitrary numbers.
+  return { label: 'Information complémentaire', value: text };
+}
+
 /** Splits "Label value" text: uses the colon when present, otherwise cuts before the first value-like word (number, Oui, Non, Jusqu'à…). */
 export function splitSpecRow(text: string): SpecRow {
   const colon = text.indexOf(':');
@@ -46,14 +85,16 @@ export function isPrintProduct(product: Product) {
 }
 
 export function publishedSpecGroups(product: Product) {
-  const groups = isPrintProduct(product) ? printerGroups : computerGroups;
+  const scanner = hasCategory(product, 'Scanners');
+  const groups = scanner ? scannerGroups : isPrintProduct(product) ? printerGroups : computerGroups;
   const plain = productPlainText(product.detail);
   const rows = plain.split(/[·;\n]/).map(value => value.trim()).filter(Boolean);
+  const entries = rows.map(text => ({ text, row: scanner ? splitScannerSpecRow(text) : splitSpecRow(text) }));
   return groups.map((group, index) => ({
     title: group.title,
-    rows: rows
-      .filter(value => groups.findIndex(candidate => candidate.pattern.test(value)) === index)
-      .map(splitSpecRow),
+    rows: entries
+      .filter(({ text, row }) => groups.findIndex(candidate => candidate.pattern.test(scanner && row.label !== 'Information complémentaire' ? row.label : text)) === index)
+      .map(({ row }) => row),
   })).filter(group => group.rows.length);
 }
 
@@ -71,6 +112,22 @@ export function printerQuickSpecs(rows: SpecRow[]): SpecRow[] {
     if (!row) return [];
     used.add(row);
     return [{ label, value: row.value }];
+  }).slice(0, 4);
+}
+
+/** Scanner summary uses published labels only, never keywords from accessory prose. */
+export function scannerQuickSpecs(rows: SpecRow[]): SpecRow[] {
+  const order: [string, RegExp][] = [
+    ['Type', /^type (?:de )?scanner$/i],
+    ['Technologie', /^(?:type de capteur|technologie de numérisation)$/i],
+    ['Format', /^(?:format papier maxi|formats de papier|format|taille maximale de numérisation scanner à plat)$/i],
+    ['Vitesse', /^vitesse de numérisation/i],
+    ['Résolution', /^résolution optique/i],
+    ['Connectivité', /^(?:connectivité|interface)$/i],
+  ];
+  return order.flatMap(([label, pattern]) => {
+    const row = rows.find(item => pattern.test(item.label));
+    return row ? [{ label, value: row.value }] : [];
   }).slice(0, 4);
 }
 
