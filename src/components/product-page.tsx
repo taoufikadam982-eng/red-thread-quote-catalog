@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight, ChevronRight, FileText, Headphones, MapPin, MessageCircle, Minus, Plus, ShieldCheck, Building2, Check } from 'lucide-react';
 import { Button } from './ui/button';
-import { assignedCategories } from '@/lib/product-categories';
+import { assignedCategories, hasCategory } from '@/lib/product-categories';
 import { ProductGallery } from './product-gallery';
 import { ProductCard } from './product-card';
 import { useProducts } from './catalog-context';
@@ -32,7 +32,7 @@ export function ProductPage({ id }: { id: string }) {
   const groups = sheet.length ? sheet.map(group => ({ title: group.title.toUpperCase(), rows: group.rows })) : publishedSpecGroups(product);
   const specifications = groups.flatMap(group => group.rows);
   const labeled = specifications.filter(item => item.label !== 'Caractéristique');
-  const sheetQuick = sheetQuickSpecs(sheet);
+  const sheetQuick = sheetQuickSpecs(sheet, hasCategory(product, 'Ordinateurs de bureau') && !hasCategory(product, 'Ordinateurs portables'));
   const quickSpecs = sheetQuick.length >= 2 ? sheetQuick : (labeled.length ? labeled : specifications).slice(0, 4);
   const highlights = (product.highlights ?? []).filter(Boolean);
   const hasStory = Boolean(product.intro || highlights.length || product.use_cases);

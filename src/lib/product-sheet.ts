@@ -29,9 +29,21 @@ export function readSpecGroups(value: unknown): SpecGroup[] {
   return parsed.success ? cleanSheet({ spec_groups: parsed.data }).spec_groups : [];
 }
 
-const quick: [string, RegExp][] = [['Processeur', /^processeur$|^cpu$/i], ['Mémoire RAM', /\bram\b|^mémoire( vive)?$/i], ['Stockage', /stockage|ssd|disque/i], ['Écran', /écran|diagonale|taille de l.écran/i]];
-/** The four top cards: processor, RAM, storage and display, read from the structured sheet. */
-export function sheetQuickSpecs(groups: SpecGroup[]) {
+const cpu: [string, RegExp] = ['Processeur', /^processeur$|^cpu$/i];
+const ram: [string, RegExp] = ['Mémoire RAM', /\bram\b|^mémoire( vive)?$/i];
+const storage: [string, RegExp] = ['Stockage', /stockage|ssd|disque/i];
+const screen: [string, RegExp] = ['Écran', /écran|diagonale/i];
+const gpu: [string, RegExp] = ['Carte graphique', /graphique|gpu/i];
+const os: [string, RegExp] = ['Système', /système d.exploitation|^système$/i];
+/** Top cards: laptops show processor, RAM, storage, display; desktops show graphics instead of display. Missing ones are replaced by the next verified spec. */
+export function sheetQuickSpecs(groups: SpecGroup[], desktop = false) {
   const rows = groups.flatMap(group => group.rows);
-  return quick.flatMap(([label, pattern]) => { const row = rows.find(item => pattern.test(item.label)); return row ? [{ label, value: row.value }] : []; });
+  const order = desktop ? [cpu, ram, storage, gpu, screen, os] : [cpu, ram, storage, screen, gpu, os];
+  return order.flatMap(([label, pattern]) => { const row = rows.find(item => pattern.test(item.label)); return row ? [{ label, value: row.value }] : []; }).slice(0, 4);
+}
+const reviewKeys: [string, RegExp][] = [cpu, ram, storage, screen, gpu, os];
+/** Key PC specifications absent from the sheet, shown to administrators for review. */
+export function missingKeySpecs(groups: SpecGroup[], desktop = false) {
+  const rows = groups.flatMap(group => group.rows);
+  return reviewKeys.filter(([label]) => !(desktop && label === 'Écran')).filter(([, p]) => !rows.some(r => p.test(r.label))).map(([label]) => label);
 }

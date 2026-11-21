@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './ui/dialog';
 import { saveProductSheet } from '@/lib/admin.functions';
-import { readSpecGroups, type ProductSheet, type SpecGroup } from '@/lib/product-sheet';
+import { missingKeySpecs, readSpecGroups, type ProductSheet, type SpecGroup } from '@/lib/product-sheet';
 
 type Source = { id: string; name: string; intro?: string | null; highlights?: string[] | null; use_cases?: string | null; extra_info?: string | null; spec_groups?: unknown };
 const move = <T,>(list: T[], from: number, to: number) => { if (to < 0 || to >= list.length) return list; const next = [...list]; const [item] = next.splice(from, 1); next.splice(to, 0, item as T); return next; };
@@ -25,7 +25,7 @@ export function AdminProductSheet({ product }: { product: Source }) {
   return <>
     <Button variant="link" className="px-0 text-xs text-foreground underline" onClick={start}>Fiche détaillée</Button>
     <Dialog open={open} onOpenChange={setOpen}><DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
-      <DialogTitle>Fiche détaillée</DialogTitle><DialogDescription>{product.name} · les lignes vides ne sont pas publiées.</DialogDescription>
+      <DialogTitle>Fiche détaillée</DialogTitle><DialogDescription>{product.name} · les lignes vides ne sont pas publiées.</DialogDescription>{sheet && missingKeySpecs(sheet.spec_groups).length > 0 && <p role="status" className="rounded-md border border-border bg-muted px-3 py-2 text-xs"><strong>À vérifier :</strong> {missingKeySpecs(sheet.spec_groups).join(', ')} non renseigné(s).</p>}
       {sheet && <div className="admin-form space-y-4">
         <label>Présentation du produit<textarea rows={4} maxLength={2000} value={sheet.intro} onChange={e => setSheet({ ...sheet, intro: e.target.value })}/></label>
         <div className="space-y-2"><strong className="text-sm">Points forts</strong>{sheet.highlights.map((h, i) => <div key={i} className="flex gap-2"><input aria-label={`Point fort ${i + 1}`} className="admin-input flex-1" maxLength={240} value={h} onChange={e => setSheet({ ...sheet, highlights: sheet.highlights.map((x, j) => j === i ? e.target.value : x) })}/><Button type="button" variant="ghost" size="icon" aria-label="Supprimer le point fort" onClick={() => setSheet({ ...sheet, highlights: sheet.highlights.filter((_, j) => j !== i) })}><Trash2/></Button></div>)}<Button type="button" variant="outline" size="sm" disabled={sheet.highlights.length >= 8} onClick={() => setSheet({ ...sheet, highlights: [...sheet.highlights, ''] })}><Plus/>Ajouter un point fort</Button></div>
