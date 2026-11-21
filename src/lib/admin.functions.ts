@@ -4,6 +4,7 @@ import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { productSchema } from './product-schema';
 import { assignedCategories } from './product-categories';
 import { adminInvitationEmailSchema } from './admin-account';
+import { repairDeep } from './text-repair';
 import { cleanSheet, productSheetSchema } from './product-sheet';
 
 export const requireAdmin = createMiddleware({ type: 'function' }).middleware([requireSupabaseAuth]).server(async ({ context, next }) => {
@@ -24,12 +25,12 @@ export const getAdminData = createServerFn({ method: 'GET' }).middleware([requir
   const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
   const users = await supabaseAdmin.auth.admin.listUsers({ perPage: 100 });
   if (users.error) throw new Error('Impossible de charger les utilisateurs.');
-  return { products: products.data ?? [], quotes: quotes.data ?? [], content: content.data ?? [], profiles: profiles.data ?? [], roles: roles.data ?? [], settings: settings.data?.data ?? {}, users: users.data.users.map(u => ({ id:u.id, email:u.email ?? '', confirmed:!!u.email_confirmed_at })), userId:context.userId };
+  return { products: repairDeep(products.data ?? []), quotes: quotes.data ?? [], content: content.data ?? [], profiles: profiles.data ?? [], roles: roles.data ?? [], settings: settings.data?.data ?? {}, users: users.data.users.map(u => ({ id:u.id, email:u.email ?? '', confirmed:!!u.email_confirmed_at })), userId:context.userId };
 });
 export const saveProducts = createServerFn({ method: 'POST' }).middleware([requireAdmin])
   .inputValidator((input: unknown) => z.array(z.unknown()).min(1).max(500).parse(input).map(value => {
     const supplied = z.object({ categories: z.array(z.string()).optional() }).passthrough().parse(value);
-    return { ...productSchema.parse(value), categoriesProvided: supplied.categories !== undefined };
+    return { ...productSchema.parse(repairDeep(value)), categoriesProvided: supplied.categories !== undefined };
   }))
   .handler(async ({ data, context }) => {
     if (new Set(data.map(p => p.reference)).size !== data.length) throw new Error('Chaque produit doit avoir une référence unique.');

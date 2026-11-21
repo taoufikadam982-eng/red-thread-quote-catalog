@@ -1,3 +1,4 @@
+import { repairDeep } from './text-repair';
 import { createServerFn } from '@tanstack/react-start';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
@@ -20,15 +21,15 @@ export const getPublishedPosts = createServerFn({ method: 'GET' }).handler(async
   });
   const { data, error } = await client.from('blog_posts').select('*').eq('published', true).order('created_at', { ascending: false });
   if (error) throw new Error('Impossible de charger les articles.');
-  return data ?? [];
+  return repairDeep(data ?? []);
 });
 export const getAdminPosts = createServerFn({ method: 'GET' }).middleware([requireAdmin]).handler(async ({ context }) => {
   const { data, error } = await context.supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
   if (error) throw new Error(error.message);
-  return data ?? [];
+  return repairDeep(data ?? []);
 });
 export const saveBlogPost = createServerFn({ method: 'POST' }).middleware([requireAdmin])
-  .inputValidator((input: unknown) => blogPostSchema.parse(input))
+  .inputValidator((input: unknown) => blogPostSchema.parse(repairDeep(input)))
   .handler(async ({ data, context }) => {
     const base = slugify(data.title);
     const { data: clash } = await context.supabase.from('blog_posts').select('id').eq('slug', base);
