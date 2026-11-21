@@ -6,3 +6,4 @@
 - Share accent-insensitive visible-product search between header suggestions and Boutique results; retain legacy q URLs alongside the search parameter.
 - Compare brands through product-brands with trimmed, case-insensitive values for filters, options and checkbox state; imported casing must not hide products linked from menus.
 - Product-page AI recommendations validate model ids against the visible catalogue and fall back to same-category items, so the section never shows invented or hidden products.
+- Detailed product sheets (intro, highlights, use cases, extra info, spec groups) are optional product columns saved by a separate admin function; an empty sheet keeps the legacy text-derived display.

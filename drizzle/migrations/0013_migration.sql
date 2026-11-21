@@ -1,0 +1,6 @@
+ALTER TABLE public.products
+  ADD COLUMN IF NOT EXISTS intro text NOT NULL DEFAULT '',
+  ADD COLUMN IF NOT EXISTS highlights text[] NOT NULL DEFAULT '{}',
+  ADD COLUMN IF NOT EXISTS use_cases text NOT NULL DEFAULT '',
+  ADD COLUMN IF NOT EXISTS extra_info text NOT NULL DEFAULT '',
+  ADD COLUMN IF NOT EXISTS spec_groups jsonb NOT NULL DEFAULT '[]'::jsonb;

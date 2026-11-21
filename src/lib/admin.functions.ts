@@ -4,6 +4,7 @@ import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { productSchema } from './product-schema';
 import { assignedCategories } from './product-categories';
 import { adminInvitationEmailSchema } from './admin-account';
+import { cleanSheet, productSheetSchema } from './product-sheet';
 
 export const requireAdmin = createMiddleware({ type: 'function' }).middleware([requireSupabaseAuth]).server(async ({ context, next }) => {
   const { data, error } = await context.supabase.rpc('has_role', { _user_id: context.userId, _role: 'admin' });
@@ -76,4 +77,12 @@ export const inviteAdmin = createServerFn({method:'POST'}).middleware([requireAd
     const {error}=await supabaseAdmin.from('user_roles').insert({user_id:result.data.user.id,role:'admin'});
     if(error)throw new Error(error.message);
     return true;
+  });
+export const saveProductSheet = createServerFn({ method: 'POST' }).middleware([requireAdmin])
+  .inputValidator(z.object({ id: z.string().min(1).max(60), sheet: productSheetSchema }))
+  .handler(async ({ data, context }) => {
+    const sheet = cleanSheet(data.sheet);
+    const { error } = await context.supabase.from('products').update(sheet).eq('id', data.id);
+    if (error) throw new Error('La fiche n’a pas pu être enregistrée.');
+    return { ok: true };
   });

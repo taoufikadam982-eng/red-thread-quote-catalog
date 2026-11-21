@@ -127,18 +127,23 @@ export type Database = {
           category: string
           clearance_badge: string | null
           created_at: string
+          extra_info: string
           hidden: boolean
+          highlights: string[]
           id: string
           image_path: string
           images: string[]
           indicative: boolean
+          intro: string
           is_clearance: boolean
           name: string
           old_price: number | null
           price: number
           reference: string
+          spec_groups: Json
           specs: string
           usage: string
+          use_cases: string
         }
         Insert: {
           availability?: string
@@ -147,18 +152,23 @@ export type Database = {
           category: string
           clearance_badge?: string | null
           created_at?: string
+          extra_info?: string
           hidden?: boolean
+          highlights?: string[]
           id?: string
           image_path?: string
           images?: string[]
           indicative?: boolean
+          intro?: string
           is_clearance?: boolean
           name: string
           old_price?: number | null
           price: number
           reference: string
+          spec_groups?: Json
           specs?: string
           usage?: string
+          use_cases?: string
         }
         Update: {
           availability?: string
@@ -167,18 +177,23 @@ export type Database = {
           category?: string
           clearance_badge?: string | null
           created_at?: string
+          extra_info?: string
           hidden?: boolean
+          highlights?: string[]
           id?: string
           image_path?: string
           images?: string[]
           indicative?: boolean
+          intro?: string
           is_clearance?: boolean
           name?: string
           old_price?: number | null
           price?: number
           reference?: string
+          spec_groups?: Json
           specs?: string
           usage?: string
+          use_cases?: string
         }
         Relationships: []
       }
