@@ -87,3 +87,23 @@ export const saveProductSheet = createServerFn({ method: 'POST' }).middleware([r
     if (error) throw new Error('La fiche n’a pas pu être enregistrée.');
     return { ok: true };
   });
+export const setUserRole = createServerFn({method:'POST'}).middleware([requireAdmin])
+  .inputValidator((input:unknown)=>z.object({userId:z.string().uuid(),role:z.enum(['admin','user'])}).parse(input))
+  .handler(async({data,context})=>{
+    if(data.userId===context.userId)throw new Error('Vous ne pouvez pas modifier votre propre rôle.');
+    const {supabaseAdmin}=await import('@/integrations/supabase/client.server');
+    const del=await supabaseAdmin.from('user_roles').delete().eq('user_id',data.userId).in('role',['admin','user']);
+    if(del.error)throw new Error('Modification du rôle impossible.');
+    const {error}=await supabaseAdmin.from('user_roles').insert({user_id:data.userId,role:data.role});
+    if(error)throw new Error('Modification du rôle impossible.');
+    return true;
+  });
+export const deleteUser = createServerFn({method:'POST'}).middleware([requireAdmin])
+  .inputValidator((input:unknown)=>z.string().uuid().parse(input))
+  .handler(async({data,context})=>{
+    if(data===context.userId)throw new Error('Vous ne pouvez pas supprimer votre propre compte.');
+    const {supabaseAdmin}=await import('@/integrations/supabase/client.server');
+    const {error}=await supabaseAdmin.auth.admin.deleteUser(data);
+    if(error)throw new Error('Suppression impossible.');
+    return true;
+  });
