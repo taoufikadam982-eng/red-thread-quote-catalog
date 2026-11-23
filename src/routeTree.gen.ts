@@ -28,6 +28,7 @@ import { Route as MarquesRouteImport } from './routes/marques'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as OffresRouteImport } from './routes/offres'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ProduitIdRouteImport } from './routes/produit.$id'
@@ -128,6 +129,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -173,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/offres': typeof OffresRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/produit/$id': typeof ProduitIdRoute
@@ -252,6 +261,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/offres'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/solutions'
     | '/admin'
     | '/produit/$id'
@@ -277,6 +287,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/offres'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/solutions'
     | '/admin'
     | '/produit/$id'
@@ -303,6 +314,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/offres'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/solutions'
     | '/_authenticated/admin'
     | '/produit/$id'
@@ -330,6 +342,7 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   OffresRoute: typeof OffresRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
   ProduitIdRoute: typeof ProduitIdRoute
   ApiPublicAssistantRoute: typeof ApiPublicAssistantRoute
@@ -471,6 +484,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -540,6 +560,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   OffresRoute: OffresRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
   ProduitIdRoute: ProduitIdRoute,
   ApiPublicAssistantRoute: ApiPublicAssistantRoute,

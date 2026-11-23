@@ -9,3 +9,5 @@
 - Detailed product sheets (intro, highlights, use cases, extra info, spec groups) are optional product columns saved by a separate admin function; an empty sheet keeps the legacy text-derived display.
 - Repair mojibake (UTF-8 read as Latin-1) via text-repair on public product reads and sheet saves, so pasted or imported descriptions display correct accents.
 - Keep monitor datasheet parsing and summary selection browser-safe in product-monitor; group published labels and preserve connector lists/decimal values instead of guessing model specifications.
+- Derive sitemap static paths from required route decisions; paginate visible products with public credentials and fail closed on query errors, so private/partial catalogues never leak into XML.
+- Centralize public URL and factual JSON-LD in seo; distinguish authoritative missing products from catalogue failures, and enforce personal-page noindex at the response boundary because admin is client-rendered.

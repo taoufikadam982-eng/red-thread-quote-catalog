@@ -1,7 +1,7 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {supabase} from '@/integrations/supabase/client';
 import {AdminDashboard,adminSections} from '@/components/admin-dashboard';
-export const Route=createFileRoute('/_authenticated/admin')({
+export const Route=createFileRoute('/_authenticated/admin')({ staticData: { sitemap: false },
  validateSearch:(search:Record<string,unknown>):{p?:string}=>({p:typeof search['p']==='string'&&adminSections.includes(search['p'])?search['p']:'products'}),
  beforeLoad:async()=>{const {data,error}=await supabase.rpc('has_role',{_user_id:(await supabase.auth.getUser()).data.user?.id??'',_role:'admin'});if(error||!data)throw new Error('Accès réservé aux administrateurs.');},
  component:AdminPage,

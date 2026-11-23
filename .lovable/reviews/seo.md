@@ -406,3 +406,16 @@ Toutes répondent 200, comportent un titre et des lignes techniques. Toutes les 
 | `/produit/hp-monitor` | Écran HP Series 7 Pro 724pf | 28 |
 | `/produit/probook` | HP ProBook 4 G1iR 14 | 28 |
 | `/produit/zbook` | HP Zbook 8G1i | 14 |
+
+
+## Lot A — Corrections validées et réalisées le 23 novembre 2026
+
+- C1/P2 : canonical et og:url propres aux 16 pages publiques et aux 39 fiches, sur l’origine publique actuelle ; les variantes Boutique/Catalogue restent utilisables et canoniques vers leur page de base, sans noindex commercial. La migration vers sesa.ma reste hors périmètre.
+- C2 : référence absente/masquée après lecture réussie → 404 réelle, sans canonical et avec noindex ; panne de lecture → erreur temporaire distincte, produit connu conservé depuis le cache.
+- P1 : sitemap issu des décisions du routeur, 55 URL vérifiées (16 pages + 39 produits visibles), sans pages privées, API, filtres/recherche ni dates lastmod inventées ; collecte publique paginée, erreur tardive → 503 plutôt que XML partiel ; robots.txt référence le sitemap. Les articles n’ont pas encore d’URL individuelle : lot B.
+- P5 : un H1 stable sur l’accueil, titres de slides en H2 avec apparence conservée, H1 ajoutés au catalogue/configurateur, showroom identifié à Hassan, Rabat.
+- P6 : AggregateRating retiré, horaires confirmés Lun–Ven 08:30–16:30 dans ComputerStore ; Product/BreadcrumbList factuels sur les 39 fiches, sans Offer ni avis inventés.
+- Pages privées : noindex de l’assistant et X-Robots-Tag pour admin, connexion, récupération et assistant, indépendamment du rendu client ; permissions inchangées.
+- Vérification : 199 tests réussis, compilation de l’aperçu OK ; HTTP/HTML/JSON-LD des 16 pages et 39 fiches, 404, sitemap et exclusions ; ASUS → produit → liste de devis vérifié à 1280/390/976px, aucune erreur navigateur ni débordement.
+
+Aucune écriture dans les données commerciales, aucun domaine connecté et aucune publication effectuée. Les corrections atteindront le site public uniquement après une publication autorisée séparément. Les lots B/C restent à valider ; indexation Google et aperçus sociaux publics non recontrôlés.

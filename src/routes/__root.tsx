@@ -82,6 +82,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   // A temporary catalogue outage must not block login or tear down quote state.
   loader: async ({ context }) => {
     // Settings are best-effort too: a failure falls back to the default WhatsApp line.

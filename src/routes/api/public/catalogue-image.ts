@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
-export const Route=createFileRoute('/api/public/catalogue-image')({server:{handlers:{GET:async({request})=>{
+export const Route=createFileRoute('/api/public/catalogue-image')({ staticData: { sitemap: false },server:{handlers:{GET:async({request})=>{
   const parsed=z.string().regex(/^[a-zA-Z0-9/_-]+\.(png|jpg|jpeg|webp)$/).max(200).safeParse(new URL(request.url).searchParams.get('path'));
   if(!parsed.success)return new Response('Invalid image',{status:400});
   const {supabaseAdmin}=await import('@/integrations/supabase/client.server');

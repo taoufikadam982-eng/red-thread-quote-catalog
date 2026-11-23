@@ -1,28 +1,31 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { ProductPage } from '@/components/product-page';
 import { catalogueQuery } from '@/components/catalog-context';
-import { productPlainText } from '@/lib/product-text';
+import { productSeo, resolveSeoProduct } from '@/lib/seo';
 
-const site = 'https://sesa.ma';
-
-export const Route = createFileRoute('/produit/$id')({
+export const Route = createFileRoute('/produit/$id')({ staticData: { sitemap: true },
   component: ProductDetail,
   loader: async ({ context, params }) => {
+    let list;
     try {
-      const list = await context.queryClient.ensureQueryData(catalogueQuery);
-      const p = list.find(item => item.id === params.id);
-      return p ? { name: p.name, brand: p.brand, specs: productPlainText(p.specs ?? '').slice(0, 150) } : null;
-    } catch { return null; }
+      list = await context.queryClient.ensureQueryData(catalogueQuery);
+    } catch {
+      // Cached known products remain usable during an outage; unknown IDs are not 404s.
+      const cached = context.queryClient.getQueryData<Awaited<ReturnType<typeof catalogueQuery.queryFn>>>(catalogueQuery.queryKey);
+      const product = cached?.find(item => item.id === params.id && !item.hidden);
+      return resolveSeoProduct(product ? [product] : undefined, params.id);
+    }
+    return resolveSeoProduct(list, params.id);
   },
-  head: ({ params, loaderData }) => {
-    const title = loaderData ? `${loaderData.name} | SESA Informatique Rabat` : 'Fiche produit | SESA Informatique Rabat';
-    const description = loaderData
-      ? `${loaderData.name}${loaderData.brand ? ` (${loaderData.brand})` : ''} — ${loaderData.specs || 'matériel informatique professionnel neuf'}. Devis B2B et retrait au showroom SESA de Rabat.`
-      : 'Matériel informatique professionnel neuf, prix TTC et devis B2B au showroom SESA de Hassan, Rabat.';
-    const url = `${site}/produit/${params.id}`;
+  notFoundComponent: () => <section className="site-width py-14"><h1 className="section-title">Référence introuvable</h1><p className="my-6">Cette référence n’est pas publiée dans le catalogue SESA.</p><Link to="/boutique">Retour à la Boutique</Link></section>,
+  errorComponent: () => <section className="site-width py-14"><h1 className="section-title">Fiche momentanément indisponible</h1><p className="my-6" role="alert">Le catalogue ne peut pas être consulté pour le moment. Réessayez dans un instant.</p><Link to="/boutique">Retour à la Boutique</Link></section>,
+  head: ({ loaderData }) => {
+    if (!loaderData) return { meta: [{ title: 'Fiche indisponible — SESA Informatique' }, { name: 'description', content: 'Cette fiche ne peut pas être consultée actuellement.' }, { property: 'og:title', content: 'Fiche indisponible — SESA Informatique' }, { property: 'og:description', content: 'Retrouvez les références publiées dans la Boutique SESA.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }, { name: 'robots', content: 'noindex' }] };
+    const { title, description, url, scripts } = productSeo(loaderData);
     return {
       meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'product' }, { property: 'og:url', content: url }, { name: 'twitter:card', content: 'summary_large_image' }],
       links: [{ rel: 'canonical', href: url }],
+      scripts,
     };
   },
 });
