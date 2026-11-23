@@ -621,6 +621,7 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 @media(max-width:760px) { .google-badge { margin-top:14px; } }
 @media(prefers-reduced-motion:reduce) { .footer-review-marquee { overflow-x:auto; } .footer-review-track { animation:none; transform:none; } .footer-review-group[aria-hidden=true] { display:none; } }
 .whatsapp-button { background:var(--whatsapp); color:var(--on-ink); }
+.whatsapp-icon { width:18px; height:18px; object-fit:contain; flex-shrink:0; }
 .whatsapp-button:hover { background:color-mix(in oklch,var(--whatsapp) 88%,var(--ink)); }
 .floating-whatsapp { position:fixed; bottom:18px; left:20px; z-index:30; font-size:11px; border-radius:24px; height:42px; }
 .admin-layout { --ink: oklch(0.21 0.034 264.665); }
@@ -825,7 +826,7 @@ body:has(.sesa-benefits) .store-footer { padding-bottom:120px; }
  .contact-form input,.contact-form select { min-height:46px; }
  .floating-whatsapp { left:auto; right:16px; bottom:max(16px,env(safe-area-inset-bottom)); width:48px; height:48px; padding:0; border-radius:50%; font-size:0; gap:0; }
  .floating-whatsapp a { font-size:0; gap:0; }
- .floating-whatsapp svg { width:24px; height:24px; }
+ .floating-whatsapp svg, .floating-whatsapp .whatsapp-icon { width:24px; height:24px; }
  body:has(.sesa-benefits) .floating-whatsapp { bottom:max(16px,env(safe-area-inset-bottom)); }
  body:has(.mobile-quote-cta) .floating-whatsapp { bottom:calc(80px + env(safe-area-inset-bottom)); }
  .store-footer { padding-bottom:80px; }
