@@ -88,7 +88,7 @@
   --product-action-shadow: 0 4px 18px color-mix(in oklch,var(--ink) 5%,transparent);
   --review-surface: color-mix(in oklch,var(--on-ink) 4%,transparent);
   --review-border: color-mix(in oklch,var(--on-ink) 10%,transparent);
-  --footer-bottom-surface: var(--primary);
+  --footer-bottom-surface: var(--ink);
   --diagnostic-border: color-mix(in oklch,var(--on-ink) 10%,transparent);
   --diagnostic-tag-border: color-mix(in oklch,var(--on-ink) 20%,transparent);
   --diagnostic-shadow: 0 12px 28px color-mix(in oklch,var(--ink) 20%,transparent);
@@ -506,11 +506,11 @@ html { scroll-behavior:smooth; scroll-padding-top:25px; }
 .footer-newsletter-consent a { text-decoration:underline; overflow-wrap:anywhere; }
 .footer-newsletter-status { margin-top:8px; font-size:12px; line-height:1.6; }
 .store-footer { background:var(--ink); color:var(--on-ink); padding-top:42px; padding-bottom:54px; }
-.footer-bottom { background:var(--footer-bottom-surface); color:var(--primary-foreground); }
+.footer-bottom { background:var(--footer-bottom-surface); color:var(--on-ink); border-top:1px solid color-mix(in oklch,var(--on-ink) 15%,transparent); }
 .footer-bottom-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-block:18px; font-size:14px; }
 .footer-bottom-inner>p { flex-shrink:0; }
 .footer-bottom nav { display:flex; align-items:center; flex-wrap:wrap; gap:16px; }
-.footer-bottom nav button { padding:0; height:auto; min-height:32px; color:var(--primary-foreground); font-size:13px; }
+.footer-bottom nav button { padding:0; height:auto; min-height:32px; color:var(--on-ink); font-size:13px; }
 .footer-bottom .cookie-manage { text-decoration:underline; text-underline-offset:3px; }
 .privacy-panel { position:fixed; z-index:45; bottom:84px; left:50%; transform:translateX(-50%); width:calc(100% - 32px); max-width:896px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:24px; padding:22px 24px; border:1px solid var(--privacy-border); border-radius:12px; background:var(--privacy-surface); color:var(--privacy-text); box-shadow:var(--privacy-shadow); animation:privacy-enter .2s ease; }
 .privacy-panel.is-closing { opacity:0; transform:translate(-50%,12px); transition:opacity .18s ease,transform .18s ease; }
