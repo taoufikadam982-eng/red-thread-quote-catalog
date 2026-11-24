@@ -14,7 +14,7 @@ export function ProductCard({ product }: { product: Product }) {
   return <article className="sesa-product-card">
     <div className="sesa-card-media">
       {isClearance(product) && <span className="sesa-clearance-badge">{clearanceLabel(product)}</span>}
-      <span className={`sesa-card-stock ${stock ? 'is-stock' : unavailable ? 'is-unavailable' : 'is-order'}`}>● {stock ? 'En stock' : unavailable ? 'Rupture de stock' : 'Sur commande'}</span>
+      {product.availability !== '' && <span className={`sesa-card-stock ${stock ? 'is-stock' : unavailable ? 'is-unavailable' : 'is-order'}`}>● {stock ? 'En stock' : unavailable ? 'Rupture de stock' : 'Sur commande'}</span>}
       <Link className="sesa-card-image" to="/produit/$id" params={{ id: product.id }} aria-label={`Voir le produit : ${name}`}><img src={product.image} alt={name} width={480} height={360} loading="lazy"/></Link>
     </div>
     <div className="sesa-card-copy">

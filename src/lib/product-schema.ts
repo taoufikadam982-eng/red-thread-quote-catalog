@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { assignedCategories, normalizeCategory, officialCategories } from './product-categories';
 import { imagePathSchema, MAX_PRODUCT_IMAGES } from './product-images';
 
-export const availabilityOptions = ['En stock', 'Sur commande', 'Rupture de stock'] as const;
+export const availabilityOptions = ['', 'En stock', 'Sur commande', 'Rupture de stock'] as const;
 export const adminCategories = ['Tous', ...officialCategories];
 export const productSchema = z.object({
   id: z.string().min(1).max(60),

@@ -41,4 +41,13 @@ describe('Boutique product selection', () => {
     expect(selectBoutiqueProducts([configured], { ...filters, selected: { Disponibilité: ['En stock'], 'Mémoire vive': ['16 Go'] } })).toEqual([configured]);
     expect(selectBoutiqueProducts([configured], { ...filters, selected: { 'Mémoire vive': ['32 Go'] } })).toEqual([]);
   });
+  it('keeps blank availability visible without treating it as a stock or order state', () => {
+    const product = products[0];
+    if (!product) throw new Error('Missing fixture');
+    const blank: Product = { ...product, availability: '' };
+    expect(selectBoutiqueProducts([blank], filters)).toEqual([blank]);
+    for (const state of ['En stock', 'Sur commande', 'Rupture de stock', 'Sur demande']) {
+      expect(selectBoutiqueProducts([blank], { ...filters, selected: { Disponibilité: [state] } })).toEqual([]);
+    }
+  });
 });

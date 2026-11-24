@@ -1,0 +1,2 @@
+ALTER TABLE public.products DROP CONSTRAINT products_availability_check;
+ALTER TABLE public.products ADD CONSTRAINT products_availability_check CHECK (availability IN ('', 'En stock', 'Sur commande', 'Rupture de stock'));

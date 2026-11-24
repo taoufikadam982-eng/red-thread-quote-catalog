@@ -23,7 +23,7 @@ export function selectBoutiqueProducts(products: Product[], filters: BoutiqueFil
   return products.filter(product => {
     if (product.hidden || !hasCategory(product, filters.category) || product.price < filters.min || product.price > filters.max) return false;
     if (!matchesProductSearch(product, query)) return false;
-    const facets: Record<string, string[]> = { ...productFacets(product), Marque: [product.brand], Disponibilité: [product.availability || 'Sur demande'] };
+    const facets: Record<string, string[]> = { ...productFacets(product), Marque: [product.brand], Disponibilité: product.availability === '' ? [] : [product.availability || 'Sur demande'] };
     return Object.entries(filters.selected).every(([key, values]) => values.length === 0 || values.some(value => key === 'Marque' ? sameBrand(product.brand, value) : (facets[key] ?? []).includes(value)));
   }).sort((a, b) => filters.sort === 'price-up' ? a.price - b.price : filters.sort === 'price-down' ? b.price - a.price : filters.sort === 'name' ? a.name.localeCompare(b.name, 'fr') : 0);
 }
